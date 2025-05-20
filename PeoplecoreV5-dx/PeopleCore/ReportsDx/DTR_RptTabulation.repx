@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="15.1.7.0" Ref="1" Name="DTR_RptTabulation" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" DataMember="EDTR_RptTabulation" DataSource="#Ref-0" Margins="50, 50, 45, 50" Landscape="true" Version="15.1" PageWidth="1100" PageHeight="850">
+  <Parameters>
+    <Item1 Ref="3" Name="onlineuserno" Type="#Ref-2" ValueInfo="0" />
+    <Item2 Ref="5" Name="filterbyno" Type="#Ref-4" ValueInfo="0" />
+    <Item3 Ref="6" Name="filterbyid" Type="#Ref-2" ValueInfo="0" />
+    <Item4 Ref="7" Name="dtrno" Type="#Ref-2" ValueInfo="0" />
+    <Item5 Ref="8" Name="groupbyno" Type="#Ref-4" ValueInfo="0" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="9" ControlType="DetailBand" Name="Detail" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="25">
+      <Controls>
+        <Item1 Ref="10" ControlType="XRTable" Name="xrTable2" Font="Arial Narrow, 7.8pt, charSet=0" SizeF="1000,25" LocationFloat="0, 0" BorderWidth="0.5" Borders="None">
+          <Rows>
+            <Item1 Ref="11" Name="xrTableRow2" ControlType="XRTableRow" Weight="11.5">
+              <Cells>
+                <Item1 Ref="12" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.015416664123535151" Borders="All" Text="xrTableCell3">
+                  <DataBindings>
+                    <Item1 Ref="13" PropertyName="Text" DataMember="EDTR_RptTabulation.DTRDate" />
+                  </DataBindings>
+                  <StylePriority Ref="14" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="15" ControlType="XRTableCell" Name="xrTableCell4" Weight="0.02229163360595704" Borders="All" Text="xrTableCell4">
+                  <DataBindings>
+                    <Item1 Ref="16" PropertyName="Text" DataMember="EDTR_RptTabulation.ShiftCode" />
+                  </DataBindings>
+                  <StylePriority Ref="17" UseBorders="false" />
+                </Item2>
+                <Item3 Ref="18" ControlType="XRTableCell" Name="xrTableCell6" Weight="0.015416633605957037" Borders="All" Text="xrTableCell6">
+                  <DataBindings>
+                    <Item1 Ref="19" PropertyName="Text" DataMember="EDTR_RptTabulation.DayTypeCode" />
+                  </DataBindings>
+                  <StylePriority Ref="20" UseBorders="false" />
+                </Item3>
+                <Item4 Ref="21" ControlType="XRTableCell" Name="xrTableCell7" Weight="0.012500015258789068" Borders="All" Text="xrTableCell7">
+                  <DataBindings>
+                    <Item1 Ref="22" PropertyName="Text" DataMember="EDTR_RptTabulation.Hrs" />
+                  </DataBindings>
+                  <StylePriority Ref="23" UseBorders="false" />
+                </Item4>
+                <Item5 Ref="24" ControlType="XRTableCell" Name="xrTableCell9" Weight="0.013333358764648442" Borders="All" Text="xrTableCell9">
+                  <DataBindings>
+                    <Item1 Ref="25" PropertyName="Text" DataMember="EDTR_RptTabulation.In1" />
+                  </DataBindings>
+                  <StylePriority Ref="26" UseBorders="false" />
+                </Item5>
+                <Item6 Ref="27" ControlType="XRTableCell" Name="xrTableCell12" Weight="0.013541687011718756" Borders="All" Text="xrTableCell12">
+                  <DataBindings>
+                    <Item1 Ref="28" PropertyName="Text" DataMember="EDTR_RptTabulation.Out1" />
+                  </DataBindings>
+                  <StylePriority Ref="29" UseBorders="false" />
+                </Item6>
+                <Item7 Ref="30" ControlType="XRTableCell" Name="xrTableCell14" Weight="0.014791564941406255" Borders="All" Text="xrTableCell14">
+                  <DataBindings>
+                    <Item1 Ref="31" PropertyName="Text" DataMember="EDTR_RptTabulation.In2" />
+                  </DataBindings>
+                  <StylePriority Ref="32" UseBorders="false" />
+                </Item7>
+                <Item8 Ref="33" ControlType="XRTableCell" Name="xrTableCell15" Weight="0.014166564941406255" Borders="All" Text="xrTableCell15">
+                  <DataBindings>
+                    <Item1 Ref="34" PropertyName="Text" DataMember="EDTR_RptTabulation.OvtIn1" />
+                  </DataBindings>
+                  <StylePriority Ref="35" UseBorders="false" />
+                </Item8>
+                <Item9 Ref="36" ControlType="XRTableCell" Name="xrTableCell18" Weight="0.013749893188476567" Borders="All" Text="xrTableCell18">
+                  <DataBindings>
+                    <Item1 Ref="37" PropertyName="Text" DataMember="EDTR_RptTabulation.OvtOut1" />
+                  </DataBindings>
+                  <StylePriority Ref="38" UseBorders="false" />
+                </Item9>
+                <Item10 Ref="39" ControlType="XRTableCell" Name="xrTableCell20" Weight="0.013541549682617192" Borders="All" Text="xrTableCell20">
+                  <DataBindings>
+                    <Item1 Ref="40" PropertyName="Text" DataMember="EDTR_RptTabulation.Ovt" />
+                  </DataBindings>
+                  <StylePriority Ref="41" UseBorders="false" />
+                </Item10>
+                <Item11 Ref="42" ControlType="XRTableCell" Name="xrTableCell22" Weight="0.012708236694335944" Borders="All" Text="xrTableCell22">
+                  <DataBindings>
+                    <Item1 Ref="43" PropertyName="Text" DataMember="EDTR_RptTabulation.Ovt8" />
+                  </DataBindings>
+                  <StylePriority Ref="44" UseBorders="false" />
+                </Item11>
+                <Item12 Ref="45" ControlType="XRTableCell" Name="xrTableCell24" Weight="0.011249893188476565" Borders="All" Text="xrTableCell24">
+                  <DataBindings>
+                    <Item1 Ref="46" PropertyName="Text" DataMember="EDTR_RptTabulation.NP" />
+                  </DataBindings>
+                  <StylePriority Ref="47" UseBorders="false" />
+                </Item12>
+                <Item13 Ref="48" ControlType="XRTableCell" Name="xrTableCell26" Weight="0.010624870300292971" Borders="All" Text="xrTableCell26">
+                  <DataBindings>
+                    <Item1 Ref="49" PropertyName="Text" DataMember="EDTR_RptTabulation.NP8" />
+                  </DataBindings>
+                  <StylePriority Ref="50" UseBorders="false" />
+                </Item13>
+                <Item14 Ref="51" ControlType="XRTableCell" Name="xrTableCell32" Weight="0.012708198465414725" Borders="All" Text="xrTableCell32">
+                  <DataBindings>
+                    <Item1 Ref="52" PropertyName="Text" DataMember="EDTR_RptTabulation.AbsHrs" />
+                  </DataBindings>
+                  <StylePriority Ref="53" UseBorders="false" />
+                </Item14>
+                <Item15 Ref="54" ControlType="XRTableCell" Name="xrTableCell33" Weight="0.012708159364771834" Borders="All" Text="xrTableCell33">
+                  <DataBindings>
+                    <Item1 Ref="55" PropertyName="Text" DataMember="EDTR_RptTabulation.Late" />
+                  </DataBindings>
+                  <StylePriority Ref="56" UseBorders="false" />
+                </Item15>
+                <Item16 Ref="57" ControlType="XRTableCell" Name="xrTableCell34" Weight="0.013333237500768386" Borders="All" Text="xrTableCell34">
+                  <DataBindings>
+                    <Item1 Ref="58" PropertyName="Text" DataMember="EDTR_RptTabulation.Under" />
+                  </DataBindings>
+                  <StylePriority Ref="59" UseBorders="false" />
+                </Item16>
+                <Item17 Ref="60" ControlType="XRTableCell" Name="xrTableCell35" Weight="0.01437591623459583" Borders="All" Text="xrTableCell35">
+                  <DataBindings>
+                    <Item1 Ref="61" PropertyName="Text" DataMember="EDTR_RptTabulation.LeaveTypeCode" />
+                  </DataBindings>
+                  <StylePriority Ref="62" UseBorders="false" />
+                </Item17>
+                <Item18 Ref="63" ControlType="XRTableCell" Name="xrTableCell36" Weight="0.0135419014144515" Borders="All" Text="xrTableCell36">
+                  <DataBindings>
+                    <Item1 Ref="64" PropertyName="Text" DataMember="EDTR_RptTabulation.LeaveHrs" />
+                  </DataBindings>
+                  <StylePriority Ref="65" UseBorders="false" />
+                </Item18>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="66" UseBorderWidth="false" UseFont="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+      <SortFields>
+        <Item1 Ref="67" FieldName="DTRDate" />
+      </SortFields>
+    </Item1>
+    <Item2 Ref="68" ControlType="TopMarginBand" Name="TopMargin" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="45" />
+    <Item3 Ref="69" ControlType="BottomMarginBand" Name="BottomMargin" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="50">
+      <Controls>
+        <Item1 Ref="70" ControlType="XRPageInfo" Name="xrPageInfo1" LocationFloat="703.5139, 9.5" SizeF="283.3188,23" Font="Arial, 6pt, charSet=0" Padding="2,2,0,0,100" Format="Page {0} of {1}">
+          <StylePriority Ref="71" UseFont="false" />
+        </Item1>
+        <Item2 Ref="72" ControlType="XRPageInfo" Name="xrPageInfo2" LocationFloat="0, 10" SizeF="374.9997,23" Font="Arial, 6pt, charSet=0" Padding="2,2,0,0,100" Format="{0:dddd, MMMM dd, yyyy h:mm:ss tt}" PageInfo="DateTime">
+          <StylePriority Ref="73" UseFont="false" />
+        </Item2>
+      </Controls>
+    </Item3>
+    <Item4 Ref="74" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="5" />
+    <Item5 Ref="75" ControlType="GroupHeaderBand" Name="HeadrEmployee" KeepTogether="true" RepeatEveryPage="true" HeightF="52.5" PageBreak="BeforeBand">
+      <Controls>
+        <Item1 Ref="76" ControlType="XRTable" Name="xrTable1" Font="Arial Narrow, 7.8pt, charSet=0" SizeF="1000,25" LocationFloat="0, 27.5" BorderWidth="0.5" Borders="None">
+          <Rows>
+            <Item1 Ref="77" Name="xrTableRow1" ControlType="XRTableRow" Weight="11.5">
+              <Cells>
+                <Item1 Ref="78" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.015416664123535151" Borders="All" Text="DTRDate">
+                  <StylePriority Ref="79" UseBorders="false" />
+                </Item1>
+                <Item2 Ref="80" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.022291648864746105" Borders="All" Text="Shift">
+                  <StylePriority Ref="81" UseBorders="false" />
+                </Item2>
+                <Item3 Ref="82" ControlType="XRTableCell" Name="xrTableCell5" Weight="0.015416649941308164" Borders="All" Text="D-Type">
+                  <StylePriority Ref="83" UseBorders="false" />
+                </Item3>
+                <Item4 Ref="84" ControlType="XRTableCell" Name="xrTableCell8" Weight="0.012499979051788238" Borders="All" Text="Hrs">
+                  <StylePriority Ref="85" UseBorders="false" />
+                </Item4>
+                <Item5 Ref="86" ControlType="XRTableCell" Name="xrTableCell10" Weight="0.013333318677703963" Borders="All" Text="In1">
+                  <StylePriority Ref="87" UseBorders="false" />
+                </Item5>
+                <Item6 Ref="88" ControlType="XRTableCell" Name="xrTableCell11" Weight="0.01354164689215198" Borders="All" Text="Out1">
+                  <StylePriority Ref="89" UseBorders="false" />
+                </Item6>
+                <Item7 Ref="90" ControlType="XRTableCell" Name="xrTableCell13" Weight="0.014791639164888171" Borders="All" Text="In2">
+                  <StylePriority Ref="91" UseBorders="false" />
+                </Item7>
+                <Item8 Ref="92" ControlType="XRTableCell" Name="xrTableCell16" Weight="0.014166654521544125" Borders="All" Text="OvtIn1">
+                  <StylePriority Ref="93" UseBorders="false" />
+                </Item8>
+                <Item9 Ref="94" ControlType="XRTableCell" Name="xrTableCell17" Weight="0.013749967575074745" Borders="All" Text="OvtOut2">
+                  <StylePriority Ref="95" UseBorders="false" />
+                </Item9>
+                <Item10 Ref="96" ControlType="XRTableCell" Name="xrTableCell19" Weight="0.013541654619413403" Borders="All" Text="Ovt">
+                  <StylePriority Ref="97" UseBorders="false" />
+                </Item10>
+                <Item11 Ref="98" ControlType="XRTableCell" Name="xrTableCell21" Weight="0.01270831124404799" Borders="All" Text="Ovt8">
+                  <StylePriority Ref="99" UseBorders="false" />
+                </Item11>
+                <Item12 Ref="100" ControlType="XRTableCell" Name="xrTableCell23" Weight="0.011249982770133546" Borders="All" Text="NP">
+                  <StylePriority Ref="101" UseBorders="false" />
+                </Item12>
+                <Item13 Ref="102" ControlType="XRTableCell" Name="xrTableCell25" Weight="0.010624982868002827" Borders="All" Text="NP8">
+                  <StylePriority Ref="103" UseBorders="false" />
+                </Item13>
+                <Item14 Ref="104" ControlType="XRTableCell" Name="xrTableCell27" Weight="0.012707639402229392" Borders="All" Text="LWOP">
+                  <StylePriority Ref="105" UseBorders="false" />
+                </Item14>
+                <Item15 Ref="106" ControlType="XRTableCell" Name="xrTableCell28" Weight="0.012708188718549623" Borders="All" Text="Late">
+                  <StylePriority Ref="107" UseBorders="false" />
+                </Item15>
+                <Item16 Ref="108" ControlType="XRTableCell" Name="xrTableCell29" Weight="0.01333321913825369" Borders="All" Text="Under">
+                  <StylePriority Ref="109" UseBorders="false" />
+                </Item16>
+                <Item17 Ref="110" ControlType="XRTableCell" Name="xrTableCell30" Weight="0.014375905437380881" Borders="All" Text="L-Type">
+                  <StylePriority Ref="111" UseBorders="false" />
+                </Item17>
+                <Item18 Ref="112" ControlType="XRTableCell" Name="xrTableCell31" Weight="0.01354190784153686" Borders="All" Text="L-Hrs">
+                  <StylePriority Ref="113" UseBorders="false" />
+                </Item18>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="114" UseBorderWidth="false" UseFont="false" UseBorders="false" />
+        </Item1>
+        <Item2 Ref="115" ControlType="XRLabel" Name="xrLabel4" LocationFloat="117.5, 1.5" SizeF="189.1667,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel4">
+          <DataBindings>
+            <Item1 Ref="116" PropertyName="Text" DataMember="EDTR_RptTabulation.empName" />
+          </DataBindings>
+          <StylePriority Ref="117" UseFont="false" />
+        </Item2>
+        <Item3 Ref="118" ControlType="XRLabel" Name="xrLabel5" LocationFloat="0, 1.5" SizeF="117.5,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="Employee Name :">
+          <StylePriority Ref="119" UseFont="false" />
+        </Item3>
+        <Item4 Ref="120" ControlType="XRLabel" Name="xrLabel6" LocationFloat="466.6654, 1.5" SizeF="240.8334,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel6">
+          <DataBindings>
+            <Item1 Ref="121" PropertyName="Text" DataMember="EDTR_RptTabulation.empcode" />
+          </DataBindings>
+          <StylePriority Ref="122" UseFont="false" />
+        </Item4>
+        <Item5 Ref="123" ControlType="XRLabel" Name="xrLabel7" LocationFloat="329.1663, 1.5" SizeF="137.4992,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="Employee Number :">
+          <StylePriority Ref="124" UseFont="false" />
+        </Item5>
+      </Controls>
+      <GroupFields>
+        <Item1 Ref="125" FieldName="empName" />
+      </GroupFields>
+    </Item5>
+    <Item6 Ref="126" ControlType="GroupFooterBand" Name="footerEmployee" HeightF="0" />
+    <Item7 Ref="127" ControlType="GroupHeaderBand" Name="HeaderCompany" RepeatEveryPage="true" Level="1" HeightF="137.5">
+      <Controls>
+        <Item1 Ref="128" ControlType="XRLabel" Name="xrLabel1" LocationFloat="0, 0" SizeF="1000,23" TextAlignment="MiddleJustify" Font="Arial, 12pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel1">
+          <DataBindings>
+            <Item1 Ref="129" PropertyName="Text" DataMember="EDTR_RptTabulation.tCompany" />
+          </DataBindings>
+          <StylePriority Ref="130" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="131" ControlType="XRLabel" Name="xrLabel2" LocationFloat="0, 23.00001" SizeF="1000,23" Font="Arial, 7.8pt, charSet=0" Padding="2,2,0,0,100" Text="xrLabel2">
+          <DataBindings>
+            <Item1 Ref="132" PropertyName="Text" DataMember="EDTR_RptTabulation.tAddress" />
+          </DataBindings>
+          <StylePriority Ref="133" UseFont="false" />
+        </Item2>
+        <Item3 Ref="134" ControlType="XRLabel" Name="xrLabel3" LocationFloat="0, 62" SizeF="1000,23" Font="Arial, 10.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel3">
+          <DataBindings>
+            <Item1 Ref="135" PropertyName="Text" DataMember="EDTR_RptTabulation.tTitle" />
+          </DataBindings>
+          <StylePriority Ref="136" UseFont="false" />
+        </Item3>
+        <Item4 Ref="137" ControlType="XRLabel" Name="xrLabel8" LocationFloat="102.4989, 91.49999" SizeF="315.8333,22.99999" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel8">
+          <DataBindings>
+            <Item1 Ref="138" PropertyName="Text" DataMember="EDTR_RptTabulation.PayClassDesc" />
+          </DataBindings>
+          <StylePriority Ref="139" UseFont="false" />
+        </Item4>
+        <Item5 Ref="140" ControlType="XRLabel" Name="xrLabel9" LocationFloat="102.4989, 114.5" SizeF="315.8333,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel9">
+          <DataBindings>
+            <Item1 Ref="141" PropertyName="Text" DataMember="EDTR_RptTabulation.dtrcode" />
+          </DataBindings>
+          <StylePriority Ref="142" UseFont="false" />
+        </Item5>
+        <Item6 Ref="143" ControlType="XRLabel" Name="xrLabel10" LocationFloat="645.8312, 91.49999" SizeF="100,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel10">
+          <DataBindings>
+            <Item1 Ref="144" PropertyName="Text" DataMember="EDTR_RptTabulation.endDate" />
+          </DataBindings>
+          <StylePriority Ref="145" UseFont="false" />
+        </Item6>
+        <Item7 Ref="146" ControlType="XRLabel" Name="xrLabel11" LocationFloat="519.9965, 91.49999" SizeF="100,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="xrLabel11">
+          <DataBindings>
+            <Item1 Ref="147" PropertyName="Text" DataMember="EDTR_RptTabulation.startdate" />
+          </DataBindings>
+          <StylePriority Ref="148" UseFont="false" />
+        </Item7>
+        <Item8 Ref="149" ControlType="XRLabel" Name="xrLabel12" LocationFloat="429.1663, 91.49999" SizeF="90.8302,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="DTR Cut-Off :">
+          <StylePriority Ref="150" UseFont="false" />
+        </Item8>
+        <Item9 Ref="151" ControlType="XRLabel" Name="xrLabel13" LocationFloat="0, 91.49999" SizeF="102.4989,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="Payroll Group :">
+          <StylePriority Ref="152" UseFont="false" />
+        </Item9>
+        <Item10 Ref="153" ControlType="XRLabel" Name="xrLabel14" LocationFloat="0, 114.5" SizeF="102.4989,23.00001" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="DTR Number :">
+          <StylePriority Ref="154" UseFont="false" />
+        </Item10>
+        <Item11 Ref="155" ControlType="XRLabel" Name="xrLabel15" LocationFloat="619.9965, 91.49999" SizeF="25.83472,23" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Text="-">
+          <StylePriority Ref="156" UseFont="false" />
+        </Item11>
+      </Controls>
+      <GroupFields>
+        <Item1 Ref="157" FieldName="tCompany" />
+      </GroupFields>
+    </Item7>
+    <Item8 Ref="158" ControlType="GroupFooterBand" Name="footerCompany" Level="1" HeightF="0" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" Name="sqlDataSource1" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v15.1" Base64="PFNxbERhdGFTb3VyY2U+PE5hbWU+c3FsRGF0YVNvdXJjZTE8L05hbWU+PENvbm5lY3Rpb24gTmFtZT0iZHNScHQiIEZyb21BcHBDb25maWc9InRydWUiIC8+PFF1ZXJ5IFR5cGU9IlN0b3JlZFByb2NRdWVyeSIgTmFtZT0iRURUUl9ScHRUYWJ1bGF0aW9uIj48UGFyYW1ldGVyIE5hbWU9IkBvbmxpbmV1c2Vybm8iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDMyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLm9ubGluZXVzZXJub10pPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAZmlsdGVyYnlubyIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MTYsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSkoW1BhcmFtZXRlcnMuZmlsdGVyYnlub10pPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAZmlsdGVyYnlpZCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MzIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSkoW1BhcmFtZXRlcnMuZmlsdGVyYnlpZF0pPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAZHRybm8iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDMyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmR0cm5vXSk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkBncm91cGJ5bm8iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDE2LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmdyb3VwYnlub10pPC9QYXJhbWV0ZXI+PFByb2NOYW1lPkVEVFJfUnB0VGFidWxhdGlvbjwvUHJvY05hbWU+PC9RdWVyeT48UmVzdWx0U2NoZW1hPjxEYXRhU2V0IE5hbWU9InNxbERhdGFTb3VyY2UxIj48VmlldyBOYW1lPSJFRFRSX1JwdFRhYnVsYXRpb24iPjxGaWVsZCBOYW1lPSJEVFJObyIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IkVtcGxveWVlTm8iIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJEVFJEYXRlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlNoaWZ0Tm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJEYXlUeXBlTm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJEYXlUeXBlTm8yIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iSHJzIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSJJbjEiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT3V0MSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJJbjIiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT3V0MiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJPdnRJbjEiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT3Z0T3V0MSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJPdnRJbjIiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT3Z0T3V0MiIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJPdnQiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9Ik92dDgiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9Ik5QIiBUeXBlPSJEZWNpbWFsIiAvPjxGaWVsZCBOYW1lPSJOUDgiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IkFic0hycyIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iTGF0ZSIgVHlwZT0iRGVjaW1hbCIgLz48RmllbGQgTmFtZT0iVW5kZXIiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9IkxlYXZlVHlwZU5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iTGVhdmVIcnMiIFR5cGU9IkRlY2ltYWwiIC8+PEZpZWxkIE5hbWU9ImR0cmNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0ic3RhcnRkYXRlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9ImVuZERhdGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0icGF5Y2xhc3NObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9ImVtcGNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iZW1wTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJTaGlmdENvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iRGF5VHlwZUNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iRGF5VHlwZUNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTGVhdmVUeXBlQ29kZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJ0VGl0bGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUGF5Q2xhc3NEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRDb21wYW55IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRBZGRyZXNzIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRDaXR5IiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjwvRGF0YVNldD48L1Jlc3VsdFNjaGVtYT48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v15.1" Ref="2" Content="System.Int32" Type="System.Type" />
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v15.1" Ref="4" Content="System.Int16" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

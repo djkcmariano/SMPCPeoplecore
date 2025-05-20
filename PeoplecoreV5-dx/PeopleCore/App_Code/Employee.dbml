@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PeopleCoreV5_Standard5" Class="EmployeeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DCOTARAS9;Initial Catalog=PeopleCoreV5_Standard5;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="PeopleCoreV5_Standard5ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.EEmployee_Web" Method="EEmployee_Web">
+    <Parameter Name="OnlineUserNo" Parameter="onlineUserNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayLocNo" Parameter="payLocNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TabIndex" Parameter="tabIndex" Type="System.Int32" DbType="Int" />
+    <ElementType Name="EEmployee_WebResult">
+      <Column Name="EmployeeNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeCode" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="NickName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="MobileNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="BirthAge" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PositionDesc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FacilityDesc" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="GroupDesc" Type="System.String" DbType="VarChar(90)" CanBeNull="true" />
+      <Column Name="DepartmentDesc" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="SectionDesc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DivisionDesc" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="TabIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EmployeeStatDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmployeeClassDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RankDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GenderDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CivilStatDesc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PayClassDesc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CostCenterDesc" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="UnitDesc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DateHired" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RegularizedDate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="TINNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SSSNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PHNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HDMFNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BankAccountNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxExemptDesc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BankTypeDesc" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

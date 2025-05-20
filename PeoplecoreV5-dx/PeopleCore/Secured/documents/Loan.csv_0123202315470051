@@ -1,0 +1,2 @@
+EmployeeNo, LoanTypeCode, DateGranted, StartofDeduction, PrincipalAmount, InterestAmount, BegBalance, Amort, NoofPayment, PayrollSchedule, Remarks, IsDeductBonus, ReferenceNo.
+0070580,Others2,1/15/2023,1/15/2023,1500,1500,1500,1500,0,1,FACILITY DUES,0,

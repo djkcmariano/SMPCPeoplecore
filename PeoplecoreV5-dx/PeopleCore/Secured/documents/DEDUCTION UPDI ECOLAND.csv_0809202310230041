@@ -1,0 +1,60 @@
+﻿EmployeeNo,Last Name,First Name,Middle Name,Extension,Loan Type,DateGranted,StartofDeduction,PrincipalAmount,InterestAmount,TotalAmount,BeginningBalance,Amortization,NoofPayments,PayrollSchedule,Remarks,ReferenceNo.,Company
+0010367,ANDRADE,SYLVIA,P,,KCC B-Up,,1/31/2022,100,0,100,100,100,1,4,KCC CAPITAL BUILD 2022,,DMC - Urban Property Developers Inc.
+9320911,ARCIAGA,ROAN,M,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010391,BERNALDO,RICO,L,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010405,BRAZA,JOVANIE,V,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0021482,CABRERA,BENIDICK,B,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320806,DISTRAJO,JOWELEO,C,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320482,ERLANO,RANDY,E,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010456,FLORES,JOCELYN,R,,KCC B-Up,,1/31/2023,900,0,900,900,100,9,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0017663,GAELA,GERALDINE,R,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320792,GIPAYA,FREDY,.,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010472,GUILOT,RENE,A,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9321101,IBANA,ELENA,Y,,KCC B-Up,,1/31/2023,900,0,900,900,100,9,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0016144,JABAR,MARGARITA,P,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010499,JAPSON,SUSANA,E,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010502,JAYONA,ERIC,L,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0018368,LACAMBRA,RUEL,E,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9218009,LACORTE,JHOANNE KELLY,D,,KCC B-Up,,1/31/2023,300,0,300,300,100,3,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320881,LATONIO,FELIXBERTO,E,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320938,LAVA,DINO,Q,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010510,LOBRIGO,EMILIANO,C,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+4980794,MANALANG,WARREN,M,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010537,MARCOS,MARIA CRISTINA,N,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0014796,MILLET,RENATO,,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010588,QUIACHON,MARIA ELENA,J,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010480,QUINTUA,MARIA BERNADETTE,T,,KCC B-Up,,1/31/2023,200,0,200,200,100,2,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9217533,SALVACION,RICHARD,R,,KCC B-Up,,1/31/2023,500,0,500,500,100,5,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320903,SAMARTINO,KALVIN,A,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0013455,SANDAGON,EVA,D,,KCC B-Up,,1/31/2023,100,0,100,100,100,1,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010545,MARTINEZ,ROWENA,S,,KCC B-Up,,1/31/2023,100.04,0,100.04,100.04,100,2,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0021482,CABRERA,BENIDICK,B,,KCC B-Up,,1/31/2023,15992.8,0,15992.8,15992.8,1332.73,13,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320938,LAVA,DINO,Q,,KCC B-Up,,1/31/2023,0.04,0,0.04,0.04,1725.48,1,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9321195,ALFONSO,JOENENAMAE,L,,SSS LOAN,,7/31/2023,32.21,0,32.21,32.21,427,1,4,SSS LOAN,,DMC - Urban Property Developers Inc.
+0020699,FANDIALAN,JANICE,P,,HDMF_SL,,6/15/2035,2204.15,0,2204.15,2204.15,2204.15,1,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0020699,FANDIALAN,JANICE,P,,HMI,,1/15/2042,892.64,0,892.64,892.64,223,5,4,HMI,,DMC - Urban Property Developers Inc.
+9217533,SALVACION,RICHARD,R,,HDMF_SL,,6/15/2047,1592.46,0,1592.46,1592.46,796,3,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+9217533,SALVACION,RICHARD,R,,HMI,,1/15/2054,892.64,0,892.64,892.64,223,5,4,HMI,,DMC - Urban Property Developers Inc.
+9321101,IBANA,ELENA,Y,,HDMF_SL,,7/31/2023,859.07,0,859.07,859.07,428,3,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0010537,MARCOS,MARIA CRISTINA,N,,HDMF_SL,,7/31/2023,0.31,0,0.31,0.31,3690,9,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0020699,FANDIALAN,JANICE,P,,KCC B-Up,,1/31/2023,636.7,0,636.7,636.7,100,7,4,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0020699,FANDIALAN,JANICE,P,,KCLoan,,7/15/2022,2665.5,0,2665.5,2665.5,1332.73,3,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0013455,SANDAGON,EVA,D,,KCLoan,,8/15/2022,0.04,0,0.04,0.04,1332.73,4,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010480,QUINTUA,MARIA BERNADETTE,T,,KCLoan,,5/15/2023,15529.33,0,15529.33,15529.33,2588.23,6,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010499,JAPSON,SUSANA,E,,KCLoan,,11/15/2022,5330.89,0,5330.89,5330.89,888.49,6,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9218017,ESCOBAL,MARIA TERESA,P,,KCLoan,,11/15/2022,2588.18,0,2588.18,2588.18,2588.23,2,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9321101,IBANA,ELENA,Y,,KCLoan,,11/15/2022,3450.9,0,3450.9,3450.9,1725.49,2,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010820,BELTRAN,HERMOSA,U,,KCLoan,,12/15/2022,18658.26,0,18658.26,18658.26,1332.73,15,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010391,BERNALDO,RICO,L,,KCLoan,,3/31/2023,19990.99,0,19990.99,19990.99,1332.73,16,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+0010510,LOBRIGO,EMILIANO,C,,KCLoan,,3/31/2023,19990.99,0,19990.99,19990.99,1332.73,16,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+0016144,JABAR,MARGARITA,P,,KCLoan,,3/31/2023,19990.99,0,19990.99,19990.99,1332.73,16,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+9692800,ABELEDA,MA. GEANELLE,T,,HMI,,4/30/2023,223.16,0,223.16,223.16,223.16,1,4,HMI,,DMC - Urban Property Developers Inc.
+9320792,GIPAYA,FREDY,.,,KCLoan,,5/15/2023,7996.41,0,7996.41,7996.41,444.24,19,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320903,SAMARTINO,KALVIN,A,,KCLoan,,5/15/2023,15992.77,0,15992.77,15992.77,888.49,18,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320881,LATONIO,FELIXBERTO,E,,KCLoan,,5/15/2023,15992.77,0,15992.77,15992.77,888.49,18,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010537,MARCOS,MARIA CRISTINA,N,,KCLoan,,5/15/2023,23989.18,0,23989.18,23989.18,1332.73,1,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+4980794,MANALANG,WARREN,M,,KCLoan,,6/15/2023,26654.64,0,26654.64,26654.64,1332.73,21,4,KAAGAPAY LOAN,,DMC - Urban Property Developers Inc.
+9320806,DISTRAJO,JOWELEO,C,,KCLoan,,6/15/2023,17769.75,0,17769.75,17769.75,888.49,20,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0015059,TEMBLADOR,FLORES,B,,HMI,,1/15/2025,1115.4,0,1115.4,1115.4,1116,1,4,HMI,,DMC - Urban Property Developers Inc.
+0015059,TEMBLADOR,FLORES,B,,HDMF_SL,,7/31/2023,3048.74,0,3048.74,3048.74,3050,1,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0010405,BRAZA,JOVANIE,V,,KCLoan,,7/15/2023,29320.1,0,29320.1,29320.1,1332.73,23,4,KAAGAPAY LOAN,,DMC - Urban Property Developers Inc.

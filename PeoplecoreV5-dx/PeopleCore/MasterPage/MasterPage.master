@@ -1,0 +1,567 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage_MasterPage" %>
+<%@ Register TagName="xMenu" TagPrefix="asp" Src="~/Include/Menu.ascx"  %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">        
+    <!-- META SECTION -->
+    <title>PeopleCore Version 5</title>            
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />        
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+
+    <link href="../css/pcore/css.css" rel="stylesheet" type="text/css" />    
+    <link href="../css/pcore/cssPager.css" rel="stylesheet" type="text/css" />
+    <%--<link href="../css/pcore/JQueryVal.css" rel="stylesheet" type="text/css" />--%>
+    <link href="../css/pcore/jqdialog.css" rel="stylesheet" type="text/css" />
+    <link href="../css/pcore/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link rel='stylesheet' type='text/css' id='theme' href='../css/theme-light.css' />
+    <!-- START PRELOADS -->
+   <%-- <audio id="audio-alert" src="../audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="../audio/fail.mp3" preload="auto"></audio>--%>
+    <!-- END PRELOADS -->                      
+
+    <!-- START SCRIPTS -->
+
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="../js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/bootstrap/bootstrap.min.js"></script>    
+    <!-- END PLUGINS -->
+        
+    <!-- START THIS PAGE PLUGINS-->        
+    <script type='text/javascript' src='../js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="../js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>  
+    
+    <script type='text/javascript' src='../js/plugins/noty/jquery.noty.js'></script>
+    <script type='text/javascript' src='../js/plugins/noty/layouts/topCenter.js'></script>
+    <script type='text/javascript' src='../js/plugins/noty/layouts/topLeft.js'></script>
+    <script type='text/javascript' src='../js/plugins/noty/layouts/topRight.js'></script>  
+     <script type='text/javascript' src='../js/plugins/noty/themes/default.js'></script>              
+    <script type="text/javascript" src="../js/demo_tables.js"></script>     
+    <!-- END THIS PAGE PLUGINS-->  
+        
+    <!-- START TEMPLATE -->
+    <script type="text/javascript" src="../js/settings.js"></script>        
+    <script type="text/javascript" src="../js/plugins.js"></script>        
+    <script type="text/javascript" src="../js/actions.js"></script>                        
+    <!-- END TEMPLATE -->
+
+    <!--START VALIDATOR-->
+    <script type="text/javascript" src="../js/pcore/jquery.validate.js"></script>
+    <script type="text/javascript" src="../js/jquery.validation.net.webforms.min.js"></script>        
+
+    <!--START LISTBOX MULTI-SELECT-->
+    <%--<link href="../css/bootstrap/bootstrap-multiselect.css"
+        rel="stylesheet" type="text/css" />--%>
+    <%--<script src="../css/bootstrap/bootstrap-multiselect.js"
+        type="text/javascript"></script>--%>
+    <!-- END LISTBOX MULTI-SELECT -->
+
+    <!-- END META SECTION -->            
+    
+    <asp:ContentPlaceHolder id="head" runat="server" />    
+    <script  type="text/javascript">
+        $(function () {            
+            $("#aspnetForm").validateWebForm();
+            $('.dropdown-toggle').dropdown();
+            $('.dropdown-menu input, .dropdown-menu label, .dropdown-menu select').click(function (e) {
+                e.stopPropagation();
+            });
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+            prm.add_endRequest(function () {
+                $("#aspnetForm").validateWebForm();
+                //rebind dropdownmenu
+                $('.dropdown-toggle').dropdown();
+                $('.dropdown-menu input, .dropdown-menu label, .dropdown-menu select').click(function (e) {
+                    e.stopPropagation();
+                });
+                adjustPanelEntry();
+                adjustPanelEntry2();
+                adjustPanelEntry3();
+            });
+        });
+
+        $(window).resize(function () {
+            adjustPanelEntry();
+            adjustPanelEntry2();
+            adjustPanelEntry3();
+        });
+
+
+        $.validator.setDefaults({
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else if (element.parent('.radio-inline').length) {
+                    error.insertAfter(element.parent().parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+       
+        function LogOutUser(result, context) {
+            // don't do anything here
+        }
+        function LogMeOut() {
+            LogOutUserCallBack();
+        }
+   
+    </script>
+    <style type="text/css">
+            .component a
+            {
+            	margin: 5px;             	
+            	display: inline-block;            	           	            	
+            }
+            
+            a.client_logos
+            {
+            	background-image:none;            	
+            }
+    </style>
+</head>
+<body  onunload="LogMeOut()">
+
+    <!-- START PAGE CONTAINER -->
+    <form id="aspnetForm" runat="server" autocomplete="off">
+        <asp:HiddenField runat="server" ID="hdtoSaveData" />
+    <!-- MESSAGE BOX-->
+    <script type="text/javascript">
+
+        
+
+        function Success(msg) {
+            $("#message-box-success").toggleClass("open");
+            $('#message-box-success .mb-container .mb-middle .mb-content').text(msg);
+        }
+        function SuccessResponse(msg, url) {
+      
+            $("#message-box-success-response").toggleClass("open");
+            $('#message-box-success-response .mb-container .mb-middle .mb-content').text(msg);
+            $('#message-box-success-response .mb-container .mb-middle .mb-footer #btnresponse').click(function (e) {                
+                window.location.href = url;
+            });
+        }
+        function PopupMessage(msg, frm) {
+
+            $("#message-box-popup-message").toggleClass("open");
+            $('#message-box-popup-message .mb-container .mb-middle .mb-content').text(msg);
+            $('#message-box-popup-message .mb-container .mb-middle .mb-footer #btnok').click(function (e) {
+                $find(frm).show();
+                
+            });
+        }
+
+        function Information(msg) {
+            $("#message-box-info").toggleClass("open");
+            $('#message-box-info .mb-container .mb-middle .mb-content').text(msg);
+        }
+        function Warning(msg) {
+            $("#message-box-warning").toggleClass("open");
+            $('#message-box-warning .mb-container .mb-middle .mb-content').text(msg);
+        }
+        function Critical(msg) {
+            $("#message-box-danger").toggleClass("open");
+            $('#message-box-danger .mb-container .mb-middle .mb-content').text(msg);
+        }        
+
+        function dialogResponseMDL(dialogTitle, fmessage, frm) {
+            noty({
+                text: fmessage,
+                layout: 'topRight',
+                buttons: [
+                                { addClass: 'btn btn-default', text: 'Ok', onClick: function ($noty) {
+                                    $find(frm).show();
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+            })
+            return false;
+        }
+
+        
+        function dialogResponseAlert(fmessage, ftype,fposition) {
+            noty({
+                text: fmessage,
+                layout: fposition,
+                type: ftype,
+                buttons: [
+                                { addClass: 'btn btn-default', text: 'Ok', onClick: function ($noty) {
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+            })
+            return false;
+        }
+
+              
+
+        function adjustPanelEntry() {
+            $('.entryPopup').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            $('.entryPopupDetl').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            var windowHeight = $(window).height(); //Get the height of the browser viewport
+            var panelsub = $('.entryPopup').height(); //Get the height of subpanel	
+            var ulsub = $('.entryPopupDetl').height(); //Get the height of subpanel	
+            var panelAdjust = windowHeight - 20; //Viewport height - 100px (Sets max height of subpanel)
+            var ulAdjust = panelAdjust - 55; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+            if (panelsub >= panelAdjust) {	 //If subpanel is taller than max height...
+                $('.entryPopup').css({ 'height': panelAdjust }); //Adjust subpanel to max height
+                $('.entryPopupDetl').css({ 'height': ulAdjust }); //Adjust subpanel ul to new size
+            }
+            else if (panelsub < panelAdjust) { //If subpanel is smaller than max height...
+                $('.entryPopupDetl').css({ 'height': 'Auto' }); //Set subpanel ul to auto (default size)
+            }
+            var windowWidth = $(window).width(); //Get the width of the browser viewport
+            var panelwidth = $('.entryPopup').width(); //Get the width of subpanel
+            var panelwidthdetl = $('.entryPopupDetl').width();
+            panelwidth = windowWidth - panelwidth;
+            panelwidth = panelwidth / 2;
+            $('.entryPopup').css({ 'left': panelwidth });
+        };
+
+        function adjustPanelEntry2() {
+            $('.entryPopup2').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            $('.entryPopupDetl2').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            var windowHeight = $(window).height(); //Get the height of the browser viewport
+            var panelsub = $('.entryPopup2').height(); //Get the height of subpanel	
+            var ulsub = $('.entryPopupDetl2').height(); //Get the height of subpanel	
+            var panelAdjust = windowHeight - 20; //Viewport height - 100px (Sets max height of subpanel)
+            var ulAdjust = panelAdjust - 55; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+            if (panelsub >= panelAdjust) {	 //If subpanel is taller than max height...
+                $('.entryPopup2').css({ 'height': panelAdjust }); //Adjust subpanel to max height
+                $('.entryPopupDetl2').css({ 'height': ulAdjust }); //Adjust subpanel ul to new size
+            }
+            else if (panelsub < panelAdjust) { //If subpanel is smaller than max height...
+                $('.entryPopupDetl2').css({ 'height': 'Auto' }); //Set subpanel ul to auto (default size)
+            }
+            var windowWidth = $(window).width(); //Get the width of the browser viewport
+            var panelwidth = $('.entryPopup2').width(); //Get the width of subpanel
+            var panelwidthdetl = $('.entryPopupDetl2').width();
+            panelwidth = windowWidth - panelwidth;
+            panelwidth = panelwidth / 2;
+            $('.entryPopup2').css({ 'left': panelwidth });
+        };
+
+
+        function adjustPanelEntry3() {
+            $('.entryPopup3').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            $('.entryPopupDetl3').css({ 'height': 'auto' }); //Reset subpanel and ul height
+            var windowHeight = $(window).height(); //Get the height of the browser viewport
+            var panelsub = $('.entryPopup3').height(); //Get the height of subpanel	
+            var ulsub = $('.entryPopupDetl3').height(); //Get the height of subpanel	
+            var panelAdjust = windowHeight - 20; //Viewport height - 100px (Sets max height of subpanel)
+            var ulAdjust = panelAdjust - 55; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+            if (panelsub >= panelAdjust) {	 //If subpanel is taller than max height...
+                $('.entryPopup3').css({ 'height': panelAdjust }); //Adjust subpanel to max height
+                $('.entryPopupDetl3').css({ 'height': ulAdjust }); //Adjust subpanel ul to new size
+            }
+            else if (panelsub < panelAdjust) { //If subpanel is smaller than max height...
+                $('.entryPopupDetl3').css({ 'height': 'Auto' }); //Set subpanel ul to auto (default size)
+            }
+            var windowWidth = $(window).width(); //Get the width of the browser viewport
+            var panelwidth = $('.entryPopup3').width(); //Get the width of subpanel
+            var panelwidthdetl = $('.entryPopupDetl3').width();
+            panelwidth = windowWidth - panelwidth;
+            panelwidth = panelwidth / 2;
+            $('.entryPopup3').css({ 'left': panelwidth });
+        };
+
+    </script>
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-sign-out"></span><strong>Log Out</strong></div>
+                <div class="mb-content">
+                    <p>Do you want to proceed?</p>                    
+                    <%--<p>Press No if you want to continue work. Press Yes to logout current user.</p>--%>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">                            
+                        <asp:LinkButton runat="server" ID="lnkLogout" CssClass="btn btn-success btn-lg" Text="Yes" OnClick="lnkLogout_Click" />
+                        <asp:Button runat="server" ID="btnClose" CssClass="btn btn-default btn-lg mb-control-close" Text="No"  />                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- success response-->
+    <div class="message-box message-box-success animated fadeIn" id="message-box-success-response">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+                <div class="mb-content">                    
+                </div>
+                <div class="mb-footer">
+                    <button class="btn btn-default btn-lg pull-right mb-control-close" id="btnresponse">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End success response -->
+
+    <!-- Popup message-->
+    <div class="message-box message-box-warning animated fadeIn" id="message-box-popup-message">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span>Warning</div>
+                    <div class="mb-content" style="font-size:14px;">                        
+                    </div>
+                    <div class="mb-footer">
+                        <button class="btn btn-default btn-lg pull-right mb-control-close" id="btnok">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End popup message -->
+          
+    <!-- success -->
+    <div class="message-box message-box-success animated fadeIn" id="message-box-success">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-check"></span>Success</div>
+                <div class="mb-content">                    
+                </div>
+                <div class="mb-footer">
+                    <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- success -->
+    <!-- info -->
+        <div class="message-box message-box-info animated fadeIn" id="message-box-info">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-info"></span>Information</div>
+                    <div class="mb-content">                        
+                    </div>
+                    <div class="mb-footer">
+                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end info -->
+        <!-- warning -->
+        <div class="message-box message-box-warning animated fadeIn" id="message-box-warning">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-warning"></span>Warning</div>
+                    <div class="mb-content">                        
+                    </div>
+                    <div class="mb-footer">
+                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end warning -->
+        <!-- danger -->
+        <div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-times"></span>Error</div>
+                    <div class="mb-content">                        
+                    </div>
+                    <div class="mb-footer">
+                        <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end danger -->       
+
+
+        <!-- END MESSAGE BOX-->
+                                   
+        <div class="page-container">                    
+            <!-- START PAGE SIDEBAR -->
+            <div class="page-sidebar">
+                <!-- START X-NAVIGATION -->
+               <ul class="x-navigation">
+                    <li class="xn-logo">
+                        <a href="#">PEOPLECORE</a>
+                        <a href="#" class="x-navigation-control"></a>
+                    </li>                    
+                    <asp:xMenu runat="server" ID="Menu1" />                    
+                </ul>
+                <!-- END X-NAVIGATION -->
+            </div>
+            <!-- END PAGE SIDEBAR -->
+                        
+            <!-- PAGE CONTENT -->            
+            <div class="page-content">                
+                <!-- START X-NAVIGATION VERTICAL -->
+                
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                    <!-- TOGGLE NAVIGATION -->
+                    <li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                    </li>
+                    <!-- END TOGGLE NAVIGATION -->
+                    <!-- SEARCH -->
+                    <%--<li class="xn-logo">
+					<div class="client"></div>
+                    <img src="../img/client_logo.png" class="pull-left" alt="Client Logo"/>
+                    </li>--%>
+                    <li class="xn-logo">
+                        <asp:Image runat="server" ID="imgCompany" Height="50" CssClass="pull-left" />
+                    </li>
+                    <!-- END SEARCH -->
+                    <asp:PlaceHolder runat="server" ID="phMasterIcon" Visible="false">                    
+                    <!-- PROFILE -->                    
+                    <li class="xn-icon-button pull-right" runat="server" id="access">
+                        <a href="#"><span class="fa fa-user"></span></a>                        
+                        <div class="panel panel-primary animated zoomIn xn-drop-left">
+                            <div class="panel-heading">     
+                                <div class="panel-title">
+                                    <asp:Image runat="server" ID="imgPhoto" width="37" height="37" CssClass="img-circle" style="border: 1px solid white;" />&nbsp;&nbsp;<asp:label ID="lblUserName" runat="server"></asp:label>
+                                    <%--<img src="../assets/images/users/user2.jpg" width="37" height="37" class="img-circle"  >--%>
+                                </div>                             
+                            </div>
+                            <div class="panel-body list-group">
+                                <div class="row" style="text-align:center;">
+                                    <div class="col-md-4 component" runat="server" id="divAdmin">
+                                        <asp:LinkButton runat="server" ID="lnkAdmin" OnClick="btnAdmin_Click">
+                                            <i class="fa fa-adn fa-3x"></i><br />Admin
+                                        </asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-4 component" runat="server" id="divMS">
+                                        <asp:LinkButton runat="server" ID="lnkMS" OnClick="btnMS_Click">
+                                            <i class="fa fa-suitcase fa-3x"></i><br />Managerial
+                                        </asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-4 component" runat="server" id="divES">
+                                        <asp:LinkButton runat="server" ID="lnkES" OnClick="btnES_Click">
+                                            <i class="fa fa-user fa-3x"></i><br />Employee
+                                        </asp:LinkButton>
+                                    </div>                                                          
+                                    <div class="col-md-4 component" runat="server">
+                                        <asp:LinkButton runat="server" ID="lnkHelp" OnClick="lnkHelp_Click">
+                                            <i class="fa fa-question-circle fa-3x"></i><br />Help
+                                        </asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-4 component">
+                                        <asp:LinkButton runat="server" ID="lnkPolicy" OnClick="lnkPolicy_Click">
+                                            <i class="fa fa-book fa-3x"></i><br />Policy
+                                        </asp:LinkButton>
+                                    </div>
+                                    <div class="col-md-4 component">
+                                        <asp:LinkButton runat="server" ID="lnkFeedback" OnClick="lnkFeedback_Click">
+                                            <i class="fa fa-comment fa-3x"></i><br />Feedback
+                                        </asp:LinkButton>
+                                    </div>                                                       
+                                </div>                                                                                                  
+                            </div>
+                            <div class="panel-footer">
+                                <asp:LinkButton runat="server" ID="lnkChangePassword" CssClass="pull-left" style="margin:10px 5px;" OnClick="lnkChangePassword_Click" Visible="false">
+                                       <i class="fa fa-key fa-fw"></i>&nbsp;Change Password
+                                </asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="lnkTime" CssClass="pull-left" style="margin:10px 5px;" OnClick="lnkTime_Click" Visible="true">
+                                       <i class="fa fa-clock-o fa-fw"></i>&nbsp;Time IN/OUT
+                                </asp:LinkButton>
+                                <a href="#" class="mb-control btn btn-default pull-right" data-box="#mb-signout" style="margin:10px 5px">Log Out</a>
+                            </div>
+                        </div>               
+                    </li>
+                    <!-- END PROFILE -->
+        			<!-- NAVIBOX -->
+                    <li class="xn-icon-button pull-right" runat="server" id="notification">
+                        <a href="#"><span class="fa fa-tasks"></span></a>                        
+                        <div class="informer informer-danger"><asp:PlaceHolder runat="server" ID="phTotalCount" /></div>                        
+                        <div class="panel panel-primary animated zoomIn xn-drop-left">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-tasks"></span>&nbsp;Notification</h3>                                                                
+                            </div>
+                            <div class="panel-body list-group scroll" style="height:200px;">
+                                <asp:PlaceHolder runat="server" ID="phNotice" />
+                                <asp:Repeater runat="server" ID="rNotification">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" ID="lnkNotice" CssClass="list-group-item" OnClick="lnk_Click" CommandArgument='<%# Eval("lnk") & "|" & Eval("MenuType") & "|" & Eval("TableName") %>'>
+                                            <span> <%# DataBinder.Eval(Container.DataItem, "fDescription") %> </span>
+                                            <span class="label label-danger pull-right"><%# DataBinder.Eval(Container.DataItem, "fCount")%> </span>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>                        
+                    </li>                    
+                    <!-- END NAVIBOX -->
+                    <!-- NAVIBOX -->
+                    <li class="xn-icon-button pull-right" runat="server" id="company">
+                        <a href="#"><span class="fa fa-building"></span></a>                                                
+                        <div class="panel panel-primary animated zoomIn xn-drop-left">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-building"></span>&nbsp;Company</h3>                                                                
+                            </div>
+                            <div class="panel-body list-group scroll" style="height:200px;">
+                                <asp:Repeater runat="server" ID="rCompany">
+                                    <ItemTemplate>
+                                        <asp:LinkButton runat="server" ID="lnkCompany" CssClass="list-group-item" OnClick="lnkCompany_Click" CommandArgument='<%# Eval("PayLocNo") %>'>
+                                            <span> <%# DataBinder.Eval(Container.DataItem, "PayLocDesc") %> </span>                                            
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>                        
+                    </li>                    
+                    <!-- END NAVIBOX -->
+                    </asp:PlaceHolder>
+                </ul>                
+                <!-- END X-NAVIGATION VERTICAL -->                     
+                
+                <!-- START BREADCRUMB -->
+                <ul class="breadcrumb">
+                    <asp:PlaceHolder runat="server" ID="phBreadCrump" />                                        
+                </ul>
+                <!-- END BREADCRUMB -->
+                
+                <!-- PAGE TITLE -->
+                <!-- <div class="page-title">                    
+                    <h2><span class="fa fa-arrow-circle-o-left"></span> Basic Tables</h2>
+                </div> -->
+                <!-- END PAGE TITLE -->                
+                
+                <!-- PAGE CONTENT WRAPPER -->
+               <%--<div class="page-content-wrap">                
+                    <div class="row">
+                        <div class="col-md-12">                            
+                            <div class="panel panel-default">--%>                                                          
+                                <div id="page-content-wrap-id" class="panel-body">
+                                    <asp:ScriptManager runat="server"  AsyncPostBackTimeout="360000" ID="ScriptManager1" />
+                                    <asp:UpdatePanel runat="server" ID="UpdatePanel1" >
+                                        <ContentTemplate>
+                                            <asp:Literal runat="server" ID="lTheme" />                                       
+                                            <asp:ContentPlaceHolder id="cphBody" runat="server" />
+                                        </ContentTemplate>                                    
+                                    </asp:UpdatePanel>
+                                    <asp:UpdateProgress runat="server" ID="UpdateProgress1">
+                                        <ProgressTemplate>
+                                            <div style="background-color:#A6A6A6;filter:alpha(opacity=50);opacity:0.50; width: 100%; top: 0px; left: 0px; position:fixed; height:100%; z-index: 100002 !important;"></div>
+                                            <div style="margin:auto;filter: alpha(opacity=100);opacity: 1;vertical-align: middle;top: 45%;position:fixed;right: 45%;height: 60px;padding-left:15px;padding-right:15px;z-index:100003!important;">
+                                                <img src="../img/ajax-loader.gif" />
+                                            </div>                                            
+                                        </ProgressTemplate>                                    
+                                    </asp:UpdateProgress>
+                                </div>
+                           <%--</div>                                                      
+                        </div>                       
+                    </div>--%>                                     
+                <!-- END PAGE CONTENT WRAPPER -->                                    
+                <%--</div>--%>         
+            </div>                        
+            <!-- END PAGE CONTENT -->            
+        </div>
+        </form>
+    <!-- END PAGE CONTAINER -->                                                      
+    </body>
+</html>

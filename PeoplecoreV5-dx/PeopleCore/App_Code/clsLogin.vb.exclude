@@ -1,0 +1,116 @@
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports Microsoft.VisualBasic
+Imports clsLib
+
+Public Class clsLogin
+    
+    Dim AccessRight As New clsBase.clsArray
+
+    Enum EnumPermissionType
+        AllowAdd = 1
+        AllowEdit = 2
+        AllowDelete = 3
+        AllowView = 4
+        AllowPost = 5
+    End Enum
+
+   
+    Public Function ValidateLogin_new(ByVal username As String, ByVal type As Integer) As DataSet
+        Return SQLHelper.ExecuteDataSet("SWeb_UserLoginVw", username, type)
+
+    End Function
+
+    Public Function GetMenuUserViewed(ByVal userno As Integer, ByVal menutype As String, ByVal menustyle As String, Optional ByVal IsClickMain As Integer = 0) As DataSet
+
+        'System.Web.HttpContext.Current.Session("item") = 0
+        Dim _ds As DataSet
+        Dim rcount As Integer = 0
+
+        System.Web.HttpContext.Current.Session("xFormname") = ""
+        System.Web.HttpContext.Current.Session("xMenuType") = ""
+        System.Web.HttpContext.Current.Session("xTablename") = ""
+        System.Web.HttpContext.Current.Session("xMenuTitle") = Nothing
+
+        _ds = sqlhelper.ExecuteDataSet("EMenuUserViewed", userno, menutype, menustyle)
+        If _ds.Tables.Count > 0 Then
+            If _ds.Tables(0).Rows.Count > 0 Then
+                rcount = _ds.Tables(0).Rows.Count
+                System.Web.HttpContext.Current.Session("xFormname") = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Formname"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                System.Web.HttpContext.Current.Session("xMenuType") = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("MenuType"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                System.Web.HttpContext.Current.Session("xTablename") = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Tablename"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                System.Web.HttpContext.Current.Session("xMenuTitle") = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("MenuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                System.Web.HttpContext.Current.Session("xLinkURL1") = System.Web.HttpContext.Current.Session("xFormname") & "?Isclickmain=" & IsClickMain
+
+            End If
+        End If
+        Return _ds
+    End Function
+
+
+    Private Function GetUserLevelPermission(ByVal userno As Integer, ByVal formname As String, ByVal tablename As String, ByVal menutype As String) As DataSet
+        Return sqlhelper.ExecuteDataSet("EMenuUserLevelPermission", userno, formname, tablename, menutype)
+    End Function
+
+    Public Function GetDeniedMessage(ByVal bPermissionType As EnumPermissionType) As String
+        Dim bRetVal As String
+        bRetVal = "Please secure permission from your team leader or administrator."
+        Select Case bPermissionType
+            Case EnumPermissionType.AllowDelete : bRetVal = "Access Denied! Please secure DELETE permission from your administrator."
+            Case EnumPermissionType.AllowAdd : bRetVal = "Access Denied! Please secure ADD permission from your administrator."
+            Case EnumPermissionType.AllowEdit : bRetVal = "Access Denied! Please secure EDIT permission from your administrator."
+            Case EnumPermissionType.AllowPost : bRetVal = "Access Denied! Please secure POST permission from your administrator."
+        End Select
+        Return bRetVal
+    End Function
+
+  
+    Public Sub GetAccessRights(ByVal UserNo As Integer, ByVal formname As String, ByVal tablename As String, Optional ByVal menutype As String = "", Optional ByVal curFormName As String = "")
+        Dim _ds As DataSet
+        AccessRight.AccessRights.xAllowAdd = False
+        AccessRight.AccessRights.xAllowDelete = False
+        AccessRight.AccessRights.xAllowEdit = False
+        AccessRight.AccessRights.xAllowView = False
+        AccessRight.AccessRights.xAllowPost = False
+
+        If (formname <> curFormName) And (curFormName <> "" Or Not curFormName Is Nothing) Then
+            Dim fds As DataSet
+            fds = sqlhelper.ExecuteDataSet("EMenuUserLevelPermission_WebCheck", UserNo, curFormName, menutype)
+            If fds.Tables.Count > 0 Then
+                If fds.Tables(0).Rows.Count > 0 Then
+                    formname = curFormName
+                    tablename = Generic.CheckDBNull(fds.Tables(0).Rows(0)("tableName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                End If
+            End If
+            fds = Nothing
+        End If
+
+        _ds = GetUserLevelPermission(UserNo, formname, tablename, menutype)
+        If _ds.Tables.Count > 0 Then
+            If _ds.Tables(0).Rows.Count > 0 Then
+                AccessRight.AccessRights.xAllowAdd = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Added"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                AccessRight.AccessRights.xAllowDelete = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Deleted"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                AccessRight.AccessRights.xAllowEdit = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Edited"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                AccessRight.AccessRights.xAllowView = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Viewed"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                AccessRight.AccessRights.xAllowPost = Generic.CheckDBNull(_ds.Tables(0).Rows(0)("Posted"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                
+            End If
+        End If
+
+    End Sub
+    Public Function IsAllowUser(ByVal bPermissionType As EnumPermissionType) As Boolean
+        Dim bRetVal As Boolean
+        bRetVal = True
+        Select Case bPermissionType
+            Case EnumPermissionType.AllowDelete : bRetVal = AccessRight.AccessRights.xAllowDelete
+            Case EnumPermissionType.AllowAdd : bRetVal = AccessRight.AccessRights.xAllowAdd
+            Case EnumPermissionType.AllowEdit : bRetVal = AccessRight.AccessRights.xAllowEdit
+            Case EnumPermissionType.AllowView : bRetVal = AccessRight.AccessRights.xAllowView
+            Case EnumPermissionType.AllowPost : bRetVal = AccessRight.AccessRights.xAllowPost
+                '...etc
+        End Select
+
+        Return bRetVal
+    End Function
+  
+End Class

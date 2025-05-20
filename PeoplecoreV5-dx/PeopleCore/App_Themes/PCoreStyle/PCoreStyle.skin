@@ -1,0 +1,283 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+<SelectedRowStyle  CssClass="SelectedRowStyle"/>
+--%>
+
+<mcn:DataPagerGridView CssClass="table table-hover striped-bottom" runat="server" AutoGenerateColumns="False" HeaderStyle-Wrap="true"  
+    PagerStyle-HorizontalAlign="Right" AllowSorting="true" GridLines="None" AllowPaging="True" PagerSettings-Visible="false" 
+    HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left">
+    <SelectedRowStyle  CssClass="SelectedRowStyle"/>
+</mcn:DataPagerGridView> 
+
+<mcn:DataPagerGridView SkinID="grdAuto" CssClass="table table-hover striped-bottom" runat="server" AutoGenerateColumns="True" HeaderStyle-Wrap="true"  
+    PagerStyle-HorizontalAlign="Right" AllowSorting="true" GridLines="None" AllowPaging="True" PagerSettings-Visible="false" 
+    HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left">
+    <SelectedRowStyle  CssClass="SelectedRowStyle"/>
+</mcn:DataPagerGridView> 
+
+<mcn:DataPagerGridView SkinID="grdDetl" CssClass="table table-hover striped-bottom" runat="server" AutoGenerateColumns="False" HeaderStyle-Wrap="true" 
+PagerStyle-HorizontalAlign="Right" AllowSorting="true" GridLines="None" AllowPaging="True" PagerSettings-Visible="false" 
+HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left"> </mcn:DataPagerGridView> 
+
+<mcn:DataPagerGridView SkinID="AllowPaging-No" CssClass="table table-hover striped-bottom" runat="server" AutoGenerateColumns="False" HeaderStyle-Wrap="true"  
+    PagerStyle-HorizontalAlign="Right" AllowSorting="true" GridLines="None" AllowPaging="false" PagerSettings-Visible="false" 
+    HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left">
+    <SelectedRowStyle  CssClass="SelectedRowStyle"/>
+</mcn:DataPagerGridView> 
+
+<mcn:DataPagerGridView SkinID="grdMBO" CssClass="table table-bordered striped-bottom" runat="server" AutoGenerateColumns="False" HeaderStyle-Wrap="true"  
+    PagerStyle-HorizontalAlign="Right" AllowSorting="true" GridLines="None" AllowPaging="false" PagerSettings-Visible="false" 
+    HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left">
+    <SelectedRowStyle  CssClass="SelectedRowStyle"/>
+</mcn:DataPagerGridView> 
+
+<mcn:DataPagerGridView HeaderStyle-Height ="30PX" skinId="grdCalendar" CssClass = "GridViewStyle"   runat="server" AutoGenerateColumns="False"  
+    Width="100%" HeaderStyle-Wrap="true"  PagerStyle-HorizontalAlign="Right"  AllowSorting="true" GridLines="None"  
+    AllowPaging="True" PagerSettings-Visible="false" > 
+    <HeaderStyle CssClass="HeaderStyle" /> 
+    <PagerStyle CssClass="PagerStyle" /> 
+    <PagerSettings Mode="NumericFirstLast" />
+    <SelectedRowStyle  CssClass="SelectedRowStyle"/>
+</mcn:DataPagerGridView> 
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdDX">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="true" />
+</dx:ASPxGridView>
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="GrdNoSearch">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="False" />
+</dx:ASPxGridView>
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdDXWOSearch">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="false" />
+</dx:ASPxGridView>
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdDXTotal">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible"/>                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="true" />
+    
+</dx:ASPxGridView>
+
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdDXAll">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+    </Styles>
+    <Settings VerticalScrollableHeight="300" />
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7" Mode="ShowAllRecords">
+        <PageSizeItemSettings Visible="true" ShowAllItem="true" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="true" />
+</dx:ASPxGridView>
+
+<ajaxToolkit:TextBoxWatermarkExtender  runat="server" WatermarkText="enter keyword --->"  />
+<ajaxToolkit:TextBoxWatermarkExtender skinId="dynamic"  runat="server" />
+<asp:TextBox  skinid="txtdate" width="100" runat="server" ></asp:TextBox>
+<asp:ImageButton runat="server" SkinID="grdEditbtn" AlternateText="Edit" ImageUrl="~/images/edit.png" height="14px" width="14px"/>
+<asp:ImageButton runat="server" SkinID="grdPreviewbtnRpt" AlternateText="preview" ImageUrl="~/images/btn_preview.png"/>
+<asp:ImageButton runat="server" SkinID="grdPreviewbtn" AlternateText="preview" ImageUrl="~/images/btn_open.png" height="13px" width="16px"/>
+<asp:ImageButton runat="server" SkinID="grdDetail" AlternateText="preview" ImageUrl="~/images/btn_detail.png"/>
+<asp:ImageButton runat="server" SkinID="grdAddbtn" AlternateText="Add" ImageUrl="~/images/btn_Add.png"/>
+<asp:ImageButton runat="server" SkinID="btnDelete" AlternateText="Delete" ImageUrl="~/images/delete.png"/>
+<asp:ImageButton runat="server" SkinID="btnAdd" AlternateText="Add" ImageUrl="~/images/add.png"/>
+<asp:ImageButton runat="server" SkinID="btnPost" AlternateText="Post" ImageUrl="~/images/post.png"/>
+<asp:ImageButton runat="server" SkinID="btnApproved" AlternateText="Approved" ImageUrl="~/images/approved.png"/>
+<asp:ImageButton runat="server" SkinID="btnDisapproved" AlternateText="Disapproved" ImageUrl="~/images/disapproved.png"/>
+<asp:ImageButton runat="server" SkinID="btnSave" AlternateText="Save" ImageUrl="~/images/save.png"/>
+<asp:ImageButton runat="server" SkinID="btnClose" AlternateText="Close" ImageUrl="~/images/close.png"/>
+<asp:ImageButton runat="server" SkinID="grdCopy" AlternateText="Copy" ImageUrl="~/images/copy.png"/>
+<asp:ImageButton runat="server" SkinID="grdReject" AlternateText="Reject" ImageUrl="~/images/reject.png"/>
+
+<dx:ASPxHtmlEditor SkinID="HtmlEditorBasic" runat="server">
+    <Toolbars>
+        <dx:HtmlEditorToolbar Name="StandardToolbar1">
+            <Items>
+                <dx:ToolbarFontNameEdit>
+                    <Items>
+                        <dx:ToolbarListEditItem Text="Times New Roman" Value="Times New Roman" />
+                        <dx:ToolbarListEditItem Text="Tahoma" Value="Tahoma" />
+                        <dx:ToolbarListEditItem Text="Verdana" Value="Verdana" />
+                        <dx:ToolbarListEditItem Text="Arial" Value="Arial" />
+                        <dx:ToolbarListEditItem Text="MS Sans Serif" Value="MS Sans Serif" />
+                        <dx:ToolbarListEditItem Text="Courier" Value="Courier" />
+                    </Items>
+                </dx:ToolbarFontNameEdit>
+                <dx:ToolbarFontSizeEdit>
+                    <Items>
+                        <dx:ToolbarListEditItem Text="1 (8pt)" Value="1" />
+                        <dx:ToolbarListEditItem Text="2 (10pt)" Value="2" />
+                        <dx:ToolbarListEditItem Text="3 (12pt)" Value="3" />
+                        <dx:ToolbarListEditItem Text="4 (14pt)" Value="4" />
+                        <dx:ToolbarListEditItem Text="5 (18pt)" Value="5" />
+                        <dx:ToolbarListEditItem Text="6 (24pt)" Value="6" />
+                        <dx:ToolbarListEditItem Text="7 (36pt)" Value="7" />
+                    </Items>
+                </dx:ToolbarFontSizeEdit>
+                <dx:ToolbarJustifyLeftButton BeginGroup="True">
+                </dx:ToolbarJustifyLeftButton>
+                <dx:ToolbarJustifyCenterButton>
+                </dx:ToolbarJustifyCenterButton>
+                <dx:ToolbarJustifyRightButton>
+                </dx:ToolbarJustifyRightButton>
+                <dx:ToolbarJustifyFullButton>
+                </dx:ToolbarJustifyFullButton>
+                <dx:ToolbarBoldButton BeginGroup="True">
+                </dx:ToolbarBoldButton>
+                <dx:ToolbarItalicButton>
+                </dx:ToolbarItalicButton>
+                <dx:ToolbarUnderlineButton>
+                </dx:ToolbarUnderlineButton>
+                <dx:ToolbarInsertOrderedListButton BeginGroup="True">
+                </dx:ToolbarInsertOrderedListButton>
+                <dx:ToolbarInsertUnorderedListButton>
+                </dx:ToolbarInsertUnorderedListButton>
+                <dx:ToolbarIndentButton BeginGroup="True">
+                </dx:ToolbarIndentButton>
+                <dx:ToolbarOutdentButton>
+                </dx:ToolbarOutdentButton>
+            </Items>
+        </dx:HtmlEditorToolbar>
+    </Toolbars>
+    <Settings AllowHtmlView="False" AllowPreview="False" />                        
+</dx:ASPxHtmlEditor>
+
+<ajaxToolkit:AutoCompleteExtender runat="server" SkinID="AC"
+            CompletionListCssClass="autocomplete_completionListElement" 
+            CompletionListItemCssClass="autocomplete_listItem" EnableCaching="false"
+            CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
+            FirstRowSelected="true" UseContextKey="true" />
+
+<dx:ASPxHtmlEditor SkinID="HtmlEditorPlane" runat="server">
+    <Toolbars>
+        <dx:HtmlEditorToolbar Name="StandardToolbar1">
+            <Items>
+                <dx:ToolbarJustifyLeftButton BeginGroup="True">
+                </dx:ToolbarJustifyLeftButton>
+                <dx:ToolbarJustifyCenterButton>
+                </dx:ToolbarJustifyCenterButton>
+                <dx:ToolbarJustifyRightButton>
+                </dx:ToolbarJustifyRightButton>
+                <dx:ToolbarJustifyFullButton>
+                </dx:ToolbarJustifyFullButton>
+                <dx:ToolbarBoldButton BeginGroup="True">
+                </dx:ToolbarBoldButton>
+                <dx:ToolbarItalicButton>
+                </dx:ToolbarItalicButton>
+                <dx:ToolbarUnderlineButton>
+                </dx:ToolbarUnderlineButton>
+                <dx:ToolbarInsertOrderedListButton BeginGroup="True">
+                </dx:ToolbarInsertOrderedListButton>
+                <dx:ToolbarInsertUnorderedListButton>
+                </dx:ToolbarInsertUnorderedListButton>
+                <dx:ToolbarIndentButton BeginGroup="True">
+                </dx:ToolbarIndentButton>
+                <dx:ToolbarOutdentButton>
+                </dx:ToolbarOutdentButton>
+            </Items>
+        </dx:HtmlEditorToolbar>
+    </Toolbars>
+    <Settings AllowHtmlView="False" AllowPreview="False" />                        
+</dx:ASPxHtmlEditor>

@@ -1,0 +1,6 @@
+﻿EmployeeNo,Last Name,First Name,Middle Name,Extension,Loan Type,DateGranted,StartofDeduction,PrincipalAmount,InterestAmount,TotalAmount,BeginningBalance,Amortization,NoofPayments,PayrollSchedule,Remarks,ReferenceNo.,Company
+0010082,FANDIALAN,SHERWIN,R,,KCC Share Capital Build-up,,1/31/2023,500,0,500,500,100,0,30th,kcc cap build up 2023,,Concepcion Grande Development Incorporated
+0011142,ROQUERO,JOANNE,C,,KCC Share Capital Build-up,,1/31/2023,900,0,900,900,100,0,30th,kcc cap build up 2023,,Concepcion Grande Development Incorporated
+0011142,ROQUERO,JOANNE,C,,PAGIBIG LOAN,,4/30/2023,2469.95,0,2469.95,2469.95,2470,0,NULL,PAG-IBIG LOAN,,Concepcion Grande Development Incorporated
+0011142,ROQUERO,JOANNE,C,,Kaagapay Cooperative Loan,,5/15/2023,31985.56,0,31985.56,31985.56,1332.73,0,15th and 30th,kaagapay loan,,Concepcion Grande Development Incorporated
+0010082,FANDIALAN,SHERWIN,R,,Kaagapay Cooperative Loan,,7/15/2023,19546.73,0,19546.73,19546.73,888.49,0,15th and 30th,kaagapay loan,,Concepcion Grande Development Incorporated

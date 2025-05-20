@@ -1,0 +1,67 @@
+Employee No. ,Loan Type Code,Date Granted,Start of Deduction,Principal Amount ,Interest Amount,Beginning Balance ,Amort,No. of Payments,Payroll Schedule,Remarks,IsDeductBonus,Reference No.
+9692800,HMI,04/30/2023,04/30/2023,223.16,0,223.16,223.16,1,4,HMI,,DMC - Urban Property Developers Inc.
+9320873,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9321195,SSS_SL,06/30/2023,06/30/2023,32.53,0,32.53,427,1,4,SSS LOAN,,DMC - Urban Property Developers Inc.
+0010367,KCC B-Up,01/31/2022,01/31/2022,100,0,100,100,1,2,KCC CAPITAL BUILD 2022,,DMC - Urban Property Developers Inc.
+9320911,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010820,KCLoan,12/15/2022,12/15/2022,21323.72,0,21323.72,1332.73,17,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010391,KCLoan,03/31/2023,03/31/2023,22656.45,0,22656.45,1332.73,18,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+0010391,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0019542,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010405,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010405,KCLoan,07/15/2023,07/15/2023,31985.56,0,31985.56,1332.73,25,4,KAAGAPAY LOAN,,DMC - Urban Property Developers Inc.
+0021482,KCLoan,01/31/2023,01/31/2023,18658.26,0,18658.26,1332.73,14,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0021482,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0013072,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320806,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320806,KCLoan,06/15/2023,06/15/2023,19546.73,0,19546.73,888.49,22,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320482,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9218017,KCLoan,11/15/2022,11/15/2022,7764.64,0,7764.64,2588.23,3,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0020699,KCC B-Up,01/31/2023,01/31/2023,636.7,0,636.7,100,7,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0020699,KCLoan,07/15/2022,07/15/2022,2665.5,0,2665.5,1332.73,3,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0020699,HDMF_MP2,06/01/2023,06/01/2023,2204.15,0,2204.15,2204.15,1,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0020699,HMI,01/15/2023,01/15/2023,446.32,0,446.32,223,3,4,HMI,,DMC - Urban Property Developers Inc.
+0010456,KCC B-Up,01/31/2023,01/31/2023,1000,0,1000,100,10,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0017663,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320792,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320792,KCLoan,05/15/2023,05/15/2023,8884.89,0,8884.89,444.24,21,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010472,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9321101,KCC B-Up,01/31/2023,01/31/2023,1100,0,1100,100,11,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9321101,HDMF_MP2,06/30/2023,06/30/2023,858.19,0,858.19,428,2,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+9321101,KCLoan,11/15/2022,11/15/2022,6901.88,0,6901.88,1725.49,4,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0016144,KCLoan,03/31/2023,03/31/2023,22656.45,0,22656.45,1332.73,18,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+0016144,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010499,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010499,KCLoan,11/15/2022,11/15/2022,7107.87,0,7107.87,888.49,8,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010502,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0018368,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9218009,KCC B-Up,01/31/2023,01/31/2023,500,0,500,100,5,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320881,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320881,KCLoan,05/15/2023,05/15/2023,17769.75,0,17769.75,888.49,20,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320938,KCLoan,01/31/2023,01/31/2023,3451,0,3451,1725.48,3,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9320938,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010510,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010510,KCLoan,03/31/2023,03/31/2023,22656.45,0,22656.45,1332.73,18,4,kaagapay loan from edison,,DMC - Urban Property Developers Inc.
+0013099,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+4980794,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+4980794,KCLoan,06/15/2023,06/15/2023,29320.1,0,29320.1,1332.73,23,4,KAAGAPAY LOAN,,DMC - Urban Property Developers Inc.
+0010537,KCLoan,05/15/2023,05/15/2023,26654.64,0,26654.64,1332.73,21,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0010537,HDMF_MP2,06/30/2023,06/30/2023,0.21,0,0.21,3690,1,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+0010537,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0021709,KCC B-Up,01/31/2023,01/31/2023,1121,0,1121,100,12,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010545,KCC B-Up,01/31/2023,01/31/2023,300.04,0,300.04,100,4,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0014796,KCLoan,08/15/2022,08/15/2022,1776.93,0,1776.93,888.49,2,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0014796,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010588,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010480,KCC B-Up,01/31/2023,01/31/2023,400,0,400,100,4,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0010480,KCLoan,05/15/2023,05/15/2023,20705.79,0,20705.79,2588.23,8,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+9217533,HDMF_MP2,06/01/2023,06/01/2023,1592.46,0,1592.46,796,3,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+9217533,HMI,01/15/2023,01/15/2023,446.32,0,446.32,223,3,4,HMI,,DMC - Urban Property Developers Inc.
+9217533,KCC B-Up,01/31/2023,01/31/2023,500,0,500,100,5,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320903,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+9320903,KCLoan,05/15/2023,05/15/2023,17769.75,0,17769.75,888.49,20,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0013455,KCLoan,08/15/2022,08/15/2022,2665.5,0,2665.5,1332.73,3,4,kaagapay loan,,DMC - Urban Property Developers Inc.
+0013455,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.
+0015059,HMI,01/15/2023,01/15/2023,1115.8,0,1115.8,1115.8,1,4,HMI,,DMC - Urban Property Developers Inc.
+0015059,HDMF_MP2,06/30/2023,06/30/2023,3049.58,0,3049.58,3049.58,1,4,PAG-IBIG LOAN,,DMC - Urban Property Developers Inc.
+9217622,KCC B-Up,01/31/2023,01/31/2023,300,0,300,100,3,2,kcc cap build up 2023,,DMC - Urban Property Developers Inc.

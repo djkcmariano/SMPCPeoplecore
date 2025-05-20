@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="15.1.7.0" Ref="1" Name="Employee_RptMasterlist" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v15.1, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" DataMember="EEmployee_RptMasterList" DataSource="#Ref-0" Margins="51, 50, 122, 32" Landscape="true" Version="15.1" PaperKind="Custom" PageWidth="5500" PageHeight="850">
+  <Parameters>
+    <Item1 Ref="3" Name="onlineuserno" Type="#Ref-2" ValueInfo="0" />
+    <Item2 Ref="5" Name="paylocno" Type="#Ref-4" ValueInfo="0" />
+    <Item3 Ref="7" Name="filterbyno" Type="#Ref-6" ValueInfo="0" />
+    <Item4 Ref="8" Name="filterbyid" Type="#Ref-6" ValueInfo="0" />
+    <Item5 Ref="10" Name="startdate" />
+    <Item6 Ref="11" Name="enddate" />
+    <Item7 Ref="12" Name="employmentstatno" Type="#Ref-4" ValueInfo="0" />
+    <Item8 Ref="13" Name="groupbyno" Type="#Ref-4" ValueInfo="0" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="14" ControlType="DetailBand" Name="Detail" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="25">
+      <Controls>
+        <Item1 Ref="15" ControlType="XRTable" Name="xrTable2" SizeF="5396.665,25" LocationFloat="0, 0" Borders="All">
+          <Rows>
+            <Item1 Ref="16" Name="xrTableRow2" ControlType="XRTableRow" Weight="11.5">
+              <Cells>
+                <Item1 Ref="17" ControlType="XRTableCell" Name="xrTableCell4" Weight="0.15714284708211709" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell4">
+                  <DataBindings>
+                    <Item1 Ref="18" PropertyName="Text" DataMember="EEmployee_RptMasterList.EmployeeCode" />
+                  </DataBindings>
+                  <StylePriority Ref="19" UseBorderWidth="false" UseFont="false" />
+                </Item1>
+                <Item2 Ref="20" ControlType="XRTableCell" Name="xrTableCell5" Weight="0.10659340323982652" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell5">
+                  <DataBindings>
+                    <Item1 Ref="21" PropertyName="Text" DataMember="EEmployee_RptMasterList.FPID" />
+                  </DataBindings>
+                  <StylePriority Ref="22" UseBorderWidth="false" UseFont="false" />
+                </Item2>
+                <Item3 Ref="23" ControlType="XRTableCell" Name="xrTableCell6" Weight="0.24395605737036402" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell6">
+                  <DataBindings>
+                    <Item1 Ref="24" PropertyName="Text" DataMember="EEmployee_RptMasterList.Fullname" />
+                  </DataBindings>
+                  <StylePriority Ref="25" UseBorderWidth="false" UseFont="false" />
+                </Item3>
+                <Item4 Ref="26" ControlType="XRTableCell" Name="xrTableCell8" Weight="0.15714285559354216" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell8">
+                  <DataBindings>
+                    <Item1 Ref="27" PropertyName="Text" DataMember="EEmployee_RptMasterList.BankAccountNo" />
+                  </DataBindings>
+                  <StylePriority Ref="28" UseBorderWidth="false" UseFont="false" />
+                </Item4>
+                <Item5 Ref="29" ControlType="XRTableCell" Name="xrTableCell10" Weight="0.22417587821899238" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell10">
+                  <DataBindings>
+                    <Item1 Ref="30" PropertyName="Text" DataMember="EEmployee_RptMasterList.PositionDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="31" UseBorderWidth="false" UseFont="false" />
+                </Item5>
+                <Item6 Ref="32" ControlType="XRTableCell" Name="xrTableCell12" Weight="0.14505499915337761" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell12">
+                  <DataBindings>
+                    <Item1 Ref="33" PropertyName="Text" DataMember="EEmployee_RptMasterList.TaxExemptCode" />
+                  </DataBindings>
+                  <StylePriority Ref="34" UseBorderWidth="false" UseFont="false" />
+                </Item6>
+                <Item7 Ref="35" ControlType="XRTableCell" Name="xrTableCell14" Weight="0.14505499915337761" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell14">
+                  <DataBindings>
+                    <Item1 Ref="36" PropertyName="Text" DataMember="EEmployee_RptMasterList.HiredDate" />
+                  </DataBindings>
+                  <StylePriority Ref="37" UseBorderWidth="false" UseFont="false" />
+                </Item7>
+                <Item8 Ref="38" ControlType="XRTableCell" Name="xrTableCell16" Weight="0.14505499915337761" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell16">
+                  <DataBindings>
+                    <Item1 Ref="39" PropertyName="Text" DataMember="EEmployee_RptMasterList.RegularizedDate" />
+                  </DataBindings>
+                  <StylePriority Ref="40" UseBorderWidth="false" UseFont="false" />
+                </Item8>
+                <Item9 Ref="41" ControlType="XRTableCell" Name="xrTableCell18" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell18">
+                  <DataBindings>
+                    <Item1 Ref="42" PropertyName="Text" DataMember="EEmployee_RptMasterList.SuperiorName" />
+                  </DataBindings>
+                  <StylePriority Ref="43" UseBorderWidth="false" UseFont="false" />
+                </Item9>
+                <Item10 Ref="44" ControlType="XRTableCell" Name="xrTableCell20" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell20">
+                  <DataBindings>
+                    <Item1 Ref="45" PropertyName="Text" DataMember="EEmployee_RptMasterList.SectionDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="46" UseBorderWidth="false" UseFont="false" />
+                </Item10>
+                <Item11 Ref="47" ControlType="XRTableCell" Name="xrTableCell22" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell22">
+                  <DataBindings>
+                    <Item1 Ref="48" PropertyName="Text" DataMember="EEmployee_RptMasterList.DepartmentDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="49" UseBorderWidth="false" UseFont="false" />
+                </Item11>
+                <Item12 Ref="50" ControlType="XRTableCell" Name="xrTableCell24" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell24">
+                  <DataBindings>
+                    <Item1 Ref="51" PropertyName="Text" DataMember="EEmployee_RptMasterList.DivisionDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="52" UseBorderWidth="false" UseFont="false" />
+                </Item12>
+                <Item13 Ref="53" ControlType="XRTableCell" Name="xrTableCell25" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell25">
+                  <DataBindings>
+                    <Item1 Ref="54" PropertyName="Text" DataMember="EEmployee_RptMasterList.EmployeeClassDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="55" UseBorderWidth="false" UseFont="false" />
+                </Item13>
+                <Item14 Ref="56" ControlType="XRTableCell" Name="xrTableCell28" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell28">
+                  <DataBindings>
+                    <Item1 Ref="57" PropertyName="Text" DataMember="EEmployee_RptMasterList.JobGradeDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="58" UseBorderWidth="false" UseFont="false" />
+                </Item14>
+                <Item15 Ref="59" ControlType="XRTableCell" Name="xrTableCell30" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell30">
+                  <DataBindings>
+                    <Item1 Ref="60" PropertyName="Text" DataMember="EEmployee_RptMasterList.EmployeeRateClassDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="61" UseBorderWidth="false" UseFont="false" />
+                </Item15>
+                <Item16 Ref="62" ControlType="XRTableCell" Name="xrTableCell32" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell32">
+                  <DataBindings>
+                    <Item1 Ref="63" PropertyName="Text" DataMember="EEmployee_RptMasterList.CostCenterDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="64" UseBorderWidth="false" UseFont="false" />
+                </Item16>
+                <Item17 Ref="65" ControlType="XRTableCell" Name="xrTableCell33" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell33">
+                  <DataBindings>
+                    <Item1 Ref="66" PropertyName="Text" DataMember="EEmployee_RptMasterList.PayClassDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="67" UseBorderWidth="false" UseFont="false" />
+                </Item17>
+                <Item18 Ref="68" ControlType="XRTableCell" Name="xrTableCell36" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell36">
+                  <DataBindings>
+                    <Item1 Ref="69" PropertyName="Text" DataMember="EEmployee_RptMasterList.PayTypeDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="70" UseBorderWidth="false" UseFont="false" />
+                </Item18>
+                <Item19 Ref="71" ControlType="XRTableCell" Name="xrTableCell37" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell37">
+                  <DataBindings>
+                    <Item1 Ref="72" PropertyName="Text" DataMember="EEmployee_RptMasterList.PaymentTypeDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="73" UseBorderWidth="false" UseFont="false" />
+                </Item19>
+                <Item20 Ref="74" ControlType="XRTableCell" Name="xrTableCell39" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell39">
+                  <DataBindings>
+                    <Item1 Ref="75" PropertyName="Text" DataMember="EEmployee_RptMasterList.BankTypeDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="76" UseBorderWidth="false" UseFont="false" />
+                </Item20>
+                <Item21 Ref="77" ControlType="XRTableCell" Name="xrTableCell41" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell41">
+                  <DataBindings>
+                    <Item1 Ref="78" PropertyName="Text" DataMember="EEmployee_RptMasterList.RankDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="79" UseBorderWidth="false" UseFont="false" />
+                </Item21>
+                <Item22 Ref="80" ControlType="XRTableCell" Name="xrTableCell43" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell43">
+                  <DataBindings>
+                    <Item1 Ref="81" PropertyName="Text" DataMember="EEmployee_RptMasterList.TaskDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="82" UseBorderWidth="false" UseFont="false" />
+                </Item22>
+                <Item23 Ref="83" ControlType="XRTableCell" Name="xrTableCell45" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell45">
+                  <DataBindings>
+                    <Item1 Ref="84" PropertyName="Text" DataMember="EEmployee_RptMasterList.FacilityDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="85" UseBorderWidth="false" UseFont="false" />
+                </Item23>
+                <Item24 Ref="86" ControlType="XRTableCell" Name="xrTableCell47" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell47">
+                  <DataBindings>
+                    <Item1 Ref="87" PropertyName="Text" DataMember="EEmployee_RptMasterList.UnitDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="88" UseBorderWidth="false" UseFont="false" />
+                </Item24>
+                <Item25 Ref="89" ControlType="XRTableCell" Name="xrTableCell49" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell49">
+                  <DataBindings>
+                    <Item1 Ref="90" PropertyName="Text" DataMember="EEmployee_RptMasterList.LocationDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="91" UseBorderWidth="false" UseFont="false" />
+                </Item25>
+                <Item26 Ref="92" ControlType="XRTableCell" Name="xrTableCell51" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell51">
+                  <DataBindings>
+                    <Item1 Ref="93" PropertyName="Text" DataMember="EEmployee_RptMasterList.EmployeeStatDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="94" UseBorderWidth="false" UseFont="false" />
+                </Item26>
+                <Item27 Ref="95" ControlType="XRTableCell" Name="xrTableCell53" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell53">
+                  <DataBindings>
+                    <Item1 Ref="96" PropertyName="Text" DataMember="EEmployee_RptMasterList.SSSNo" />
+                  </DataBindings>
+                  <StylePriority Ref="97" UseBorderWidth="false" UseFont="false" />
+                </Item27>
+                <Item28 Ref="98" ControlType="XRTableCell" Name="xrTableCell55" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell55">
+                  <DataBindings>
+                    <Item1 Ref="99" PropertyName="Text" DataMember="EEmployee_RptMasterList.PHNo" />
+                  </DataBindings>
+                  <StylePriority Ref="100" UseBorderWidth="false" UseFont="false" />
+                </Item28>
+                <Item29 Ref="101" ControlType="XRTableCell" Name="xrTableCell57" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell57">
+                  <DataBindings>
+                    <Item1 Ref="102" PropertyName="Text" DataMember="EEmployee_RptMasterList.HDMFNo" />
+                  </DataBindings>
+                  <StylePriority Ref="103" UseBorderWidth="false" UseFont="false" />
+                </Item29>
+                <Item30 Ref="104" ControlType="XRTableCell" Name="xrTableCell59" Weight="0.1890110211146756" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell59">
+                  <DataBindings>
+                    <Item1 Ref="105" PropertyName="Text" DataMember="EEmployee_RptMasterList.TINNo" />
+                  </DataBindings>
+                  <StylePriority Ref="106" UseBorderWidth="false" UseFont="false" />
+                </Item30>
+                <Item31 Ref="107" ControlType="XRTableCell" Name="xrTableCell61" Weight="0.10439584971616531" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell61">
+                  <DataBindings>
+                    <Item1 Ref="108" PropertyName="Text" DataMember="EEmployee_RptMasterList.BirthAge" />
+                  </DataBindings>
+                  <StylePriority Ref="109" UseBorderWidth="false" UseFont="false" />
+                </Item31>
+                <Item32 Ref="110" ControlType="XRTableCell" Name="xrTableCell63" Weight="0.10439584971616531" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell63">
+                  <DataBindings>
+                    <Item1 Ref="111" PropertyName="Text" DataMember="EEmployee_RptMasterList.Birthdate" />
+                  </DataBindings>
+                  <StylePriority Ref="112" UseBorderWidth="false" UseFont="false" />
+                </Item32>
+                <Item33 Ref="113" ControlType="XRTableCell" Name="xrTableCell65" Weight="0.17912091457329993" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell65">
+                  <DataBindings>
+                    <Item1 Ref="114" PropertyName="Text" DataMember="EEmployee_RptMasterList.PresentAddress" />
+                  </DataBindings>
+                  <StylePriority Ref="115" UseBorderWidth="false" UseFont="false" />
+                </Item33>
+                <Item34 Ref="116" ControlType="XRTableCell" Name="xrTableCell67" Weight="0.11318686055130778" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell67">
+                  <DataBindings>
+                    <Item1 Ref="117" PropertyName="Text" DataMember="EEmployee_RptMasterList.PresentPhoneNo" />
+                  </DataBindings>
+                  <StylePriority Ref="118" UseBorderWidth="false" UseFont="false" />
+                </Item34>
+                <Item35 Ref="119" ControlType="XRTableCell" Name="xrTableCell69" Weight="0.17142841684323723" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell69">
+                  <DataBindings>
+                    <Item1 Ref="120" PropertyName="Text" DataMember="EEmployee_RptMasterList.HomeAddress" />
+                  </DataBindings>
+                  <StylePriority Ref="121" UseBorderWidth="false" UseFont="false" />
+                </Item35>
+                <Item36 Ref="122" ControlType="XRTableCell" Name="xrTableCell72" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell72">
+                  <DataBindings>
+                    <Item1 Ref="123" PropertyName="Text" DataMember="EEmployee_RptMasterList.HomePhoneNo" />
+                  </DataBindings>
+                  <StylePriority Ref="124" UseBorderWidth="false" UseFont="false" />
+                </Item36>
+                <Item37 Ref="125" ControlType="XRTableCell" Name="xrTableCell74" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell74">
+                  <DataBindings>
+                    <Item1 Ref="126" PropertyName="Text" DataMember="EEmployee_RptMasterList.MobileNo" />
+                  </DataBindings>
+                  <StylePriority Ref="127" UseBorderWidth="false" UseFont="false" />
+                </Item37>
+                <Item38 Ref="128" ControlType="XRTableCell" Name="xrTableCell76" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell76">
+                  <DataBindings>
+                    <Item1 Ref="129" PropertyName="Text" DataMember="EEmployee_RptMasterList.CivilStatDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="130" UseBorderWidth="false" UseFont="false" />
+                </Item38>
+                <Item39 Ref="131" ControlType="XRTableCell" Name="xrTableCell77" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell77">
+                  <DataBindings>
+                    <Item1 Ref="132" PropertyName="Text" DataMember="EEmployee_RptMasterList.GenderDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="133" UseBorderWidth="false" UseFont="false" />
+                </Item39>
+                <Item40 Ref="134" ControlType="XRTableCell" Name="xrTableCell79" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell79">
+                  <DataBindings>
+                    <Item1 Ref="135" PropertyName="Text" DataMember="EEmployee_RptMasterList.Email" />
+                  </DataBindings>
+                  <StylePriority Ref="136" UseBorderWidth="false" UseFont="false" />
+                </Item40>
+                <Item41 Ref="137" ControlType="XRTableCell" Name="xrTableCell82" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell82">
+                  <DataBindings>
+                    <Item1 Ref="138" PropertyName="Text" DataMember="EEmployee_RptMasterList.CityDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="139" UseBorderWidth="false" UseFont="false" />
+                </Item41>
+                <Item42 Ref="140" ControlType="XRTableCell" Name="xrTableCell83" Weight="0.13736226176528882" BorderWidth="0.5" Font="Arial Narrow, 7.8pt, charSet=0" Text="xrTableCell83">
+                  <DataBindings>
+                    <Item1 Ref="141" PropertyName="Text" DataMember="EEmployee_RptMasterList.ProvinceDesc" />
+                  </DataBindings>
+                  <StylePriority Ref="142" UseBorderWidth="false" UseFont="false" />
+                </Item42>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="143" UseBorderWidth="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item1>
+    <Item2 Ref="144" ControlType="TopMarginBand" Name="TopMargin" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="121.666664">
+      <Controls>
+        <Item1 Ref="145" ControlType="XRLabel" Name="xrLabel4" LocationFloat="0, 90.9999847" SizeF="588.3333,23.0000076" Font="Arial, 9pt, charSet=0" Padding="2,2,0,0,96" Text="xrLabel4">
+          <DataBindings>
+            <Item1 Ref="146" PropertyName="Text" DataMember="EEmployee_RptMasterList.tTitle2" />
+          </DataBindings>
+          <StylePriority Ref="147" UseFont="false" />
+        </Item1>
+        <Item2 Ref="148" ControlType="XRLabel" Name="xrLabel3" LocationFloat="0, 67.99998" SizeF="588.3333,23" Font="Arial, 9pt, charSet=0" Padding="2,2,0,0,96" Text="xrLabel3">
+          <DataBindings>
+            <Item1 Ref="149" PropertyName="Text" DataMember="EEmployee_RptMasterList.tTitle" />
+          </DataBindings>
+          <StylePriority Ref="150" UseFont="false" />
+        </Item2>
+        <Item3 Ref="151" ControlType="XRLabel" Name="xrLabel2" LocationFloat="0, 40" SizeF="588.3333,16.33334" Font="Arial Narrow, 7.8pt, charSet=0" Padding="2,2,0,0,96" Text="xrLabel2">
+          <DataBindings>
+            <Item1 Ref="152" PropertyName="Text" DataMember="EEmployee_RptMasterList.tAddress" />
+          </DataBindings>
+          <StylePriority Ref="153" UseFont="false" />
+        </Item3>
+        <Item4 Ref="154" ControlType="XRLabel" Name="xrLabel1" LocationFloat="0, 16.9999943" SizeF="588.3333,22.9999981" Font="Arial Narrow, 12pt, style=Bold, charSet=0" Padding="2,2,0,0,96" Text="xrLabel1">
+          <DataBindings>
+            <Item1 Ref="155" PropertyName="Text" DataMember="EEmployee_RptMasterList.tCompany" />
+          </DataBindings>
+          <StylePriority Ref="156" UseFont="false" />
+        </Item4>
+      </Controls>
+    </Item2>
+    <Item3 Ref="157" ControlType="BottomMarginBand" Name="BottomMargin" TextAlignment="TopLeft" Padding="0,0,0,0,100" HeightF="32.3333244">
+      <Controls>
+        <Item1 Ref="158" ControlType="XRPageInfo" Name="xrPageInfo2" LocationFloat="9.999988, 0" SizeF="374.9997,23" Font="Arial, 6pt, charSet=0" Padding="2,2,0,0,96" Format="{0:dddd, MMMM dd, yyyy h:mm:ss tt}" PageInfo="DateTime">
+          <StylePriority Ref="159" UseFont="false" />
+        </Item1>
+        <Item2 Ref="160" ControlType="XRPageInfo" Name="xrPageInfo1" LocationFloat="5113.33252, 0" SizeF="283.318848,23" Font="Arial, 6pt, charSet=0" Padding="2,2,0,0,96" Format="Page {0} of {1}">
+          <StylePriority Ref="161" UseFont="false" />
+        </Item2>
+      </Controls>
+    </Item3>
+    <Item4 Ref="162" ControlType="PageHeaderBand" Name="PageHeader" HeightF="25">
+      <Controls>
+        <Item1 Ref="163" ControlType="XRTable" Name="xrTable1" SizeF="5396.65137,25" LocationFloat="0, 0" BorderWidth="0.5" Borders="All">
+          <Rows>
+            <Item1 Ref="164" Name="xrTableRow1" ControlType="XRTableRow" Weight="11.5">
+              <Cells>
+                <Item1 Ref="165" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.12823128519660074" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Employee No.">
+                  <StylePriority Ref="166" UseFont="false" />
+                </Item1>
+                <Item2 Ref="167" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.086982084532353482" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="FP ID No.">
+                  <StylePriority Ref="168" UseFont="false" />
+                </Item2>
+                <Item3 Ref="169" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.19907235126392003" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Employee Name">
+                  <StylePriority Ref="170" UseFont="false" />
+                </Item3>
+                <Item4 Ref="171" ControlType="XRTableCell" Name="xrTableCell7" Weight="0.12823127641659854" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Bank Account No.">
+                  <StylePriority Ref="172" UseFont="false" />
+                </Item4>
+                <Item5 Ref="173" ControlType="XRTableCell" Name="xrTableCell9" Weight="0.18293138175112086" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Position">
+                  <StylePriority Ref="174" UseFont="false" />
+                </Item5>
+                <Item6 Ref="175" ControlType="XRTableCell" Name="xrTableCell11" Weight="0.11836737732805581" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Tax Code">
+                  <StylePriority Ref="176" UseFont="false" />
+                </Item6>
+                <Item7 Ref="177" ControlType="XRTableCell" Name="xrTableCell13" Weight="0.11836737732805581" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Hired Date">
+                  <StylePriority Ref="178" UseFont="false" />
+                </Item7>
+                <Item8 Ref="179" ControlType="XRTableCell" Name="xrTableCell15" Weight="0.11836737732805581" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Regularized Date">
+                  <StylePriority Ref="180" UseFont="false" />
+                </Item8>
+                <Item9 Ref="181" ControlType="XRTableCell" Name="xrTableCell17" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Superior">
+                  <StylePriority Ref="182" UseFont="false" />
+                </Item9>
+                <Item10 Ref="183" ControlType="XRTableCell" Name="xrTableCell19" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Section">
+                  <StylePriority Ref="184" UseFont="false" />
+                </Item10>
+                <Item11 Ref="185" ControlType="XRTableCell" Name="xrTableCell21" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Department">
+                  <StylePriority Ref="186" UseFont="false" />
+                </Item11>
+                <Item12 Ref="187" ControlType="XRTableCell" Name="xrTableCell23" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Division">
+                  <StylePriority Ref="188" UseFont="false" />
+                </Item12>
+                <Item13 Ref="189" ControlType="XRTableCell" Name="xrTableCell26" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Employee Class">
+                  <StylePriority Ref="190" UseFont="false" />
+                </Item13>
+                <Item14 Ref="191" ControlType="XRTableCell" Name="xrTableCell27" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Job Grade">
+                  <StylePriority Ref="192" UseFont="false" />
+                </Item14>
+                <Item15 Ref="193" ControlType="XRTableCell" Name="xrTableCell29" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Rate Class">
+                  <StylePriority Ref="194" UseFont="false" />
+                </Item15>
+                <Item16 Ref="195" ControlType="XRTableCell" Name="xrTableCell31" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Cost Center">
+                  <StylePriority Ref="196" UseFont="false" />
+                </Item16>
+                <Item17 Ref="197" ControlType="XRTableCell" Name="xrTableCell34" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Payroll Group">
+                  <StylePriority Ref="198" UseFont="false" />
+                </Item17>
+                <Item18 Ref="199" ControlType="XRTableCell" Name="xrTableCell35" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Pay Type">
+                  <StylePriority Ref="200" UseFont="false" />
+                </Item18>
+                <Item19 Ref="201" ControlType="XRTableCell" Name="xrTableCell38" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Payment Type">
+                  <StylePriority Ref="202" UseFont="false" />
+                </Item19>
+                <Item20 Ref="203" ControlType="XRTableCell" Name="xrTableCell40" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Bank Type">
+                  <StylePriority Ref="204" UseFont="false" />
+                </Item20>
+                <Item21 Ref="205" ControlType="XRTableCell" Name="xrTableCell42" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Rank">
+                  <StylePriority Ref="206" UseFont="false" />
+                </Item21>
+                <Item22 Ref="207" ControlType="XRTableCell" Name="xrTableCell44" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Task">
+                  <StylePriority Ref="208" UseFont="false" />
+                </Item22>
+                <Item23 Ref="209" ControlType="XRTableCell" Name="xrTableCell46" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Facility">
+                  <StylePriority Ref="210" UseFont="false" />
+                </Item23>
+                <Item24 Ref="211" ControlType="XRTableCell" Name="xrTableCell48" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Unit">
+                  <StylePriority Ref="212" UseFont="false" />
+                </Item24>
+                <Item25 Ref="213" ControlType="XRTableCell" Name="xrTableCell50" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Location">
+                  <StylePriority Ref="214" UseFont="false" />
+                </Item25>
+                <Item26 Ref="215" ControlType="XRTableCell" Name="xrTableCell52" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Employee Status">
+                  <StylePriority Ref="216" UseFont="false" />
+                </Item26>
+                <Item27 Ref="217" ControlType="XRTableCell" Name="xrTableCell54" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="SSS No.">
+                  <StylePriority Ref="218" UseFont="false" />
+                </Item27>
+                <Item28 Ref="219" ControlType="XRTableCell" Name="xrTableCell56" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="PH No.">
+                  <StylePriority Ref="220" UseFont="false" />
+                </Item28>
+                <Item29 Ref="221" ControlType="XRTableCell" Name="xrTableCell58" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="HDMF No.">
+                  <StylePriority Ref="222" UseFont="false" />
+                </Item29>
+                <Item30 Ref="223" ControlType="XRTableCell" Name="xrTableCell60" Weight="0.1542362460725647" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Tin No.">
+                  <StylePriority Ref="224" UseFont="false" />
+                </Item30>
+                <Item31 Ref="225" ControlType="XRTableCell" Name="xrTableCell62" Weight="0.085188314821994987" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Age">
+                  <StylePriority Ref="226" UseFont="false" />
+                </Item31>
+                <Item32 Ref="227" ControlType="XRTableCell" Name="xrTableCell64" Weight="0.085188314821994987" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Birth Date">
+                  <StylePriority Ref="228" UseFont="false" />
+                </Item32>
+                <Item33 Ref="229" ControlType="XRTableCell" Name="xrTableCell66" Weight="0.14616525588017551" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Present Address">
+                  <StylePriority Ref="230" UseFont="false" />
+                </Item33>
+                <Item34 Ref="231" ControlType="XRTableCell" Name="xrTableCell68" Weight="0.092361925181879315" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Present Phone No.">
+                  <StylePriority Ref="232" UseFont="false" />
+                </Item34>
+                <Item35 Ref="233" ControlType="XRTableCell" Name="xrTableCell70" Weight="0.13988801441197085" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Residential Address">
+                  <StylePriority Ref="234" UseFont="false" />
+                </Item35>
+                <Item36 Ref="235" ControlType="XRTableCell" Name="xrTableCell71" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Residential Phone No.">
+                  <StylePriority Ref="236" UseFont="false" />
+                </Item36>
+                <Item37 Ref="237" ControlType="XRTableCell" Name="xrTableCell73" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Mobile No.">
+                  <StylePriority Ref="238" UseFont="false" />
+                </Item37>
+                <Item38 Ref="239" ControlType="XRTableCell" Name="xrTableCell75" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Civil Status">
+                  <StylePriority Ref="240" UseFont="false" />
+                </Item38>
+                <Item39 Ref="241" ControlType="XRTableCell" Name="xrTableCell78" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Gender">
+                  <StylePriority Ref="242" UseFont="false" />
+                </Item39>
+                <Item40 Ref="243" ControlType="XRTableCell" Name="xrTableCell80" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Email Address">
+                  <StylePriority Ref="244" UseFont="false" />
+                </Item40>
+                <Item41 Ref="245" ControlType="XRTableCell" Name="xrTableCell81" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="City/Municipality">
+                  <StylePriority Ref="246" UseFont="false" />
+                </Item41>
+                <Item42 Ref="247" ControlType="XRTableCell" Name="xrTableCell84" Weight="0.11208892478313406" Font="Arial Narrow, 7.8pt, style=Bold, charSet=0" Text="Province">
+                  <StylePriority Ref="248" UseFont="false" />
+                </Item42>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="249" UseBorderWidth="false" UseBorders="false" />
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="250" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="35.8333321" />
+    <Item6 Ref="251" ControlType="PageFooterBand" Name="PageFooter" HeightF="41.6666679" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" Name="sqlDataSource1" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v15.1" Base64="PFNxbERhdGFTb3VyY2U+PE5hbWU+c3FsRGF0YVNvdXJjZTE8L05hbWU+PENvbm5lY3Rpb24gTmFtZT0iZHNScHQiIEZyb21BcHBDb25maWc9InRydWUiIC8+PFF1ZXJ5IFR5cGU9IlN0b3JlZFByb2NRdWVyeSIgTmFtZT0iRUVtcGxveWVlX1JwdE1hc3Rlckxpc3QiPjxQYXJhbWV0ZXIgTmFtZT0iQG9ubGluZXVzZXJubyIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MzIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSkoW1BhcmFtZXRlcnMub25saW5ldXNlcm5vXSk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkBwYXlsb2NubyIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MTYsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSkoW1BhcmFtZXRlcnMucGF5bG9jbm9dKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQGZpbHRlcmJ5bm8iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDE2LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmZpbHRlcmJ5bm9dKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQGZpbHRlcmJ5aWQiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDMyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmZpbHRlcmJ5aWRdKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQHN0YXJ0ZGF0ZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLnN0YXJ0ZGF0ZV0pPC9QYXJhbWV0ZXI+PFBhcmFtZXRlciBOYW1lPSJAZW5kZGF0ZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uU3RyaW5nLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmVuZGRhdGVdKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQGVtcGxveW1lbnRzdGF0bm8iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDE2LCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkpKFtQYXJhbWV0ZXJzLmVtcGxveW1lbnRzdGF0bm9dKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iQGdyb3VwYnlubyIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MTYsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSkoW1BhcmFtZXRlcnMuZ3JvdXBieW5vXSk8L1BhcmFtZXRlcj48UHJvY05hbWU+RUVtcGxveWVlX1JwdE1hc3Rlckxpc3Q8L1Byb2NOYW1lPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iRUVtcGxveWVlX1JwdE1hc3Rlckxpc3QiPjxGaWVsZCBOYW1lPSJFbXBsb3llZU5vIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iRW1wbG95ZWVDb2RlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkZ1bGxuYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkJpcnRoQWdlIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iUG9zaXRpb25ObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlBvc2l0aW9uRGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJGUElEIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkJhbmtBY2NvdW50Tm8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVGF4RXhlbXB0Tm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJUYXhFeGVtcHRDb2RlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkhpcmVkRGF0ZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJSZWd1bGFyaXplZERhdGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSW1tZWRpYXRlU3VwZXJpb3JObyIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlN1cGVyaW9yTmFtZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJTZWN0aW9uTm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJTZWN0aW9uRGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJEZXBhcnRtZW50Tm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJEZXBhcnRtZW50RGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJEaXZpc2lvbk5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iRGl2aXNpb25EZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkVtcGxveWVlQ2xhc3NObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IkVtcGxveWVlQ2xhc3NEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkVtcGxveWVlU3RhdE5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iRW1wbG95ZWVTdGF0RGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJKb2JHcmFkZU5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iSm9iR3JhZGVEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkVtcGxveWVlUmF0ZUNsYXNzTm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJFbXBsb3llZVJhdGVDbGFzc0Rlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQ29zdENlbnRlck5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iQ29zdENlbnRlckRlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQ29zdENlbnRlckNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUGF5VHlwZU5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iUGF5VHlwZURlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUGF5bWVudFR5cGVObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlBheW1lbnRUeXBlRGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJCYW5rVHlwZU5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iQmFua1R5cGVEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlJhbmtObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlJhbmtEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlRhc2tObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlRhc2tEZXNjIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkZhY2lsaXR5Tm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJGYWNpbGl0eURlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVW5pdE5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iVW5pdERlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iTG9jYXRpb25ObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IkxvY2F0aW9uRGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJTU1NObyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJQSE5vIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkhETUZObyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJIRE1GTUlETm8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iVElOTm8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQmlydGhkYXRlIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlByZXNlbnRBZGRyZXNzIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlByZXNlbnRQaG9uZU5vIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9Ik1vYmlsZU5vIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkNpdmlsU3RhdE5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iQ2l2aWxTdGF0RGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJHZW5kZXJObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IkdlbmRlckRlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iRW1haWwiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iR3JvdXBieUNvZGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iR3JvdXBieURlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iR3JvdXBOYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRUaXRsZSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJ0VGl0bGUyIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRDb21wYW55IiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRBZGRyZXNzIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9InRUZWwiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0idFVzZXJOYW1lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlBheUNsYXNzTm8iIFR5cGU9IkludDE2IiAvPjxGaWVsZCBOYW1lPSJQYXlDbGFzc0Rlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSG9tZUFkZHJlc3MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSG9tZVBob25lTm8iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iQ2l0eU5vIiBUeXBlPSJJbnQxNiIgLz48RmllbGQgTmFtZT0iQ2l0eURlc2MiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUHJvdmluY2VObyIgVHlwZT0iSW50MTYiIC8+PEZpZWxkIE5hbWU9IlByb3ZpbmNlRGVzYyIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJMUyIgVHlwZT0iRGVjaW1hbCIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjwvU3FsRGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v15.1" Ref="2" Content="System.Int32" Type="System.Type" />
+    <Item2 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v15.1" Ref="4" Content="System.Int16" Type="System.Type" />
+    <Item3 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v15.1" Ref="6" Content="System.Int64" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

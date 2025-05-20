@@ -1,0 +1,289 @@
+﻿Imports System.Data
+Imports clsLib
+
+Partial Class MasterPage_frmSecuredList
+    Inherits System.Web.UI.MasterPage
+
+    
+    Dim xPublicVar As New clsPublicVariable
+
+    Private Sub InitBreadcrumb()
+        Dim genhtml As New HtmlGenericControl
+
+        If Session("xMenuTitle") <> "" And Session("xMenuTitle2") = "" And Session("xMenuTitle3") = "" And Session("xMenuTitle4") = "" Then
+            genhtml.InnerHtml = "<ul class=""breadcrumb""><li class=""active"">" & Session("xMenuTitle") & "</li></ul>"
+            ulbreadcrumb.Controls.Add(genhtml)
+        ElseIf Session("xMenuTitle") <> "" And Session("xMenuTitle2") <> "" And Session("xMenuTitle3") = "" And Session("xMenuTitle4") = "" Then
+            genhtml.InnerHtml = "<ul class=""breadcrumb""><li><a href=""" & Session("xLinkURL1") & """>" & Session("xMenuTitle") & "</a></li> <li class=""active"">" & Session("xMenuTitle2") & "</li></ul>"
+            ulbreadcrumb.Controls.Add(genhtml)
+
+        ElseIf Session("xMenuTitle") <> "" And Session("xMenuTitle2") <> "" And Session("xMenuTitle3") <> "" And Session("xMenuTitle4") = "" Then
+            genhtml.InnerHtml = "<ul class=""breadcrumb""><li><a href=""" & Session("xLinkURL1") & """>" & Session("xMenuTitle") & "</a></li> <li><a href=""" & Session("xLinkURL2") & """>" & Session("xMenuTitle2") & "</a></li> <li class=""active"">" & Session("xMenuTitle3") & "</li></ul>"
+            ulbreadcrumb.Controls.Add(genhtml)
+
+        ElseIf Session("xMenuTitle") <> "" And Session("xMenuTitle2") <> "" And Session("xMenuTitle3") <> "" And Session("xMenuTitle4") <> "" Then
+            genhtml.InnerHtml = "<ul class=""breadcrumb""><li><a href=""" & Session("xLinkURL1") & """>" & Session("xMenuTitle") & "</a></li> <li><a href=""" & Session("xLinkURL2") & """>" & Session("xMenuTitle2") & "</a></li> <li><a href=""" & Session("xLinkURL3") & """>" & Session("xMenuTitle3") & "</a></li> <li class=""active"">" & Session("xMenuTitle4") & "</li></ul>"
+            ulbreadcrumb.Controls.Add(genhtml)
+
+        End If
+
+    End Sub
+
+    Private Sub GetUserInfo()
+        Try
+            Dim genhtml As New HtmlGenericControl
+            '
+            'genhtml.InnerHtml = "<img align=""left"" src=frmShowImage.ashx?tNo=" & Session("OnlineEmployeeNo") & "&tIndex=2 alt="""">"
+            'liprofile.Controls.Add(genhtml)
+        Catch ex As Exception
+            Response.Redirect("../frmpageExpired.aspx")
+        End Try
+    End Sub
+    Private Sub GetPendingStatus()
+
+        Dim li As New HtmlGenericControl
+        Dim totalcount As Integer = 0
+        Dim ds As DataSet
+        Dim flnk As String = "", fcount As Integer = 0, fdescription As String = ""
+        ds = sqlhelper.ExecuteDataSet("EGetPendingTransaction", xPublicVar.xOnlineUseNo, 1, Session("xPayLocNo"))
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim lii As New HtmlGenericControl
+                    flnk = Generic.CheckDBNull(ds.Tables(0).Rows(i)("lnk"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    fcount = Generic.CheckDBNull(ds.Tables(0).Rows(i)("fCount"), clsBase.clsBaseLibrary.enumObjectType.IntType)
+                    fdescription = Generic.CheckDBNull(ds.Tables(0).Rows(i)("fDescription"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+
+                    lii.InnerHtml = "<a href=""" & flnk & """ class=""list-group-item"">&nbsp;&nbsp;<span class=""fa"">" & fdescription & "</span> &nbsp;&nbsp;<span class=""label label-danger"">" & fcount & "</span></a>"
+                    pending.Controls.Add(lii)
+                    totalcount = totalcount + fcount
+                Next
+                notiTotal.InnerText = totalcount
+                notitotalNew.InnerText = totalcount & " new"
+            End If
+        End If
+
+
+
+    End Sub
+    Private Sub initiateMenu()
+        Dim ds As DataSet
+        Dim menuTitle As String = ""
+        Dim formName As String = "", menutype As String = ""
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "01", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulstaffing.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "02", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ul201.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "03", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulbenefits.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "04", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulattendance.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "05", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulpayroll.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "06", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ultraining.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "07", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulcareer.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "08", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulhealth.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "09", "reference")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulorg.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "10", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    uldiscipline.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "11", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulpe.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+        ds = sqlhelper.ExecuteDataSet("dbo.EMenuUserViewed_Module", -99, "12", "main")
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
+                    Dim li As New HtmlGenericControl
+                    menuTitle = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menuTitle"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = Generic.CheckDBNull(ds.Tables(0).Rows(i)("formName"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    menutype = Generic.CheckDBNull(ds.Tables(0).Rows(i)("menutype"), clsBase.clsBaseLibrary.enumObjectType.StrType)
+                    formName = formName & "?menustyle=main&menutype=" & menutype & "&IsClickMain=1"
+                    li.InnerHtml = "<li><a href=""" & formName & """><span class=""""></span>" & menuTitle & "</a></li>"
+                    ulsecurity.Controls.Add(li)
+
+                Next
+            End If
+        End If
+        ds = Nothing
+
+    End Sub
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        xPublicVar.xOnlineUseNo = Generic.CheckDBNull(Session("OnlineUserNo"), Global.clsBase.clsBaseLibrary.enumObjectType.IntType)
+        GetUserInfo()
+        GetPendingStatus()
+        InitBreadcrumb()
+        initiateMenu()
+    End Sub
+End Class
+
+
+
+
+
+
+

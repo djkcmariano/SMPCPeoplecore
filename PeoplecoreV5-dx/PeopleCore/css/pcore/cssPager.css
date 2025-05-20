@@ -1,0 +1,185 @@
+﻿/* -- ASPxPager -- */
+.dxpControl
+{
+	font: 9pt "Trebuchet MS", Helvetica, sans-serif;
+	color: black;
+}
+.dxpControl td.dxpCtrl 
+{
+    padding: 5px 2px 5px 2px;
+}
+.dxpButton
+{
+	font: 9pt "Trebuchet MS", Helvetica, sans-serif;
+	color: #394EA2;
+	text-decoration: underline;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+	
+}
+.dxpButton a
+{
+	font: 9pt "Trebuchet MS", Helvetica, sans-serif;
+	color: #394EA2;
+	text-decoration: underline;
+	white-space: nowrap;
+}
+.dxpDisabledButton
+{
+	font: 9pt "Trebuchet MS", Helvetica, sans-serif;
+	color: black;
+	text-decoration: none;
+}
+.dxpPageNumber
+{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: gray;
+	font-size:11px;
+	text-decoration: underline;
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px 5px 0px 5px;
+}
+.dxpPageNumber a
+{
+	font: "Trebuchet MS", Helvetica, sans-serif;
+	color: #394EA2;
+	font-size:11px;
+	text-decoration: underline;
+}
+.dxpCurrentPageNumber
+{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: black;
+	font-weight: bold;
+	font-size:11px;
+	text-decoration: none;
+	padding: 1px 3px 0px 3px;
+	white-space: nowrap;
+}
+.dxpSummary
+{
+	font-family:"Trebuchet MS", Helvetica, sans-serif;
+	color:black;
+	font-size:11px;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px 4px 0px 4px;
+}
+.dxpSeparator
+{
+	background-color: #CCCCCC;
+}
+/* Disabled */
+.dxpDisabled
+{
+	color: #acacac;
+	border-color: #808080;
+	cursor: default;
+}
+
+/* -- ASPxPager Lite -- */
+
+.dxpLite
+{
+	font: 9pt "Trebuchet MS", Helvetica, sans-serif;
+	color: black;
+	padding: 5px 2px;
+	float: left;
+}
+
+.dxpLite .dxp-summary,
+.dxpLite .dxp-sep,
+.dxpLite .dxp-button,
+.dxpLite .dxp-num,
+.dxpLite .dxp-current,
+.dxpLite .dxp-ellip
+{
+	display: block;	
+	float: left;
+	margin-left: 4px;
+	font-weight: normal;
+}
+.dxpLite .dxp-lead
+{
+	margin-left: 0 !important;
+}
+
+.dxpLite a
+{
+	color: #394EA2;
+	text-decoration: underline;
+}
+
+.dxpLite .dxp-button
+{
+	color: #394EA2;
+	white-space: nowrap;
+	text-align: center;
+	cursor: pointer;
+	text-decoration: underline;	
+}
+.dxpLite .dxp-button img
+{
+	border: 0;
+	vertical-align: middle;
+	text-decoration: none;
+}
+.dxpLite .dxp-wideButton
+{
+	padding: 0 5px;
+}
+.dxpLite .dxp-disabledButton
+{
+	text-decoration: none;
+	color: #acacac;
+	cursor: default;	
+}
+
+.dxpLite .dxp-num
+{
+	color: #394EA2;
+	text-decoration: underline;	
+	padding: 2px 5px 1px;
+	cursor: pointer;
+}
+
+.dxpLite .dxp-current
+{
+	color: Black;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 2px 3px 1px;	
+	cursor: text;
+}
+
+.dxpLite .dxp-summary,
+.dxpLite .dxp-ellip
+{
+	white-space: nowrap;
+	padding: 2px 4px 1px;
+}
+
+.dxpLite .dxp-sep
+{
+	background: #cccccc;
+    width: 1px;
+    height: 11px;
+    margin-top: 5px;
+}
+
+.dxpLiteDisabled,
+.dxpLiteDisabled a,
+.dxpLiteDisabled .dxp-summary,
+.dxpLiteDisabled .dxp-sep, 
+.dxpLiteDisabled .dxp-button,
+.dxpLiteDisabled .dxp-num,
+.dxpLiteDisabled .dxp-current,
+.dxpLiteDisabled .dxp-ellip
+{
+	color: #acacac;
+	border-color: #808080;
+	cursor: default;
+}

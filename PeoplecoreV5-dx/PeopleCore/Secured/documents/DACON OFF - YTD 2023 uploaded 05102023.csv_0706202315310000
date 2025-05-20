@@ -1,0 +1,8 @@
+employeecode,ApplicableYear,DateFrom,DateTo,Description,TotalBasicIncome,TotalOneTimeTaxableIncomeOther,TotalNonTaxableIncomeOther,TaxExemption,TaxWHeld,Bonus,December Adjustment? (1-YES and 0=NO),With Previos Employer(1=YES and 0=NO),Employer Name,Address,Tin No.,Exclude in Aplpha(1=YES and 0=NO),Hazard Pay,Commission,Directors Fee,Overtime,Profit,Repre,Cola,Housing,Transpo,13th mont(initial release),deminimis,NP,Holiday,Pay,MWE (1=YES and 0=No)
+9665730,2023,1/1/2023,5/31/2023,,450000,0,0,15250,29450,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,37500,0,0,0,0,0
+0010286,2023,1/1/2023,6/30/2023,,732599.4,0,0,18300,133624.64,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,61050,0,0,0,0,0
+9822089,2023,1/1/2023,6/30/2023,,1680000,0,0,0,537101.23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,140000,0,0,0,0,0
+9213490,2023,1/1/2023,6/30/2023,,957000,0,0,18300,195582.47,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,79750,0,0,0,0,0
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

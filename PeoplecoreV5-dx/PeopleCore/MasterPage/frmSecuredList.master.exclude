@@ -1,0 +1,626 @@
+﻿<%@ Master Language="VB" CodeFile="frmSecuredList.master.vb" Inherits="MasterPage_frmSecuredList" %>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head id="Head1" runat="server">        
+        <!-- META SECTION -->
+        <title>PeopleCore Version 5</title>            
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!-- END META SECTION -->
+        
+        <!-- CSS INCLUDE -->        
+        <link rel="stylesheet" type="text/css" id="theme" href="../css/theme-default.css"/>
+        <!-- EOF CSS INCLUDE -->    
+        <link href="../css/pcore/css.css" rel="stylesheet" type="text/css" />
+        <link href="../css/pcore/css3.css" rel="stylesheet" type="text/css" />
+        <link href="../css/pcore/cssPager.css" rel="stylesheet" type="text/css" />
+        <link href="../css/pcore/JQueryVal.css" rel="stylesheet" type="text/css" />
+        <link href="../css/pcore/jqdialog.css" rel="stylesheet" type="text/css" />
+        <link href="../css/pcore/jquery-ui.css" rel="stylesheet" type="text/css" />   
+        <!-- EOF CSS INCLUDE -->  
+
+        
+        <!-- START SCRIPTS -->
+            <!-- START PLUGINS -->
+            <script type="text/javascript" src="../js/plugins/jquery/jquery.min.js"></script>
+            <script type="text/javascript" src="../js/plugins/jquery/jquery-ui.min.js"></script>
+            
+        <script type="text/javascript" src="../js/pcore/jquery.validate.js"></script>
+        <script src="../js/pcore/initialized.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+
+            //select all checkboxes
+            function SelectAllCheckboxes(spanChk) {
+
+                // Added as ASPX uses SPAN for checkbox
+                var oItem = spanChk.children;
+                var theBox = (spanChk.type == "checkbox") ?
+            spanChk : spanChk.children.item[0];
+                xState = theBox.checked;
+                elm = theBox.form.elements;
+
+                for (i = 0; i < elm.length; i++)
+                    if (elm[i].type == "checkbox" && elm[i].name.indexOf("chk") > 0 &&
+            elm[i].id != theBox.id) {
+                        //elm[i].click();
+                        if (elm[i].checked != xState)
+                            elm[i].click();
+                        //elm[i].checked=xState;
+                    }
+            }
+
+            //Adjust panel height of Popup Entry
+            function adjustPanelEntry() {
+
+
+                $('.entryPopup').css({ 'height': 'auto' }); //Reset subpanel and ul height
+                $('.entryPopupDetl').css({ 'height': 'auto' }); //Reset subpanel and ul height
+
+               
+                var windowHeight = $(window).height(); //Get the height of the browser viewport
+                var panelsub = $('.entryPopup').height(); //Get the height of subpanel	
+                var ulsub = $('.entryPopupDetl').height(); //Get the height of subpanel	
+                var panelAdjust = windowHeight - 100; //Viewport height - 100px (Sets max height of subpanel)
+                var ulAdjust = panelAdjust - 45; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+
+                if (panelsub >= panelAdjust) {	 //If subpanel is taller than max height...
+                    $('.entryPopup').css({ 'height': panelAdjust }); //Adjust subpanel to max height
+                    $('.entryPopupDetl').css({ 'height': ulAdjust }); //Adjust subpanel ul to new size
+                }
+                else if (panelsub < panelAdjust) { //If subpanel is smaller than max height...
+                    $('.entryPopupDetl').css({ 'height': 'Auto' }); //Set subpanel ul to auto (default size)
+                }
+
+                             
+
+                var windowWidth = $(window).width(); //Get the width of the browser viewport
+                var panelwidth = $('.entryPopup').width(); //Get the width of subpanel
+                var panelwidthdetl = $('.entryPopupDetl').width();
+                               
+                panelwidth = windowWidth - panelwidth;
+                panelwidth = panelwidth / 2;
+                $('.entryPopup').css({ 'left': panelwidth });
+
+            };
+
+
+            function adjustPanelEntryDetl() {
+
+
+                $('.entryPopup2').css({ 'height': 'auto' }); //Reset subpanel and ul height
+                $('.entryPopupDetl2').css({ 'height': 'auto' }); //Reset subpanel and ul height
+
+                var windowHeight = $(window).height(); //Get the height of the browser viewport
+                var panelsub = $('.entryPopup2').height(); //Get the height of subpanel	
+                var ulsub = $('.entryPopupDetl2').height(); //Get the height of subpanel	
+                var panelAdjust = windowHeight - 100; //Viewport height - 100px (Sets max height of subpanel)
+                var ulAdjust = panelAdjust - 25; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+
+                if (panelsub >= panelAdjust) {	 //If subpanel is taller than max height...
+                    $('.entryPopup2').css({ 'height': panelAdjust }); //Adjust subpanel to max height
+                    $('.entryPopupDetl2').css({ 'height': ulAdjust }); //Adjust subpanel ul to new size
+                }
+                else if (panelsub < panelAdjust) { //If subpanel is smaller than max height...
+                    $('.entryPopupDetl2').css({ 'height': 'Auto' }); //Set subpanel ul to auto (default size)
+                }
+
+                var windowWidth = $(window).width(); //Get the width of the browser viewport
+                var panelwidth = $('.entryPopup2').width(); //Get the width of subpanel
+                panelwidth = windowWidth - panelwidth;
+                panelwidth = panelwidth / 2;
+                $('.entryPopup2').css({ 'left': panelwidth });
+
+            };
+
+
+            function deleteItem(uniqueID, itemID) {
+                noty({
+                    text: 'These items will be permanently deleted and cannot be recovered. Proceed?',
+                    layout: 'topRight',
+                    buttons: [
+                                { addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                    __doPostBack(uniqueID, '');
+                                    $noty.close();
+
+                                }
+                                },
+                                { addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+                })
+            }
+
+            function dialogMessage(dialogTitle, message) {
+                noty({ text: message, layout: 'topRight', type: 'success' });
+                return false;
+
+            }
+
+            function postMessage(uniqueID) {
+                noty({
+                    text: 'Posted record cannot be modified, Proceed?',
+                    layout: 'topRight',
+                    buttons: [
+                                { addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                    __doPostBack(uniqueID, '');
+                                    $noty.close();
+
+                                }
+                                },
+                                { addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+                })
+            }
+
+            function confirmMessage(uniqueID, fmessage) {
+                noty({
+                    text: fmessage,
+                    layout: 'topRight',
+                    buttons: [
+                                { addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                    __doPostBack(uniqueID, '');
+                                    $noty.close();
+
+                                }
+                                },
+                                { addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+                })
+                return false;
+            }
+            function dialogResponse(dialogTitle, message, frm) {
+                noty({
+                    text: message,
+                    layout: 'topRight',
+                    buttons: [
+                                { addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                    window.open(frm, '_top', 'menubar=yes,scrollbars=yes,resizable=yes,with=100%,height=100%')
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+                })
+                return false;
+
+            }
+            function dialogResponseMDL(dialogTitle, fmessage, frm) {
+
+
+                noty({
+                    text: fmessage,
+                    layout: 'topRight',
+                    buttons: [
+                                { addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                    $find(frm).show();
+                                    $noty.close();
+
+                                }
+                                }
+                            ]
+                })
+                return false;
+            }
+</script>
+
+    <script type="text/javascript">
+        $(function () {
+            /*
+            * this swallows backspace keys on any non-input element.
+            * stops backspace -> back
+            */
+            var rx = /INPUT|SELECT|TEXTAREA/i;
+
+            $(document).bind("keydown keypress", function (e) {
+                if (e.which == 8) { // 8 == backspace
+                    if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
+                        e.preventDefault();
+                    }
+                }
+            });
+        });
+
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+        window.onload = 'noBack()';
+        window.onpageshow = function (evt) { if (evt.persisted) noBack() }
+        window.onunload = function () { void (0) }
+
+    </script>                                   
+    </head>
+    <body>
+        <form runat="server" id="form1">
+            
+            <ajaxtoolkit:ToolkitScriptManager runat="server" ID="TSM"  EnablePageMethods="true" EnablePartialRendering="true" ScriptMode="Release" LoadScriptsBeforeUI="false"
+             CombineScripts="true" >
+   
+
+</ajaxtoolkit:ToolkitScriptManager>
+        <!-- START PAGE CONTAINER -->
+        <!-- START PAGE CONTAINER -->
+       <div class="page-container">
+            
+            <!-- START PAGE SIDEBAR -->
+            <div class="page-sidebar">
+                <!-- START X-NAVIGATION -->
+                <ul class="x-navigation">
+                    <li class="xn-logo">
+                        <a href="index.html">PEOPLECORE</a>
+                        <a href="#" class="x-navigation-control"></a>
+                    </li>
+                    <li class="xn-title">MAIN NAVIGATION</li>
+                    <%-- <li class="xn-profile">
+              			<div class="form-group">
+                                        <a href="#"<button class="btn btn-info btn-rounded"><i class="fa fa-suitcase"></i>MS</button></a>
+                                        <a href="#"<button class="btn btn-info btn-rounded"><i class="fa fa-users"></i>ES</button></a>
+                                        <a href="#"<button class="btn btn-info btn-rounded"><i class="fa fa-key"></i>ADMIN</button></a>
+                                    </div>
+                    </li>--%>
+                    <li class="active">
+                    <li class="xn-openable">
+                        <a href="index.html"><span class="fa fa-weixin"></span> <span class="xn-text">Staffing</span></a>
+                          <ul runat="server" id="ulstaffing" style="padding-left:10px;">
+                            
+                        </ul>                    
+                    </li>
+                    </li>                     
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">201 Admin</span></a>
+                        <ul runat="server" id="ul201" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Benefits</span></a>
+                        <ul runat="server" id="ulbenefits" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>
+
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Attendance</span></a>
+                          <ul runat="server" id="ulattendance" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-money"></span> <span class="xn-text">Payroll</span></a>                        
+                          <ul runat="server" id="ulpayroll" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-paste"></span> <span class="xn-text">Training</span></a>
+                         <ul runat="server" id="ultraining" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="tables.html"><span class="fa fa-mortar-board"></span> <span class="xn-text">Career</span></a>
+                          <ul runat="server" id="ulcareer" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-bar-chart-o"></span><span class="xn-text">Performance</span></a>
+                          <ul runat="server" id="ulpe" style="padding-left:10px;">
+                            
+                          </ul>
+                    </li>                    
+                    <li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-heart-o"></span> <span class="xn-text">Health</span></a>
+                        <ul runat="server" id="ulhealth" style="padding-left:10px;">
+                            
+                        </ul>
+                    </li>                    
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-map-marker"></span> <span class="xn-text">Admin Discipline</span></a>
+                          <ul runat="server" id="uldiscipline" style="padding-left:10px;">
+                            
+                          </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-map-marker"></span> <span class="xn-text">Organization</span></a>
+                          <ul runat="server" id="ulorg" style="padding-left:10px;">
+                            
+                          </ul>
+                    </li>                 
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-sitemap"></span> <span class="xn-text">Security</span></a>
+                         <ul runat="server" id="ulsecurity" style="padding-left:10px;">
+                            
+                        </ul>
+                <!-- END X-NAVIGATION -->
+            </div>
+            <!-- END PAGE SIDEBAR -->
+            
+            <!-- PAGE CONTENT -->
+            <div class="page-content">
+                
+                <!-- START X-NAVIGATION VERTICAL -->
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                    <!-- TOGGLE NAVIGATION -->
+                    <li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                    </li>
+                    <!-- END TOGGLE NAVIGATION -->
+                    <!-- SEARCH -->
+                    <li class="xn-logo">
+					<div class="client"></div>
+                     <img src="../img/client_logo.png" class="pull-left" alt="Client Logo"/>
+                    </li>   
+                    <!-- END SEARCH -->
+                    <!-- PROFILE -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-user"></span></a>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging"  style="width:250px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-user"></span> User Profile</h3> 
+                            </div>
+                            <div class="panel panel-default">
+                                    <div class="panel-body profile">
+                                        <div class="profile-image" runat="server" id="liprofile">
+                                            <%--<img src="../assets/images/users/user2.jpg" alt="Jeric Faura"/>--%>
+                                        </div>
+                                        <div class="profile-data">
+                                            <%--<div class="profile-data-name"><%= Session("userFullName").ToString%></div>--%>
+                                            <%--<div class="profile-data-title" style="color:#000"><%= Session("userPosition").ToString%></div>--%>
+                                        </div>                                  
+                                    </div>                                
+                                    <div class="panel-body">                                    
+                                        <div class="row">
+                                             <a href="#" class="mb-control" data-box="#mb-signout"><button class="btn btn-info btn-rounded"><i class="fa fa-sign-out"></i>SIGN-OUT</button></a>
+                                        </div>
+                                    </div>
+                            </div>
+                                           
+                    </li>
+                    <!-- END PROFILE -->
+                    <!-- MESSAGES -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-comments"></span></a>
+                        <div class="informer informer-danger" runat="server" id="notiTotal">4</div>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" style="width:300px;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-comments"></span> Notifications</h3>                                
+                                <div class="pull-right">
+                                    <span class="label label-danger" runat="server" id="notitotalNew" >4 new</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;" runat="server" id="pending">
+                                    <%--<a href="#" class="list-group-item">
+                                        <div class="list-group-status status-online"></div>
+                                    
+                                        <span class="contacts-title">John Doe</span>
+                                        <p>Praesent placerat tellus id augue condimentum</p>
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <div class="list-group-status status-online"></div>
+                                    
+                                        <span class="contacts-title">John Doe</span>
+                                        <p>Praesent placerat tellus id augue condimentum</p>
+                                    </a>--%>
+                                   
+                                </div>     
+                            </div>
+                            <div class="panel-footer text-center">
+                                <a href="../pages-messages.html">Show all Notifications</a>
+                            </div>                            
+                        </div>                        
+                    </li>
+                    <!-- END MESSAGES -->
+                    <!-- TASKS -->
+                    <%--<li class="xn-icon-button pull-right">
+                        <a href="#"><span class="fa fa-tasks"></span></a>
+                        <div class="informer informer-warning">3</div>
+                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><span class="fa fa-tasks"></span> Tasks</h3>                                
+                                <div class="pull-right">
+                                    <span class="label label-warning">3 active</span>
+                                </div>
+                            </div>
+                            <div class="panel-body list-group scroll" style="height: 200px;">                                
+                                <a class="list-group-item" href="#">
+                                    <strong>Phasellus augue arcu, elementum</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">50%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 25 Sep 2014 / 50%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Aenean ac cursus</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+                                    </div>
+                                    <small class="text-muted">Dmitry Ivaniuk, 24 Sep 2014 / 80%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Lorem ipsum dolor</strong>
+                                    <div class="progress progress-small progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%;">95%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 23 Sep 2014 / 95%</small>
+                                </a>
+                                <a class="list-group-item" href="#">
+                                    <strong>Cras suscipit ac quam at tincidunt.</strong>
+                                    <div class="progress progress-small">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">100%</div>
+                                    </div>
+                                    <small class="text-muted">John Doe, 21 Sep 2014 /</small><small class="text-success"> Done</small>
+                                </a>                                
+                            </div>     
+                            <div class="panel-footer text-center">
+                                <a href="pages-tasks.html">Show all tasks</a>
+                            </div>                            
+                        </div>                        
+                    </li>--%>
+                    <!-- END TASKS -->
+                    <!-- NAVIBOX -->
+                    <li class="xn-icon-button-user-access-control pull-right">
+                    <a href="#" runat="server" id="menuNavi" >ADMIN</a>
+                    <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" style="width:250px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><span class="fa fa-user"></span> USER ACCESS CONTROL</h3>                                
+                        </div>
+                        <div class="panel-body  scroll" style="height: 80px;"> <!--list-group-->
+						<div class="form-group" style="text-align:center;">
+            			    <button class="btn btn-info btn-rounded"><i class="fa fa-suitcase"></i>MS</button>
+                            <button class="btn btn-info btn-rounded"><i class="fa fa-users"></i>ES</button>
+                           <%-- <button class="btn btn-info btn-rounded"><i class="fa fa-key"></i>ADMIN</button>--%>
+                        </div>                        
+                      </div> 
+                      </div>                       
+                    </li>
+                </ul>
+                <!-- END X-NAVIGATION VERTICAL -->                     
+                
+                <!-- START BREADCRUMB -->
+              
+                <%--<ul class="breadcrumb" runat="server" id="ulbreadcrumb">
+                    <li><a href="#">Home</a></li>                    
+                    <li><a href="#">Tables</a></li>
+                    <li class="active">Data Tables</li>
+                </ul>--%>
+                <asp:Panel runat="server" ID="ulbreadcrumb">
+                    
+                </asp:Panel>
+                
+                <!-- END BREADCRUMB -->
+
+                <!-- PAGE TITLE -->
+                <div class="page-title">                    
+                   
+                </div>
+                <!-- END PAGE TITLE -->                
+
+                <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">                
+                
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- START DEFAULT DATATABLE -->
+                            <div class="panel panel-default">
+                                <%--<div class="panel-heading">                                
+                                    <ul class="panel-controls">
+                                        <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                        <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                        <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>                                
+                                </div>--%>
+                                <div  id="page-content-wrap-id" class="panel-body">
+                                    <asp:contentplaceholder id="Body" runat="server">
+
+                                    </asp:contentplaceholder>
+                                </div>
+                            </div>
+                            <!-- END DEFAULT DATATABLE -->
+
+
+                        </div>
+                    </div>                                
+                    
+                </div>
+                <!-- PAGE CONTENT WRAPPER -->                                
+            </div>    
+            <!-- END PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTAINER -->       
+        
+        <!-- MESSAGE BOX-->
+        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+            <div class="mb-container">
+                <div class="mb-middle">
+                    <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                    <div class="mb-content">
+                        <p>Are you sure you want to log out?</p>                    
+                        <p>Press No if you want to continue work. Press Yes to logout current user.</p>
+                    </div>
+                    <div class="mb-footer">
+                        <div class="pull-right">
+                            <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
+                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MESSAGE BOX-->
+
+        <!-- START PRELOADS -->
+        <audio id="audio-alert" src="../audio/alert.mp3" preload="auto"></audio>
+        <audio id="audio-fail" src="../audio/fail.mp3" preload="auto"></audio>
+        <!-- END PRELOADS -->
+
+        <script type="text/javascript" src="../js/plugins/bootstrap/bootstrap.min.js"></script>        
+            <!-- END PLUGINS -->
+
+            <!-- THIS PAGE PLUGINS -->
+            <script type='text/javascript' src='../js/plugins/icheck/icheck.min.js'></script>
+            <script type="text/javascript" src="../js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+        
+            <script type='text/javascript' src='../js/plugins/noty/jquery.noty.js'></script>
+            <script type='text/javascript' src='../js/plugins/noty/layouts/topCenter.js'></script>
+            <script type='text/javascript' src='../js/plugins/noty/layouts/topLeft.js'></script>
+            <script type='text/javascript' src='../js/plugins/noty/layouts/topRight.js'></script>            
+            
+            <script type='text/javascript' src='../js/plugins/noty/themes/default.js'></script>
+            <script type="text/javascript">
+                function notyConfirm() {
+                    noty({
+                        text: 'Do you want to continue?',
+                        layout: 'topRight',
+                        buttons: [
+                                {
+                                    addClass: 'btn btn-success btn-clean', text: 'Ok', onClick: function ($noty) {
+                                        $noty.close();
+                                        noty({ text: 'You clicked "Ok" button', layout: 'topRight', type: 'success' });
+                                    }
+                                },
+                                {
+                                    addClass: 'btn btn-danger btn-clean', text: 'Cancel', onClick: function ($noty) {
+                                        $noty.close();
+                                        noty({ text: 'You clicked "Cancel" button', layout: 'topRight', type: 'error' });
+                                    }
+                                }
+                        ]
+                    })
+                }
+            </script>
+        
+            <!-- END PAGE PLUGINS -->
+
+            <!-- START TEMPLATE -->
+            <script type="text/javascript" src="../js/settings.js"></script>
+            <script type="text/javascript" src="../js/plugins.js"></script>        
+            <script type="text/javascript" src="../js/actions.js"></script>       
+        <!-- END TEMPLATE -->
+    <!-- END SCRIPTS --> 
+        </form>
+    </body>
+</html>
+
+
+
+
+
+

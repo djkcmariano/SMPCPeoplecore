@@ -1,0 +1,80 @@
+﻿/* JQuery CSS */
+input[type=checkbox].error  { background: #fff; border-bottom: 1px dotted red; border-top: 1px dotted red; border-left: 1px dotted red; border-right: 1px dotted red; }
+input[type=text].error  { background: #fff; border-bottom: 1px dotted red; border-top: 1px dotted red; border-left: 1px dotted red; border-right: 1px dotted red; }
+select.error { background: #fff; border-bottom: 1px dotted red; border-top: 1px dotted red; border-left: 1px dotted red; border-right: 1px dotted red;  }
+textarea.error { background: #fff; border-bottom: 1px dotted red; border-top: 1px dotted red; border-left: 1px dotted red; border-right: 1px dotted red;  } /*background: #fed*/
+checkbox.error { background: #fff; border-bottom: 1px dotted red; border-top: 1px dotted red; border-left: 1px dotted red; border-right: 1px dotted red;  }
+
+label.error, .form-side-labels label.error, .form-top-labels label.error{
+	margin: 0 0 0 5px;
+	padding: 3px;
+	width: 80px;
+	font-weight:normal;
+	color: red;
+	font-size:11px;
+	background: 000;
+}
+
+
+
+
+/**************************** jquery ui ******************************
+@import "../JQueryThemes/redmond/jquery-ui-1.8.11.custom.css";*/
+
+/**************************** jquery validate ************************
+@import "core.css";
+@import "cmxformTemplate.css";
+@import "cmxform.css";*/
+
+form.MasterPageForm1 { width: 50em; }
+
+em.error {
+    background: url("../Images/Unchecked.gif") no-repeat 0px 0px;
+    padding-left: 16px;
+}
+
+/*em.error
+{
+     word-spacing: normal;
+	display: none;
+	position: fixed;
+	right: 20px;
+	bottom: 50px;
+	width: 300px;
+	font-size: 80%;
+	padding: 5px;
+	background: rgb(191,219,255);
+	border: 2px solid #8a73a8;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	z-index: 99999;
+	box-shadow: 5px 5px 10px #bfdbff;
+	-moz-box-shadow: 5px 5px 10px #bfdbff;
+	-webkit-box-shadow: 5px 5px 10px #bfdbff;	
+	color:#8a73a8;
+	font-size: inherit;	
+}*/
+
+em.success {
+    background: url("../Images/Checked.gif") no-repeat 0px 0px;
+    padding-left: 16px;
+}
+
+/*form.MasterPageForm1 label.error {
+    margin-left: auto;
+    
+}*/
+
+em.error { color: red;
+           font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+            }
+            
+#warning { display: none; }
+
+#errorbox2 {
+	list-style: square outside none;
+	padding-left: 2em;
+	color:#555555;
+	font-size: inherit;
+}
