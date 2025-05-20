@@ -34,7 +34,7 @@ Partial Class Secured_PayTemplate_TakeHome
 
     Private Sub PopulateGrid()
         Dim _dt As DataTable
-        _dt = SQLHelper.ExecuteDataTable("EPayClass_Web", UserNo, "", PayLocNo)
+        _dt = SQLHelper.ExecuteDataTable("EPayClass_Web", UserNo, "", 0, PayLocNo)
         Me.grdMain.DataSource = _dt
         Me.grdMain.DataBind()
     End Sub
