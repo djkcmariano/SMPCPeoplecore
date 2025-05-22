@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="VB" AutoEventWireup="false" Theme="PCoreStyle" MasterPageFile="~/MasterPage/MasterPage.master" CodeFile="RptTemplateViewerDynamic.aspx.vb" Inherits="Secured_rptTemplateViewerDynamic" %>
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+
 
 <asp:Content id="Content3" contentplaceholderid="cphBody" runat="server">
 
@@ -8,7 +9,7 @@
         document.getElementById('<%= hifNo.ClientID %>').value = eventArgs.get_value();
     }
 </script>
-
+        
 <div class="page-content-wrap">         
     <div class="row">
         <div class="panel panel-default">
@@ -33,7 +34,8 @@
     </div>
 
     <div class="row">
-            <rsweb:ReportViewer ID="rviewer" runat="server" Width="100%" Font-Names="Verdana" Font-Size="8pt" Height="543px" ShowPrintButton="true" >
+            <rsweb:ReportViewer ID="rviewer" runat="server" Width="100%" Font-Names="Verdana" Font-Size="8pt" Height="543px" >
+            <%--<rsweb:ReportViewer ID="rviewer" runat="server" Width="100%" Font-Names="Verdana" Font-Size="8pt" Height="543px" ShowPrintButton="true" >--%>
             </rsweb:ReportViewer>
     </div>
 
