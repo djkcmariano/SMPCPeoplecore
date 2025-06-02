@@ -218,10 +218,11 @@ Partial Class Secured_BENLeaveTypeList
         Dim ForfeitureTypeNo As Integer = Generic.ToInt(cboForfeitureTypeNo.SelectedValue)
         Dim SpecificDate As String = Generic.ToStr(txtSpecificDate.Text)
         Dim LeaveDays As Integer = Generic.ToStr(txtLeaveDays.Text)
+        Dim IsNotRD As Boolean = Generic.ToBol(txtIsNotRD.Checked)
         '//validate start here
         Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
         Dim dtx As New DataTable
-        dtx = SQLHelper.ExecuteDataTable("ELeaveType_WebValidate", UserNo, PayLocNo, LeaveTypeNo, LeaveTypeCode, LeaveTypeDesc, ChargeToLeaveTypeNo, ChargeToLeaveTypeNo2, IsWithPay, IsMaintainBalance, IsOnline, GenderNo, IsApplytoall, IsArchived, IsForefeited, IsAccumulated, IsRefresh, RefreshCutOffNo, RefreshCutOffDays, ForfeitedPeriodNo, ForfeitedCount, LeaveCateNo)
+        dtx = SQLHelper.ExecuteDataTable("ELeaveType_WebValidate", UserNo, PayLocNo, LeaveTypeNo, LeaveTypeCode, LeaveTypeDesc, ChargeToLeaveTypeNo, ChargeToLeaveTypeNo2, IsWithPay, IsMaintainBalance, IsOnline, GenderNo, IsApplytoall, IsArchived, IsForefeited, IsAccumulated, IsRefresh, RefreshCutOffNo, RefreshCutOffDays, ForfeitedPeriodNo, ForfeitedCount, LeaveCateNo, IsNotRD)
 
         For Each rowx As DataRow In dtx.Rows
             invalid = Generic.ToBol(rowx("tProceed"))
@@ -236,7 +237,7 @@ Partial Class Secured_BENLeaveTypeList
         End If
 
 
-        If SQLHelper.ExecuteNonQuery("ELeaveType_WebSave", UserNo, PayLocNo, LeaveTypeNo, LeaveTypeCode, LeaveTypeDesc, ChargeToLeaveTypeNo, ChargeToLeaveTypeNo2, IsWithPay, IsMaintainBalance, IsOnline, GenderNo, IsApplytoall, IsArchived, IsForefeited, IsAccumulated, IsRefresh, RefreshCutOffNo, RefreshCutOffDays, ForfeitedPeriodNo, ForfeitedCount, LeaveCateNo, MaxFiledHrs, ForfeitureTypeNo, SpecificDate, LeaveDays) > 0 Then
+        If SQLHelper.ExecuteNonQuery("ELeaveType_WebSave", UserNo, PayLocNo, LeaveTypeNo, LeaveTypeCode, LeaveTypeDesc, ChargeToLeaveTypeNo, ChargeToLeaveTypeNo2, IsWithPay, IsMaintainBalance, IsOnline, GenderNo, IsApplytoall, IsArchived, IsForefeited, IsAccumulated, IsRefresh, RefreshCutOffNo, RefreshCutOffDays, ForfeitedPeriodNo, ForfeitedCount, LeaveCateNo, MaxFiledHrs, ForfeitureTypeNo, SpecificDate, LeaveDays, IsNotRD) > 0 Then
             Retval = True
         Else
             Retval = False
