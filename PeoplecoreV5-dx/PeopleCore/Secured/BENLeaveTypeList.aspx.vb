@@ -218,7 +218,7 @@ Partial Class Secured_BENLeaveTypeList
         Dim ForfeitureTypeNo As Integer = Generic.ToInt(cboForfeitureTypeNo.SelectedValue)
         Dim SpecificDate As String = Generic.ToStr(txtSpecificDate.Text)
         Dim LeaveDays As Integer = Generic.ToStr(txtLeaveDays.Text)
-        Dim IsNotRD As Boolean = Generic.ToBol(txtIsNotRD.Checked)
+        Dim IsNotRD As Boolean = Generic.ToBol(chkIsNotRD.Checked)
         '//validate start here
         Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
         Dim dtx As New DataTable

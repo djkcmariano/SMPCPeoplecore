@@ -177,7 +177,7 @@
                     <label class="col-md-4 control-label  has-space">
                     </label>
                     <div class="col-md-7">
-                        <asp:CheckBox ID="txtIsNotRD" runat="server" Text="&nbsp; Deduct Leave Hrs in Rest Day or Holiday" />
+                        <asp:CheckBox ID="chkIsNotRD" runat="server" Text="&nbsp; Deduct Leave Hrs in Rest Day or Holiday" />
                     </div>
                 </div>
                 <div class="form-group">
