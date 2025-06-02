@@ -122,7 +122,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label has-space">Have you taken BSP pre-employment test before?</label>
+                <label class="col-md-4 control-label has-space">Have you taken SMPC and other Affiliates pre-employment test before?</label>
                 <div class="col-md-7">
                     <asp:RadioButtonList runat="server" ID="rblIsPreEmpTest" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rblIsPreEmpTest_SelectedIndexChanged">
                         <asp:ListItem Value="1" Text="Yes&nbsp;&nbsp;&nbsp;" />
