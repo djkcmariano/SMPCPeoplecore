@@ -59,10 +59,7 @@
                                 <dx:GridViewDataTextColumn FieldName="OvtOut1" Caption="Out" />
                                 <dx:GridViewDataTextColumn FieldName="OvtIn2" Caption="In 2" Visible="false" />
                                 <dx:GridViewDataTextColumn FieldName="OvtOut2" Caption="Out 2" Visible="false" />
-                                <%--<dx:GridViewDataTextColumn FieldName="ChargedToDesc" Caption="Charged to" Visible="false" />--%>
                                 <dx:GridViewDataTextColumn FieldName="OTBreak" Caption="OT Break" Visible="false" />
-                                <%--<dx:GridViewDataCheckColumn FieldName="IsForCompensatory" Caption="For CTO" />--%>
-                                <%--<dx:GridViewDataCheckColumn FieldName="IsOnCall" Caption="On Call" Visible="false" />--%>
                                 <dx:GridViewDataTextColumn FieldName="Hrs" Caption="Filed<br />Hrs" />
                                 <dx:GridViewDataTextColumn FieldName="Reason" Caption="Reason" Width="12%" />
                                 <dx:GridViewDataTextColumn FieldName="Remarks" Caption="Disapprover<br />Remarks" Width="12%"  Visible="false" />
