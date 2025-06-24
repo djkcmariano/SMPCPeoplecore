@@ -372,11 +372,10 @@ Partial Class Secured_EmpHRANEdit
             Dim MembershipTypeNo As Integer = Generic.ToInt(cboMembershipTypeNo.SelectedValue)
             Dim MembershipStatNo As Integer = Generic.ToInt(cboMembershipStatNo.SelectedValue)
             Dim MembershipClassNo As Integer = Generic.ToInt(cboMembershipClassNo.SelectedValue)
+            Dim HousingClassNo As Integer = Generic.ToInt(cboHousingClassNo.SelectedValue)
 
             Dim IsRata As Boolean = Generic.ToBol(chkIsRata.Checked)
             Dim IsTA As Boolean = Generic.ToBol(chkIsTA.Checked)
-
-            Dim HousingClassNo As Integer = Generic.ToInt(Me.cboHousingClassNo.SelectedValue)
 
             '//validate start here
             Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
@@ -527,13 +526,20 @@ Partial Class Secured_EmpHRANEdit
 
             End Try
             lblEI.Attributes.Add("class", "col-md-3 control-label has-required")
+            lblCL.Attributes.Add("class", "col-md-3 control-label has-required")
             cboApplicantStandardHeaderNo.CssClass = "form-control required"
             cboApplicantStandardHeaderNo.Enabled = True
+            cboClearanceTemplateNo.CssClass = "form-control required"
+            cboClearanceTemplateNo.Enabled = True
         Else
             lblEI.Attributes.Add("class", "col-md-3 control-label has-space")
+            lblCL.Attributes.Add("class", "col-md-3 control-label has-space")
             cboApplicantStandardHeaderNo.CssClass = "form-control"
             cboApplicantStandardHeaderNo.Text = ""
             cboApplicantStandardHeaderNo.Enabled = False
+            cboClearanceTemplateNo.CssClass = "form-control"
+            cboClearanceTemplateNo.Text = ""
+            cboClearanceTemplateNo.Enabled = False
         End If
 
         'Exit Interview Template

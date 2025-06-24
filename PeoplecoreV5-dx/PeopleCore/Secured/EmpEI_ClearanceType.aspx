@@ -36,8 +36,9 @@
                             </dx:GridViewDataColumn>
                             <dx:GridViewDataTextColumn FieldName="Code" Caption="Trans No." />
                             <dx:GridViewDataTextColumn FieldName="EmployeeEIClearanceTypeCode" Caption="Code" />
-                            <dx:GridViewDataTextColumn FieldName="EmployeeEIClearanceTypeDesc" Caption="Description" />                                                        
-                            <dx:GridViewDataTextColumn FieldName="EmployeeEIClearanceCateDesc" Caption="Category" />
+                            <dx:GridViewDataTextColumn FieldName="EmployeeEIClearanceTypeDesc" Caption="Description" />   
+                            <dx:GridViewDataTextColumn FieldName="ClearanceTemplateDesc" Caption="Clearance Template" />
+                            <dx:GridViewDataTextColumn FieldName="EmployeeEIClearanceCateDesc" Caption="Accountability Category" />
                             <dx:GridViewDataTextColumn FieldName="DeptHeadName" Caption="Department Head" />
                             <dx:GridViewDataTextColumn FieldName="InChargeNo" Caption="Focal Person" />
                             <dx:GridViewDataTextColumn FieldName="EncodeBy" Caption="Encoded By" /> 
@@ -84,6 +85,12 @@
                 <label class="col-md-4 control-label">Description :</label>
                 <div class="col-md-7">
                     <asp:TextBox ID="txtEmployeeEIClearanceTypeDesc" runat="server"  CssClass="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label has-required">Clearance Template :</label>
+                <div class="col-md-7">
+                    <asp:DropDownList ID="cboClearanceTemplateNo" runat="server" DataMember = "EClearanceTemplate" CssClass="form-control required" />
                 </div>
             </div>
             <div class="form-group">
