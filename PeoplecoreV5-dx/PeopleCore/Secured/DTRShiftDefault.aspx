@@ -56,6 +56,8 @@
                                 <dx:GridViewDataComboBoxColumn FieldName="PayClassDesc" Caption="Payroll Group" Visible="false" />
                                 <dx:GridViewDataComboBoxColumn FieldName="CostCenterDesc" Caption="Cost Center" Visible="false" />
                                 <dx:GridViewDataComboBoxColumn FieldName="UnitDesc" Caption="Unit" Visible="false" />
+                                <dx:GridViewDataComboBoxColumn FieldName="ModifiedBy" Caption="Modified By" Visible="false" />
+                                <dx:GridViewDataComboBoxColumn FieldName="ModifiedDate" Caption="Modified Date" Visible="false" />
                                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" Caption="&nbsp;" />
                             </Columns>                            
                         </dx:ASPxGridView>

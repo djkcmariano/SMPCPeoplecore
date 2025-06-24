@@ -60,9 +60,10 @@
                             <dx:GridViewDataTextColumn FieldName="TaxWithheld" Caption="Tax" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
                             <dx:GridViewDataTextColumn FieldName="EmployeeSSS" Caption="SSS" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
                             <dx:GridViewDataTextColumn FieldName="GSISEEFromSuspension" Caption="SSS<br/>From Suspension" PropertiesTextEdit-DisplayFormatString="{0:N2}" Visible="false" />
-                            <dx:GridViewDataTextColumn FieldName="EmployeeHDMF" Caption="HDMF" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
-                            <dx:GridViewDataTextColumn FieldName="EmployeePH" Caption="PH" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
-                            <dx:GridViewDataTextColumn FieldName="EmployeePF" Caption="PF" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
+                            <dx:GridViewDataTextColumn FieldName="EmployeeHDMF" Caption="HDMF EE" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
+                            <dx:GridViewDataTextColumn FieldName="EmployeePH" Caption="PH EE" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
+                            <dx:GridViewDataTextColumn FieldName="EmployeeUnion" Caption="Union EE" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
+                            <dx:GridViewDataTextColumn FieldName="EmployeePF" Caption="PF EE" PropertiesTextEdit-DisplayFormatString="{0:N2}"  />
                             <dx:GridViewDataTextColumn FieldName="EmployeeIHP" Caption="HF" PropertiesTextEdit-DisplayFormatString="{0:N2}" Visible="false" />
                             <dx:GridViewDataTextColumn FieldName="EmployerSSS" Caption="SSS BS" PropertiesTextEdit-DisplayFormatString="{0:N2}" Visible="false" />
                             <dx:GridViewDataTextColumn FieldName="GSISERFromSuspension" Caption="SSS BS<br/>From Suspension" PropertiesTextEdit-DisplayFormatString="{0:N2}" Visible="false" />

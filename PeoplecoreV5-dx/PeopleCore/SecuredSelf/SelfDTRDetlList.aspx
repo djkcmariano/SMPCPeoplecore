@@ -170,7 +170,6 @@
                                 <dx:GridViewDataColumn FieldName="DayTypeCode2" Caption="D-Type2" Visible="false" /> 
                                 <dx:GridViewDataColumn FieldName="Hrs" Caption="Req.<br/>Hrs" />                 
                                 <dx:GridViewDataColumn FieldName="ActualHrs" Caption="Actual Hrs" Visible="false" />
-                                <dx:GridViewDataColumn FieldName="HolidayHrs" Caption="<center>Holiday<br>Pay</center>" Visible="false" />
                                 <dx:GridViewDataColumn FieldName="In1" Caption="In1" />
                                 <dx:GridViewDataColumn FieldName="Out1" Caption="Out1" />
                                 <dx:GridViewDataColumn FieldName="In2" Caption="In2" Visible="false"/>
@@ -195,7 +194,8 @@
                                         <asp:LinkButton runat="server" ID="lnkViewLeaveType"  Font-Size="X-Small" Text='<%# Bind("LeaveTypeCodes") %>' ToolTip='<%# Bind("LeaveTypeCodes_Hrs") %>' CommandArgument='<%# Bind("DTRNo") %>' />
                                     </DataItemTemplate>
                                 </dx:GridViewDataColumn>
-                                <dx:GridViewDataColumn FieldName="LeaveHrs" Caption="<center>Leave<br>Hrs</center>" />    
+                                <dx:GridViewDataColumn FieldName="LeaveHrs" Caption="<center>Leave<br>Hrs</center>" /> 
+                                <dx:GridViewDataColumn FieldName="HolidayHrs" Caption="<center>Holiday<br>Hrs</center>"  />
                                 <dx:GridViewDataColumn FieldName="Remarks" Caption="Remarks" />
                                 <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Work Allocation" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Wrap="True" Width="1%">
                                     <DataItemTemplate>

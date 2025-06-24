@@ -13,8 +13,8 @@ Partial Class SecuredSelf_SelfEmployeeWI
         Dim dt As DataTable
         dt = SQLHelper.ExecuteDataTable("EEmployee_WebOne", UserNo, TransNo)
         For Each row As DataRow In dt.Rows
-            Generic.PopulateData(Me, "Panel1", dt)
             Generic.PopulateDropDownList_Self(UserNo, Me, "Panel1", PayLocNo)
+            Generic.PopulateData(Me, "Panel1", dt)
         Next
     End Sub
 

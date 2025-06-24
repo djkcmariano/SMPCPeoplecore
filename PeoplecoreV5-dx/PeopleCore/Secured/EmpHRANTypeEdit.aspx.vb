@@ -169,4 +169,8 @@ Partial Class Secured_EmpHRANTypeEdit
         ScriptManager.RegisterStartupScript(Me, Me.GetType(), key, script, True)
     End Sub
 
+    Protected Sub lnkClearRadio_Click(sender As Object, e As EventArgs) Handles lnkClearRadio.Click
+        txtIsActivePay.Checked = False
+        txtIsSuspendPay.Checked = False
+    End Sub
 End Class

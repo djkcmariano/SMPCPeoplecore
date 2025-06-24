@@ -57,7 +57,7 @@
                          
                         <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="grdDX" KeyFieldName="DTRDetiNo" OnCommandButtonInitialize="grdMain_CommandButtonInitialize" OnCustomCallback="gridMain_CustomCallback">                                                                                                         
                             <Columns>
-                                <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center" Visible="False">
+                                <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Left" Visible="False">
                                         <DataItemTemplate>
                                             <asp:LinkButton runat="server" ID="lnkEdit" CssClass="fa fa-pencil" Font-Size="Medium" OnClick="lnkEdit_Click" />
                                         </DataItemTemplate>
@@ -86,6 +86,9 @@
                                 <dx:GridViewDataTextColumn FieldName="LocationDesc" Caption="Location" Visible="false" />
                                 <dx:GridViewDataTextColumn FieldName="GroupbyDesc" Caption="Group By" Visible="false" />
                                 <dx:GridViewDataTextColumn FieldName="SectionDesc" Caption="Section" Visible="false" />
+                                <dx:GridViewDataTextColumn FieldName="DepartmentDesc" Caption="Department" Visible="false" />
+                                <dx:GridViewDataTextColumn FieldName="EmployeeRateClassDesc" Caption="Rate Class" Visible="false" />
+                                <dx:GridViewDataTextColumn FieldName="HiredDate" Caption="Date Hired" Visible="false" />
                                 <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Details" HeaderStyle-HorizontalAlign="Center">
                                     <DataItemTemplate>
                                         <asp:LinkButton runat="server" ID="lnkDetail" CssClass="fa fa-list" Font-Size="Medium" OnClick="lnkDetail_Click" />

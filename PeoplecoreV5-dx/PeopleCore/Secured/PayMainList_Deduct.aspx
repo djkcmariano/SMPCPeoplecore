@@ -45,7 +45,8 @@
                                     <dx:GridViewDataTextColumn FieldName="tCode" Caption="Reference No." Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="EncodeDate" Caption="Encoded Date" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="EncodedBy" Caption="Encoded By" Visible="false" />
-                                    <dx:GridViewDataTextColumn FieldName="GCash" Caption="GCash No." Visible="false" />      
+                                    <dx:GridViewDataTextColumn FieldName="GCash" Caption="GCash No." Visible="false" />  
+                                    <dx:GridViewDataTextColumn FieldName="FamBankAccountNo" Caption="Family Allotment Bank No" Visible="false" />    
                                 </Columns>                            
                             </dx:ASPxGridView>
                             <dx:ASPxGridViewExporter ID="grdExport" runat="server" GridViewID="grdMain" />    

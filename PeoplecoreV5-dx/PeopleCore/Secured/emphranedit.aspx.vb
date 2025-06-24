@@ -376,6 +376,8 @@ Partial Class Secured_EmpHRANEdit
             Dim IsRata As Boolean = Generic.ToBol(chkIsRata.Checked)
             Dim IsTA As Boolean = Generic.ToBol(chkIsTA.Checked)
 
+            Dim HousingClassNo As Integer = Generic.ToInt(Me.cboHousingClassNo.SelectedValue)
+
             '//validate start here
             Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
             Dim dtx As New DataTable
@@ -393,16 +395,16 @@ Partial Class Secured_EmpHRANEdit
                 Exit Sub
             End If
 
-            dt = SQLHelper.ExecuteDataTable("EHRAN_WebSave", UserNo, HRANNo, EmployeeNo, EmployeeCode, HRANTypeNo, Reason, PreparationDate, Effectivity, Description, DueDate, _
-                                                        PositionNo, TaskNo, DivisionNo, DepartmentNo, SectionNo, DayOffNo, ShiftNo, EmployeeClassNo, EmployeeRateClassNo, EmployeeStatNo, _
-                                                        PayTypeNo, PayLocNo, CurrentSalary, ImmediateSuperiorNo, IsSupervisor, IsReady, PreparedByNo, LocationNo, SalaryGradeNo, PlantillaNo, _
-                                                        StepNo, PayClassNo, Fullname, IsApplicant, TaxExemptNo, RankNo, HRANRCNo, DayOffNo2, FacilityNo, UnitNo, _
-                                                        PaymentTypeNo, CostCenterNo, GroupNo, pwd, LS, HRANCorrectedNo, IsFacHead, IsDivHead, IsDepHead, IsSecHead, _
-                                                        IsGroHead, IsUniHead, ipAddress, hostName, macAddress, IsSeparated, ProjectNo, IsDontDeductTax, AllowTempNo, ActingPlantillaNo, _
-                                                        OfficeOrderNum, IsConferment, AccountCode, DatePublished, AgencyHead, AgencyHeadDesignation, PSBHead, HRHead, PublicationNo, HRANHOANo, _
-                                                        HRANHOADNo, HRANHRMONo, HRANPSBNo, RMCNo, BranchNo, TeamNo, IsRMCHead, IsBranchHead, IsTeamHead, DateofApproval, _
-                                                        IsForRata, JobGradeNo, HRANTypeReasonNo, ApprovalStatNo, MembershipTypeNo, MembershipClassNo, MembershipStatNo, _
-                                                        Generic.ToInt(cboApplicantStandardHeaderNo.SelectedValue), IsRata, IsTA, Generic.ToInt(cboClearanceTemplateNo.SelectedValue))
+            dt = SQLHelper.ExecuteDataTable("EHRAN_WebSave", UserNo, HRANNo, EmployeeNo, EmployeeCode, HRANTypeNo, Reason, PreparationDate, Effectivity, Description, DueDate,
+                                                        PositionNo, TaskNo, DivisionNo, DepartmentNo, SectionNo, DayOffNo, ShiftNo, EmployeeClassNo, EmployeeRateClassNo, EmployeeStatNo,
+                                                        PayTypeNo, PayLocNo, CurrentSalary, ImmediateSuperiorNo, IsSupervisor, IsReady, PreparedByNo, LocationNo, SalaryGradeNo, PlantillaNo,
+                                                        StepNo, PayClassNo, Fullname, IsApplicant, TaxExemptNo, RankNo, HRANRCNo, DayOffNo2, FacilityNo, UnitNo,
+                                                        PaymentTypeNo, CostCenterNo, GroupNo, pwd, LS, HRANCorrectedNo, IsFacHead, IsDivHead, IsDepHead, IsSecHead,
+                                                        IsGroHead, IsUniHead, ipAddress, hostName, macAddress, IsSeparated, ProjectNo, IsDontDeductTax, AllowTempNo, ActingPlantillaNo,
+                                                        OfficeOrderNum, IsConferment, AccountCode, DatePublished, AgencyHead, AgencyHeadDesignation, PSBHead, HRHead, PublicationNo, HRANHOANo,
+                                                        HRANHOADNo, HRANHRMONo, HRANPSBNo, RMCNo, BranchNo, TeamNo, IsRMCHead, IsBranchHead, IsTeamHead, DateofApproval,
+                                                        IsForRata, JobGradeNo, HRANTypeReasonNo, ApprovalStatNo, MembershipTypeNo, MembershipClassNo, MembershipStatNo,
+                                                        Generic.ToInt(cboApplicantStandardHeaderNo.SelectedValue), IsRata, IsTA, Generic.ToInt(cboClearanceTemplateNo.SelectedValue), HousingClassNo)
 
             Dim forEscalation As Integer = 0
             Dim IsAdd As Boolean = False
@@ -622,46 +624,47 @@ Partial Class Secured_EmpHRANEdit
         _ds = SQLHelper.ExecuteDataSet("EHRAN_WebLookup_AC_Employee", UserNo, prefixText, contextKey, PayLocNo)
         For Each row As DataRow In _ds.Tables(0).Rows
             Dim item As String = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(Generic.ToStr(row("FullName")),
-                                Generic.ToStr(row("EmployeeNo")) & _
-                                "|" & Generic.ToStr(row("EmployeeCode")) & _
-                                "|" & Generic.ToStr(row("PlantillaNo")) & _
-                                "|" & Generic.ToStr(row("PlantillaDesc")) & _
-                                "|" & Generic.ToStr(row("ActingPlantillaNo")) & _
-                                "|" & Generic.ToStr(row("TaskNo")) & _
-                                "|" & Generic.ToStr(row("PositionNo")) & _
-                                "|" & Generic.ToStr(row("PositionDesc")) & _
-                                "|" & Generic.ToStr(row("SalaryGradeNo")) & _
-                                "|" & Generic.ToStr(row("FacilityNo")) & _
-                                "|" & Generic.ToStr(row("GroupNo")) & _
-                                "|" & Generic.ToStr(row("DepartmentNo")) & _
-                                "|" & Generic.ToStr(row("UnitNo")) & _
-                                "|" & Generic.ToStr(row("DivisionNo")) & _
-                                "|" & Generic.ToStr(row("SectionNo")) & _
-                                "|" & Generic.ToStr(row("CostCenterNo")) & _
-                                "|" & Generic.ToStr(row("LocationNo")) & _
-                                "|" & Generic.ToStr(row("ProjectNo")) & _
-                                "|" & Generic.ToStr(row("ShiftNo")) & _
-                                "|" & Generic.ToStr(row("DayoffNo")) & _
-                                "|" & Generic.ToStr(row("DayoffNo2")) & _
-                                "|" & Generic.ToStr(row("EmployeeClassNo")) & _
-                                "|" & Generic.ToStr(row("EmployeeStatNo")) & _
-                                "|" & Generic.ToStr(row("RankNo")) & _
-                                "|" & Generic.ToStr(row("IsSupervisor")) & _
-                                "|" & Generic.ToStr(row("ImmediateSuperiorNo")) & _
-                                "|" & Generic.ToStr(row("SFullName")) & _
-                                "|" & Generic.ToStr(row("PayClassNo")) & _
-                                "|" & Generic.ToStr(row("PayLocNo")) & _
-                                "|" & Generic.ToStr(row("PayTypeNo")) & _
-                                "|" & Generic.ToStr(row("PaymentTypeNo")) & _
-                                "|" & Generic.ToStr(row("EmployeeRateClassNo")) & _
-                                "|" & Generic.ToStr(row("TaxExemptNo")) & _
-                                "|" & Generic.ToStr(row("CurrentSalary")) & _
-                                "|" & Generic.ToStr(row("IsEditSalary")) & _
-                                "|" & Generic.ToStr(row("ActingPlantillaDesc")) & _
-                                "|" & Generic.ToStr(row("JobGradeNo")) & _
-                                "|" & Generic.ToStr(row("IsDontDeductTax")) & _
-                                "|" & Generic.ToStr(row("IsRata")) & _
-                                "|" & Generic.ToStr(row("IsTA")))
+                                Generic.ToStr(row("EmployeeNo")) &
+                                "|" & Generic.ToStr(row("EmployeeCode")) &
+                                "|" & Generic.ToStr(row("PlantillaNo")) &
+                                "|" & Generic.ToStr(row("PlantillaDesc")) &
+                                "|" & Generic.ToStr(row("ActingPlantillaNo")) &
+                                "|" & Generic.ToStr(row("TaskNo")) &
+                                "|" & Generic.ToStr(row("PositionNo")) &
+                                "|" & Generic.ToStr(row("PositionDesc")) &
+                                "|" & Generic.ToStr(row("SalaryGradeNo")) &
+                                "|" & Generic.ToStr(row("FacilityNo")) &
+                                "|" & Generic.ToStr(row("GroupNo")) &
+                                "|" & Generic.ToStr(row("DepartmentNo")) &
+                                "|" & Generic.ToStr(row("UnitNo")) &
+                                "|" & Generic.ToStr(row("DivisionNo")) &
+                                "|" & Generic.ToStr(row("SectionNo")) &
+                                "|" & Generic.ToStr(row("CostCenterNo")) &
+                                "|" & Generic.ToStr(row("LocationNo")) &
+                                "|" & Generic.ToStr(row("ProjectNo")) &
+                                "|" & Generic.ToStr(row("ShiftNo")) &
+                                "|" & Generic.ToStr(row("DayoffNo")) &
+                                "|" & Generic.ToStr(row("DayoffNo2")) &
+                                "|" & Generic.ToStr(row("EmployeeClassNo")) &
+                                "|" & Generic.ToStr(row("EmployeeStatNo")) &
+                                "|" & Generic.ToStr(row("RankNo")) &
+                                "|" & Generic.ToStr(row("IsSupervisor")) &
+                                "|" & Generic.ToStr(row("ImmediateSuperiorNo")) &
+                                "|" & Generic.ToStr(row("SFullName")) &
+                                "|" & Generic.ToStr(row("PayClassNo")) &
+                                "|" & Generic.ToStr(row("PayLocNo")) &
+                                "|" & Generic.ToStr(row("PayTypeNo")) &
+                                "|" & Generic.ToStr(row("PaymentTypeNo")) &
+                                "|" & Generic.ToStr(row("EmployeeRateClassNo")) &
+                                "|" & Generic.ToStr(row("TaxExemptNo")) &
+                                "|" & Generic.ToStr(row("CurrentSalary")) &
+                                "|" & Generic.ToStr(row("IsEditSalary")) &
+                                "|" & Generic.ToStr(row("ActingPlantillaDesc")) &
+                                "|" & Generic.ToStr(row("JobGradeNo")) &
+                                "|" & Generic.ToStr(row("IsDontDeductTax")) &
+                                "|" & Generic.ToStr(row("IsRata")) &
+                                "|" & Generic.ToStr(row("IsTA")) &
+                                "|" & Generic.ToStr(row("HousingClassNo")))
             items.Add(item)
         Next
         _ds.Dispose()

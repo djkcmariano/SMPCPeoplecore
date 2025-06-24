@@ -742,6 +742,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-3 control-label has-space">Housing Classification :</label>
+                                <div class="col-md-6">
+                                    <asp:DropdownList ID="cboHousingClassNo" runat="server" CssClass="form-control" DataMember="EHousingClass" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-3 control-label has-required">Immediate Head :</label>
                                 <div class="col-md-6">
                                     <asp:TextBox runat="server" ID="txtSFullName" CssClass="form-control required" style="display:inline-block;" Placeholder="Type here..." /> 
