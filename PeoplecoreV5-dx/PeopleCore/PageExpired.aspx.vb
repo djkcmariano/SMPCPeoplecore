@@ -43,6 +43,10 @@ Partial Class PageExpired
             Me.txtWarningMessage.Text = "<strong>Oops, the page you're looking for does not exist</strong>"
             SQLHelper.ExecuteNonQuery("SUserStat_WebSave_Activity", UserNo, Session("xFormname"), "Page not found", 0)
             panelBack.Visible = True
+        ElseIf pagestatus = 6 Then
+            Me.txtWarningMessage.Text = "<strong>This password reset link has expired. Please request a new one to reset your password.</strong>"
+            SQLHelper.ExecuteNonQuery("SUserStat_WebSave_Activity", UserNo, Session("xFormname"), "Page not found", 0)
+            panelBack.Visible = True
         End If
 
 

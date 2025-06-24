@@ -24,7 +24,8 @@ Partial Class Secured_SecUserResetPassword
     End Sub
 
     Protected Sub lnkSave_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
+        Dim query As String
+        Dim encryptedQuery As String
         If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowAdd) Then
             Dim Retval As Boolean = False
             Dim fpassword As String = PeopleCoreCrypt.Encrypt(txtPassword.Text)
@@ -36,8 +37,22 @@ Partial Class Secured_SecUserResetPassword
             End If
 
             If Retval Then
+                Dim ds1 As DataSet, FPLinkNo As String = ""
+                ds1 = SQLHelper.ExecuteDataSet("EFPLink_WebCreate", UserNo)
+                If ds1.Tables.Count > 0 Then
+                    If ds1.Tables(0).Rows.Count > 0 Then
+                        FPLinkNo = Generic.ToStr(ds1.Tables(0).Rows(0)("FPLinkNo"))
+                    End If
+                End If
+
+                query = "id=" + Generic.ToStr(Generic.ToInt(hifuserno.Value)) & "&FPLinkNo=" + Generic.ToStr(FPLinkNo)
+                encryptedQuery = "?enc=" & Security.Encrypt(Query)
+
+                encryptedQuery = Request.Url.GetLeftPart(UriPartial.Authority) & HttpContext.Current.Request.Path.Substring(HttpContext.Current.Request.Path.IndexOf("/", 1), HttpContext.Current.Request.Path.LastIndexOf("/") - HttpContext.Current.Request.Path.IndexOf("/", 1)) & "/passwordchange.aspx" + encryptedQuery
+                SQLHelper.ExecuteNonQuery("EUser_WebForgotPassword", Generic.ToInt(hifuserno.Value), encryptedQuery, FPLinkNo)
+
                 hifuserno.Value = 0
-                MessageBox.Success(MessageTemplate.SuccessSave, Me)
+                MessageBox.Success("An email was sent to the user.", Me)
             Else
                 MessageBox.Critical(MessageTemplate.ErrorSave, Me)
             End If

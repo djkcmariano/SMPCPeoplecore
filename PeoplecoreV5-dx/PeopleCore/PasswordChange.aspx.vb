@@ -9,7 +9,9 @@ Partial Class PasswordChange
     Dim TransNo As Int64 = 0
     Dim PayLocNo As Int64 = 0
     Dim rowno As Integer = 0
+    Dim FPLinkNo As Int64 = 0
     Dim username As String = ""
+    Dim IsReset As Boolean
 
     Protected Sub PopulateData()
         Dim dt As DataTable
@@ -21,11 +23,21 @@ Partial Class PasswordChange
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         username = Generic.ToStr(Session("OnlineUsername"))
-        UserNo = Generic.ToInt(Request.QueryString("userno"))
+        UserNo = Generic.ToInt(Request.QueryString("id"))
         PayLocNo = Generic.ToInt(Request.QueryString("paylocno"))
+        FPLinkNo = Generic.ToInt(Request.QueryString("FPLinkNo"))
+        IsReset = Generic.ToInt(Request.QueryString("IsReset"))
 
-        If UserNo = 0 Or username = "" Then
-            Response.Redirect("~/default.aspx?")
+        Dim ds As DataSet, IsValid As Boolean
+        ds = SQLHelper.ExecuteDataSet("EFPLink_WebValidate", UserNo, FPLinkNo)
+        If ds.Tables.Count > 0 Then
+            If ds.Tables(0).Rows.Count > 0 Then
+                IsValid = Generic.ToBol(ds.Tables(0).Rows(0)("IsValid"))
+            End If
+        End If
+
+        If (UserNo = 0) Or (IsValid = False And IsReset = False) Then
+            Response.Redirect("~/pageexpired.aspx?i=6")
         End If
 
         If Not IsPostBack Then
@@ -48,7 +60,7 @@ Partial Class PasswordChange
         If SaveRecord() Then
             Session.Clear()
             Session.Abandon()
-            MessageBox.SuccessResponse("Your password has been successfully changed. Click OK to re-log.", Me, "")
+            MessageBox.SuccessResponse("Your password has been successfully changed. Click OK to re-log.", Me, "default.aspx")
         End If
 
     End Sub
@@ -65,6 +77,7 @@ Partial Class PasswordChange
         Dim firstName As String = ""
         Dim lastName As String = ""
         Dim middleName As String = ""
+        Dim birthdate As String = ""
 
         dsCheck = SQLHelper.ExecuteDataSet("EUser_WebOldPasswordCheck", UserNo)
         If dsCheck.Tables.Count > 0 Then
@@ -74,11 +87,14 @@ Partial Class PasswordChange
                 firstName = Generic.ToStr(dsCheck.Tables(0).Rows(0)("firstname"))
                 lastName = Generic.ToStr(dsCheck.Tables(0).Rows(0)("lastname"))
                 middleName = Generic.ToStr(dsCheck.Tables(0).Rows(0)("middlename"))
+                birthdate = Generic.ToStr(dsCheck.Tables(0).Rows(0)("birthdate"))
 
-                If Not CheckPasswordMatching(Me.txtoldpassword.Text, fpasswordchk) Then
-                    fcheck = 0
-                Else
-                    fcheck = 1
+                If txtFirstName.Text.ToUpper <> firstName.ToUpper Then
+                    fcheck = 3
+                ElseIf txtlastName.Text.ToUpper <> lastName.ToUpper Then
+                    fcheck = 4
+                    'ElseIf txtBirthDate.Text <> birthdate Then
+                    '    fcheck = 5
                 End If
             End If
             If dsCheck.Tables(1).Rows.Count > 0 Then
@@ -100,12 +116,12 @@ Partial Class PasswordChange
             Exit Function
         End If
 
-        If fcheck = 0 Then
-            MessageBox.Critical("Old Password did not match.", Me)
-            SaveRecord = False
-            Exit Function
+        'If fcheck = 0 Then
+        '    MessageBox.Critical("Old Password did not match.", Me)
+        '    SaveRecord = False
+        '    Exit Function
 
-        End If
+        'End If
 
         If Not CheckPasswordMatching(Me.txtNewPassword.Text, Me.txtRnewPassword.Text) Then
             MessageBox.Critical("Your new password did not match.", Me)

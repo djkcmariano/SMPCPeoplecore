@@ -6,6 +6,8 @@ Partial Class frmForgotPassword
 
     Protected Sub btnSave_Click(sender As Object, e As System.EventArgs)
         Dim url As String = "ctl00_cphBody_mdlforgot"
+        Dim query As String
+        Dim encryptedQuery As String
 
         If Captcha.IsValid Then
 
@@ -25,14 +27,41 @@ Partial Class frmForgotPassword
                     UserNo = Generic.ToStr(ds.Tables(0).Rows(0)("UserNo"))
                 End If
             End If
-
             If pwd <> "" Then
+
+                Dim ds1 As DataSet, FPLinkNo As String = ""
+                ds1 = SQLHelper.ExecuteDataSet("EFPLink_WebCreate", UserNo)
+                If ds1.Tables.Count > 0 Then
+                    If ds1.Tables(0).Rows.Count > 0 Then
+                        FPLinkNo = Generic.ToStr(ds1.Tables(0).Rows(0)("FPLinkNo"))
+                    End If
+                End If
+
+                Query = "id=" + Generic.ToStr(UserNo) & "&FPLinkNo=" + Generic.ToStr(FPLinkNo)
+                encryptedQuery = "?enc=" & Security.Encrypt(query)
+
+                encryptedQuery = Request.Url.GetLeftPart(UriPartial.Authority) & Request.Path.Substring(0, HttpContext.Current.Request.Path.LastIndexOf("/")) & "/passwordchange.aspx" + encryptedQuery
+
+
+
+
                 pwd = PeopleCoreCrypt.Decrypt(pwd)
-                SQLHelper.ExecuteNonQuery("EUser_WebForgot", Generic.ToInt(UserNo), pwd)
-                MessageBox.Success("Your username and password were successfully sent to your assigned email address in 201 record.", Me)
+                SQLHelper.ExecuteNonQuery("EUser_WebForgotPassword", Generic.ToInt(UserNo), encryptedQuery, FPLinkNo)
+
+                Dim urlr As String = "default.aspx?"
+                MessageBox.SuccessResponse("Your password reset link is successfully sent to your assigned email address in 201 record.", Me, urlr)
+
             Else
                 MessageBox.Warning("Your username did not return any results. Please try again.", Me)
             End If
+
+            'If pwd <> "" Then
+            '    pwd = PeopleCoreCrypt.Decrypt(pwd)
+            '    SQLHelper.ExecuteNonQuery("EUser_WebForgot", Generic.ToInt(UserNo), pwd)
+            '    MessageBox.Success("Your username and password were successfully sent to your assigned email address in 201 record.", Me)
+            'Else
+            '    MessageBox.Warning("Your username did not return any results. Please try again.", Me)
+            'End If
 
             If Generic.ToStr(EmailAdd) = "" Then
                 MessageBox.Information("No email address defined to your 201 record. Please inform your HRIS Administrator to proceed this transaction.", Me)

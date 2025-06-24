@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="form-group">
+                                    <div class="form-group" style="display:none;">
                                         <label class="col-md-5 control-label has-space">New Password :</label>
                                         <div class="col-md-3">
                                             <asp:Textbox ID="txtPassword" ReadOnly="true" runat="server" CssClass="form-control required default-cursor"></asp:Textbox>
@@ -68,7 +68,8 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-md-offset-5 pull-left">
-                                                <asp:Button ID="btnSave" Text="Save" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Click here to save changes" OnClick="lnkSave_Click" ></asp:Button>
+                                            <asp:Button ID="btnSave" Text="Send Reset Link" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Send Reset Link" OnClick="lnkSave_Click" ></asp:Button>
+                                                <%--<asp:Button ID="btnSave" Text="Save" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Click here to save changes" OnClick="lnkSave_Click" ></asp:Button>--%>
                                                 <asp:Button ID="btnCancel" Text="Cancel" runat="server" CausesValidation="false" CssClass="btn btn-default" OnClick="btnCancel_Click" ToolTip="Click here to cancel" ></asp:Button>                       
                                         </div>
                                     </div>
