@@ -143,6 +143,7 @@
                                 <label class="radio-inline">
                                     <asp:RadioButton ID="txtIsSuspendPay" GroupName="EmploymentStat" Text="Suspend" runat="server" />
                                 </label>
+                                <asp:LinkButton runat="server" ID="lnkClearRadio" OnClick="lnkClearRadio_Click" CausesValidation="false" Text="Clear" />
                             </div>
                         </div>
 
