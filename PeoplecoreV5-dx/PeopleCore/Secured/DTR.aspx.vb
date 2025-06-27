@@ -61,6 +61,7 @@ Partial Class Secured_DTR
             lnkPost.Enabled = False
             lnkProcess.Enabled = False
             lnkProcessDisc.Visible = False
+            lnkProcessLogs.Visible = False
         End If
 
         Dim _dt As DataTable
@@ -271,6 +272,23 @@ Partial Class Secured_DTR
                 DeleteCount = DeleteCount + 1
             Next
 
+            '//validate start here
+            Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
+            Dim dtx As New DataTable
+            dtx = SQLHelper.ExecuteDataTable("EDTR_WebProcessValidate", UserNo, ViewState("Id"), PayLocNo)
+
+            For Each rowx As DataRow In dtx.Rows
+                invalid = Generic.ToBol(rowx("Invalid"))
+                messagedialog = Generic.ToStr(rowx("MessageDialog"))
+                alerttype = Generic.ToStr(rowx("AlertType"))
+            Next
+
+            If invalid = True Then
+                MessageBox.Alert(messagedialog, alerttype, Me)
+                Exit Sub
+            End If
+
+
             If DeleteCount = 1 Then
                 DTRAppendAsyn()
                 Dim strx As String = process_status
@@ -333,7 +351,7 @@ Partial Class Secured_DTR
         i = Generic.ToInt(container.Grid.GetRowValues(container.VisibleIndex, New String() {"DTRNo"}))
 
         Response.Redirect("~/secured/DTRDetlList.aspx?transNo=" & i & "&tModify=false&IsClickMain=1")
-        
+
     End Sub
 
     Protected Sub lnkManualDTR_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -344,7 +362,7 @@ Partial Class Secured_DTR
         i = Generic.ToInt(container.Grid.GetRowValues(container.VisibleIndex, New String() {"DTRNo"}))
 
         Response.Redirect("~/secured/DTRDetlList_Manual.aspx?transNo=" & i & "&tModify=false&IsClickMain=1")
-        
+
     End Sub
     Protected Sub lnkEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
@@ -483,8 +501,8 @@ Partial Class Secured_DTR
         Dim container As GridViewDataItemTemplateContainer = TryCast(lnk.NamingContainer, GridViewDataItemTemplateContainer)
         'Dim id As Integer = Generic.ToInt(container.Grid.GetRowValues(container.VisibleIndex, New String() {"PayNo"}))
         Dim id As Integer = grdMain.GetRowValues(Integer.Parse(hf("VisibleIndex").ToString()), "DTRNo")
-        Dim param As String = Generic.ReportParam(New ReportParameter(ReportParameter.Type.int, PayLocNo.ToString), _
-                                                  New ReportParameter(ReportParameter.Type.int, id.ToString()), _
+        Dim param As String = Generic.ReportParam(New ReportParameter(ReportParameter.Type.int, PayLocNo.ToString),
+                                                  New ReportParameter(ReportParameter.Type.int, id.ToString()),
                                                   New ReportParameter(ReportParameter.Type.int, "0"))
         sb.Append("<script>")
         sb.Append("window.open('rpttemplateviewer.aspx?reportno=405&param=" & param & "','_blank','toolbars=no,location=no,directories=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');")
@@ -537,4 +555,67 @@ Partial Class Secured_DTR
 
     End Sub
 
+    Protected Sub lnkProcessLogs_Click(sender As Object, e As EventArgs)
+        Dim DeleteCount As Integer = 0
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowProcess) Then
+            Dim fieldValues As List(Of Object) = grdMain.GetSelectedFieldValues(New String() {"DTRNo"})
+            Dim str As String = ""
+            For Each item As Integer In fieldValues
+                ViewState("Id") = CType(item, Integer)
+                DeleteCount = DeleteCount + 1
+            Next
+
+            If DeleteCount = 1 Then
+                DTRAppendAsynLog()
+                Dim strx As String = process_status
+                If err_num <> 0 Then ' strx.Substring(0, 3).ToLower = "msg" Then
+                    SQLHelper.ExecuteNonQuery("EErrorLog_WebSave", UserNo, err_num, strx, "EDTR", "EDTR_WebProcessLogs", 1, ViewState("Id"))
+                    PopulateGrid()
+                    MessageBox.Critical(strx, Me)
+                Else
+                    SQLHelper.ExecuteNonQuery("EErrorLog_WebSave", UserNo, 0, "", "EDTR", "EDTR_WebProcessLogs", 1, ViewState("Id"))
+                    PopulateGrid()
+                    process_status = Replace(process_status, "Command complete. Processing Time is :", "DTR Raw Logs Processing completed at ")
+                    MessageBox.Success(process_status, Me)
+                End If
+            ElseIf DeleteCount > 1 Then
+                MessageBox.Warning("Please select 1 transaction to process.", Me)
+            Else
+                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
+            End If
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedProcess, Me)
+        End If
+    End Sub
+    Private Sub DTRAppendAsynLog()
+        Dim xcmdProcSAVE As SqlClient.SqlCommand
+
+        Try
+
+            xcmdProcSAVE = Nothing
+            xcmdProcSAVE = New SqlClient.SqlCommand
+
+            xcmdProcSAVE.CommandText = "EDTR_WebProcessLogs"
+            xcmdProcSAVE.CommandType = CommandType.StoredProcedure
+            xcmdProcSAVE.Connection = xBase.xOpenConnectionAsyn(SQLHelper.ConSTRAsyn)
+            xcmdProcSAVE.CommandTimeout = 0
+
+            xcmdProcSAVE.Parameters.Add("@onlineuserno", SqlDbType.Int, 4)
+            xcmdProcSAVE.Parameters("@onlineuserno").Value = Generic.CheckDBNull(UserNo, Global.clsBase.clsBaseLibrary.enumObjectType.IntType)
+
+            xcmdProcSAVE.Parameters.Add("@DTRNo", SqlDbType.Int, 4)
+            xcmdProcSAVE.Parameters("@DTRNo").Value = Generic.CheckDBNull(ViewState("Id"), Global.clsBase.clsBaseLibrary.enumObjectType.IntType)
+
+            process_status = AssynChronous.xRunCommandAsynchronous(xcmdProcSAVE, "EDTR_WebProcessLogs", SQLHelper.ConSTRAsyn, IsCompleted, err_num)
+            Session("IsCompleted") = 0 'IsCompleted
+
+            If Session("IsCompleted") = 1 Then
+                'clsModalControls.SetModalPopupControls(CType(Master.FindControl("cphBody"), ContentPlaceHolder), "completed")
+            End If
+        Catch
+            'Response.RedirectLocation = Session("xFormname") & "?IsClickMain=" & IsClickMain
+        End Try
+
+    End Sub
 End Class
