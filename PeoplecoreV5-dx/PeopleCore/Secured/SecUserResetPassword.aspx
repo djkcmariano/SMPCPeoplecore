@@ -62,13 +62,15 @@
 
                                     <div class="form-group">
                                         <div class="col-md-7 col-md-offset-5">
-                                            <p><code>Note: Click the Save button for the new password to take effect. </code></p>
+                                            <%--<p><code>Note: Click the Save button for the new password to take effect. </code></p>--%>
+                                            <p><code>Note: Reset link will be sent on the user email</code></p>
+                                            <p><code>Note: If user has no company/personal email, password will be reset to default.</code></p>
                                         </div>
                                      </div>
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-md-offset-5 pull-left">
-                                            <asp:Button ID="btnSave" Text="Send Reset Link" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Send Reset Link" OnClick="lnkSave_Click" ></asp:Button>
+                                            <asp:Button ID="btnSave" Text="Save" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Send Reset Link" OnClick="lnkSave_Click" ></asp:Button>
                                                 <%--<asp:Button ID="btnSave" Text="Save" runat="server" CausesValidation="false" CssClass="btn btn-primary submit fsMain btnSave" ToolTip="Click here to save changes" OnClick="lnkSave_Click" ></asp:Button>--%>
                                                 <asp:Button ID="btnCancel" Text="Cancel" runat="server" CausesValidation="false" CssClass="btn btn-default" OnClick="btnCancel_Click" ToolTip="Click here to cancel" ></asp:Button>                       
                                         </div>

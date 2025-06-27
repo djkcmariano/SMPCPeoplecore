@@ -46,13 +46,13 @@ Partial Class Secured_SecUserResetPassword
                 End If
 
                 query = "id=" + Generic.ToStr(Generic.ToInt(hifuserno.Value)) & "&FPLinkNo=" + Generic.ToStr(FPLinkNo)
-                encryptedQuery = "?enc=" & Security.Encrypt(Query)
+                encryptedQuery = "?enc=" & Security.Encrypt(query)
 
                 encryptedQuery = Request.Url.GetLeftPart(UriPartial.Authority) & HttpContext.Current.Request.Path.Substring(HttpContext.Current.Request.Path.IndexOf("/", 1), HttpContext.Current.Request.Path.LastIndexOf("/") - HttpContext.Current.Request.Path.IndexOf("/", 1)) & "/passwordchange.aspx" + encryptedQuery
                 SQLHelper.ExecuteNonQuery("EUser_WebForgotPassword", Generic.ToInt(hifuserno.Value), encryptedQuery, FPLinkNo)
 
                 hifuserno.Value = 0
-                MessageBox.Success("An email was sent to the user.", Me)
+                MessageBox.Success("Password reset was successful. If the user has an email address on record, a confirmation has been sent. If no email is defined, the user's account has been updated with the default password.", Me)
             Else
                 MessageBox.Critical(MessageTemplate.ErrorSave, Me)
             End If
