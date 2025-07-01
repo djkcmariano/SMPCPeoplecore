@@ -198,17 +198,21 @@ Partial Class SecuredSelf_SelfDTROBApplicationList
                 Message = Generic.CheckDBNull(dts.Tables(1).Rows(0)("Message"), clsBase.clsBaseLibrary.enumObjectType.StrType)
 
                 If MobileNo <> "" Then
-
-                    Dim httpWebRequest = CType(WebRequest.Create("http://Rubidium/smsapi/api/sms"), HttpWebRequest)
+                    Dim httpWebRequest = CType(WebRequest.Create("http://aluminum/SMARTSMS_SMPC/api/SendSmsApi/send"), HttpWebRequest)
                     httpWebRequest.ContentType = "application/json"
                     httpWebRequest.Method = "POST"
 
+                    Dim smsArray = New Object() {
+                                                New With {
+                                                    Key .ReferenceNo = IdNo,
+                                                    .Destination = MobileNo,
+                                                    .Message = Message,
+                                                    .SystemName = "PEOPLECORE"
+                                                }
+                                            }
+
                     Using streamWriter = New StreamWriter(httpWebRequest.GetRequestStream())
-                        Dim json As String = New JavaScriptSerializer().Serialize(New With {Key .IdNo = IdNo, _
-                                                                                            .SuperiorIdNo = SuperiorIdNo, _
-                                                                                            .EmployeeNo = EmployeeNo, _
-                                                                                            .MobileNo = MobileNo, _
-                                                                                            .Message = Message})
+                        Dim json As String = New JavaScriptSerializer().Serialize(smsArray)
                         streamWriter.Write(json)
                     End Using
 
@@ -216,6 +220,23 @@ Partial Class SecuredSelf_SelfDTROBApplicationList
                     Using streamReader = New StreamReader(httpResponse.GetResponseStream())
                         Dim result = streamReader.ReadToEnd()
                     End Using
+                    'Dim httpWebRequest = CType(WebRequest.Create("http://Rubidium/smsapi/api/sms"), HttpWebRequest)
+                    'httpWebRequest.ContentType = "application/json"
+                    'httpWebRequest.Method = "POST"
+
+                    'Using streamWriter = New StreamWriter(httpWebRequest.GetRequestStream())
+                    '    Dim json As String = New JavaScriptSerializer().Serialize(New With {Key .IdNo = IdNo, _
+                    '                                                                        .SuperiorIdNo = SuperiorIdNo, _
+                    '                                                                        .EmployeeNo = EmployeeNo, _
+                    '                                                                        .MobileNo = MobileNo, _
+                    '                                                                        .Message = Message})
+                    '    streamWriter.Write(json)
+                    'End Using
+
+                    'Dim httpResponse = CType(httpWebRequest.GetResponse(), HttpWebResponse)
+                    'Using streamReader = New StreamReader(httpResponse.GetResponseStream())
+                    '    Dim result = streamReader.ReadToEnd()
+                    'End Using
 
                     RetVal = True
 
