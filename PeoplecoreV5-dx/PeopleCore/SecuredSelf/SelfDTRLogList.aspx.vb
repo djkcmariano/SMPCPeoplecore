@@ -262,7 +262,7 @@ Partial Class SecuredSelf_SelfDTRLogList
                                                     Key .ReferenceNo = IdNo,
                                                     .Destination = MobileNo,
                                                     .Message = Message,
-                                                    .SystemName = "PEOPLECORE"
+                                                    .SystemName = "PCORE"
                                                 }
                                             }
 

@@ -269,7 +269,7 @@ Partial Class SecuredSelf_SelfDTRShiftList
                                                     Key .ReferenceNo = IdNo,
                                                     .Destination = MobileNo,
                                                     .Message = Message,
-                                                    .SystemName = "PEOPLECORE"
+                                                    .SystemName = "PCORE"
                                                 }
                                             }
 

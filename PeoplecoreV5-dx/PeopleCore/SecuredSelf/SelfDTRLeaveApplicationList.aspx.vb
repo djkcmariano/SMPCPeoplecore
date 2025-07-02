@@ -339,7 +339,7 @@ Partial Class SecuredSelf_SelfDTRLeaveApplicationList
                                                     Key .ReferenceNo = IdNo,
                                                     .Destination = MobileNo,
                                                     .Message = Message,
-                                                    .SystemName = "PEOPLECORE"
+                                                    .SystemName = "PCORE"
                                                 }
                                             }
 

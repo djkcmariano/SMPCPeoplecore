@@ -207,7 +207,7 @@ Partial Class SecuredSelf_SelfDTROBApplicationList
                                                     Key .ReferenceNo = IdNo,
                                                     .Destination = MobileNo,
                                                     .Message = Message,
-                                                    .SystemName = "PEOPLECORE"
+                                                    .SystemName = "PCORE"
                                                 }
                                             }
 
