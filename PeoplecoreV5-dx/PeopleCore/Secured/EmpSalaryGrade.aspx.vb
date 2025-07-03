@@ -4,7 +4,7 @@ Imports DevExpress.Web
 Imports DevExpress.XtraPrinting
 Imports DevExpress.Export
 
-Partial Class Secured_EmpSalaryLevel
+Partial Class Secured_EmpSalaryGrade
     Inherits System.Web.UI.Page
 
     Dim UserNo As Integer = 0
@@ -27,7 +27,7 @@ Partial Class Secured_EmpSalaryLevel
             End If
 
             Dim dt As DataTable
-            dt = SQLHelper.ExecuteDataTable("ESalaryLevel_Web", UserNo, Generic.ToInt(cboTabNo.SelectedValue), PayLocNo)
+            dt = SQLHelper.ExecuteDataTable("ESalaryGrade_Web", UserNo, Generic.ToInt(cboTabNo.SelectedValue), PayLocNo)
             grdMain.DataSource = dt
             grdMain.DataBind()
         Catch ex As Exception
@@ -46,7 +46,7 @@ Partial Class Secured_EmpSalaryLevel
     Protected Sub PopulateData(id As Int64)
         Try
             Dim dt As DataTable
-            dt = SQLHelper.ExecuteDataTable("ESalaryLevel_WebOne", UserNo, id)
+            dt = SQLHelper.ExecuteDataTable("ESalaryGrade_WebOne", UserNo, id)
             For Each row As DataRow In dt.Rows
                 Generic.PopulateData(Me, "pnlPopupMain", dt)
             Next
@@ -175,10 +175,11 @@ Partial Class Secured_EmpSalaryLevel
         Dim Mid As Decimal = Generic.ToDec(txtMidpointSalaryM.Text)
         Dim Max As Decimal = Generic.ToDec(txtMaximumSalaryM.Text)
         Dim IsNoOT As Boolean = Generic.ToBol(txtIsNoOT.Checked)
+        Dim IsNoNP As Boolean = Generic.ToBol(txtIsNoNP.Checked)
         Dim RA As Decimal = Generic.ToDec(txtRata.Text)
         Dim TA As Decimal = Generic.ToDec(txtTA.Text)
         Dim obj As Object
-        obj = SQLHelper.ExecuteScalar("ESalaryLevel_WebSave", UserNo, PayLocNo, Generic.ToInt(txtCode.Text), txtSalaryGradeCode.Text, txtSalaryGradeDesc.Text, RA, TA, txtIsArchived.Checked, Min, Mid, Max, IsNoOT)
+        obj = SQLHelper.ExecuteScalar("ESalaryGrade_WebSave", UserNo, PayLocNo, Generic.ToInt(txtCode.Text), txtSalaryGradeCode.Text, txtSalaryGradeDesc.Text, RA, TA, txtIsArchived.Checked, Min, Mid, Max, IsNoOT, IsNoNP)
         If Generic.ToInt(obj) = 0 Then
             SaveRecord = True
         ElseIf Generic.ToInt(obj) = 2 Then
