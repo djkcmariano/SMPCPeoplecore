@@ -236,7 +236,7 @@ Partial Class Include_Tab
         Session("xMenuType") = Generic.Split(lnk.CommandArgument, 1)
         Session("xTableName") = Generic.Split(lnk.CommandArgument, 2)
         Session("xFormName") = Generic.Split(lnk.CommandArgument, 3)
-        'Response.Redirect(URL & "?id=" & _transactionID)
+        'Response.Redirect(URL & "?id=" & _transactionID & "&tModify=false&IsClickMain=1")
         Response.Redirect("~/secured/" + Session("xFormName") + "?id=" & _transactionID & "&tModify=false&IsClickMain=1")
     End Sub
 
