@@ -330,16 +330,21 @@ Partial Class SecuredSelf_SelfDTRLeaveApplicationList
 
                 If MobileNo <> "" Then
 
-                    Dim httpWebRequest = CType(WebRequest.Create("http://Rubidium/smsapi/api/sms"), HttpWebRequest)
+                    Dim httpWebRequest = CType(WebRequest.Create("http://aluminum/SMARTSMS_SMPC/api/SendSmsApi/send"), HttpWebRequest)
                     httpWebRequest.ContentType = "application/json"
                     httpWebRequest.Method = "POST"
 
+                    Dim smsArray = New Object() {
+                                                New With {
+                                                    Key .ReferenceNo = IdNo,
+                                                    .Destination = MobileNo,
+                                                    .Message = Message,
+                                                    .SystemName = "PCORE"
+                                                }
+                                            }
+
                     Using streamWriter = New StreamWriter(httpWebRequest.GetRequestStream())
-                        Dim json As String = New JavaScriptSerializer().Serialize(New With {Key .IdNo = IdNo, _
-                                                                                            .SuperiorIdNo = SuperiorIdNo, _
-                                                                                            .EmployeeNo = EmployeeNo, _
-                                                                                            .MobileNo = MobileNo, _
-                                                                                            .Message = Message})
+                        Dim json As String = New JavaScriptSerializer().Serialize(smsArray)
                         streamWriter.Write(json)
                     End Using
 
