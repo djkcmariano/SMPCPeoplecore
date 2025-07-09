@@ -83,12 +83,12 @@ Partial Class PasswordStatus
 
     Protected Sub lnkChange_Click(sender As Object, e As System.EventArgs)
 
-        Session("OnlineUserNo") = 0
+        'Session("OnlineUserNo") = 0
         Session("xPayLocNo") = 0
         'Session.Abandon()
         'Session.Clear()
         'Session.RemoveAll()
-        Response.Redirect("~/passwordchange.aspx?paylocno=" & PayLocNo.ToString & "&userno=" & UserNo.ToString)
+        Response.Redirect("~/passwordchange.aspx?paylocno=" & PayLocNo.ToString & "&id=" & UserNo.ToString)
 
     End Sub
 
