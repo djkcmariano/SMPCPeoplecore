@@ -37,8 +37,32 @@
                                                 <asp:Textbox ID="txtUserCode" ReadOnly="true"  runat="server" CssClass="form-control default-cursor"></asp:Textbox>
                                              </div>
                                         </div>
-                                        
+
                                         <div class="form-group">
+                                            <label class="col-md-5 control-label  has-required">First Name :</label>
+                                            <div class="col-md-3">
+                                                <asp:Textbox ID="txtFirstName" runat="server" CssClass="form-control required"></asp:Textbox>
+                                             </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label  has-required">Last Name :</label>
+                                            <div class="col-md-3">
+                                                <asp:Textbox ID="txtlastName" runat="server" CssClass="form-control required"></asp:Textbox>
+                                             </div>
+                                        </div>
+
+<%--                                        <div class="form-group">
+                                            <label class="col-md-5 control-label  has-required">Birth Date :</label>
+                                            <div class="col-md-3">
+                                                <asp:Textbox ID="txtBirthDate" runat="server" CssClass="form-control required" SkinID="txtdate"></asp:Textbox>
+                                                <ajaxToolkit:CalendarExtender runat="server" ID="CalendarExtender5" TargetControlID="txtBirthDate" Format="MM/dd/yyyy" />
+                                                <ajaxToolkit:MaskedEditExtender runat="server" ID="MaskedEditExtender5" TargetControlID="txtBirthDate" Mask="99/99/9999" MaskType="Date" />
+                                                <asp:CompareValidator runat="server" ID="CompareValidator5" Operator="DataTypeCheck" ControlToValidate="txtBirthDate" Type="Date" ErrorMessage="Please enter valid date." Display="Dynamic" />
+                                             </div>
+                                        </div>--%>
+                                        
+                                        <div class="form-group" style="position:absolute; visibility:hidden;">
                                             <label class="col-md-5 control-label has-required">Enter old password :</label>
                                             <div class="col-md-3">
                                                 <asp:Textbox ID="txtOldPassword" TextMode="Password" runat="server" CssClass="form-control required"></asp:Textbox>
@@ -49,6 +73,7 @@
                                             <label class="col-md-5 control-label has-required">Enter new password :</label>
                                             <div class="col-md-3">
                                                 <asp:Textbox ID="txtNewPassword" TextMode="Password" runat="server" CssClass="form-control required"></asp:Textbox>
+
                                             </div>
                                         </div>
 

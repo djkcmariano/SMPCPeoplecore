@@ -199,9 +199,10 @@ Partial Class Secured_EmpEI_ClearanceType
         Dim deptheadno As Integer = Generic.ToInt(hifEmployeeNo.Value)
         Dim inchargeno As Integer = Generic.ToInt(hifEmployeeNo2.Value)
         Dim isArchived As Boolean = Generic.ToBol(chkIsArchived.Checked)
+        Dim ClearanceTemplateNo As Integer = Generic.ToInt(cboClearanceTemplateNo.SelectedValue)
 
         Dim dt As New DataTable, error_num As Integer = 0, error_message As String = "", retVal As Boolean = False
-        dt = SQLHelper.ExecuteDataTable("EEmployeeEIClearanceType_WebSave", UserNo, tno, tcode, tdesc, cateno, isArchived, PayLocNo, deptheadno, inchargeno)
+        dt = SQLHelper.ExecuteDataTable("EEmployeeEIClearanceType_WebSave", UserNo, tno, tcode, tdesc, cateno, isArchived, PayLocNo, deptheadno, inchargeno, ClearanceTemplateNo)
         For Each row As DataRow In dt.Rows
             retVal = True
             error_num = Generic.ToInt(row("Error_num"))

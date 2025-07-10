@@ -183,6 +183,7 @@
                                                         document.getElementById('<%= txtIsDontDeductTax.ClientID %>').checked = false;
                                                         document.getElementById('<%= chkIsRata.ClientID %>').checked = false;
                                                         document.getElementById('<%= chkIsTA.ClientID %>').checked = false;
+                                                        document.getElementById('<%= cboHousingClassNo.ClientID %>').value = "";
                                                     }
                                                 } 
 
@@ -228,6 +229,7 @@
                                                     document.getElementById('<%= txtIsDontDeductTax.ClientID %>').checked = SplitH(eventArgs.get_value(), 37);
                                                     document.getElementById('<%= chkIsRata.ClientID %>').checked = SplitH(eventArgs.get_value(), 38);
                                                     document.getElementById('<%= chkIsTA.ClientID %>').checked = SplitH(eventArgs.get_value(), 39);
+                                                    document.getElementById('<%= cboHousingClassNo.ClientID %>').value = SplitH(eventArgs.get_value(), 40);
 
                                                     SalaryPermission();
                                                     /// Session["cursalary"] = SplitH(eventArgs.get_value(), 33); ;
@@ -742,6 +744,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-3 control-label has-space">Housing Classification :</label>
+                                <div class="col-md-6">
+                                    <asp:DropDownList ID="cboHousingClassNo" DataMember="EHousingClass" runat="server" CssClass="form-control"></asp:DropDownList>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-3 control-label has-required">Immediate Head :</label>
                                 <div class="col-md-6">
                                     <asp:TextBox runat="server" ID="txtSFullName" CssClass="form-control required" style="display:inline-block;" Placeholder="Type here..." /> 
@@ -767,7 +776,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label has-space" runat="server" id="Label1">Clearance Template :</label>
+                                <label class="col-md-3 control-label has-space" runat="server" id="lblCL">Clearance Template :</label>
                                 <div class="col-md-6">
                                     <asp:DropdownList ID="cboClearanceTemplateNo" runat="server" CssClass="form-control" />                                                                                                        
                                 </div>

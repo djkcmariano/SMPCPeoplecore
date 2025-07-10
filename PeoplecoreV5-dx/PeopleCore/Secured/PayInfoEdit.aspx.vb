@@ -122,6 +122,9 @@ Partial Class Secured_EmpEditInfo
             Dim OTParameterNo As Integer = Generic.ToInt(cboOTParameterNo.SelectedValue)
             Dim HDMF2No As String = Generic.ToStr(txtHDMF2No.Text)
 
+            Dim FamBankTypeNo As Integer = Generic.ToInt(cboFamBankTypeNo.SelectedValue)
+            Dim FamBankAccountNo As String = Generic.ToStr(txtFamBankAccountNo.Text)
+
             'Validate Here
             Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
             Dim dtx As New DataTable
@@ -140,11 +143,12 @@ Partial Class Secured_EmpEditInfo
                 Exit Sub
             End If
             'Save Here
-            If SQLHelper.ExecuteNonQuery("EPayInfo_WebSave", UserNo, TransNo, PayClassNo, PayTypeNo, PaymentTypeNo, TaxExemptNo, EmployeeRateClassNo, BankTypeNo, BankAccountNo, SSSNo, _
-                                        PHNo, HDMFNo, TinNo, IsSuspendSSS, IsSuspendPHNo, IsSuspendHDMF, IsDontDeductTax, IsSSSER, IsPHER, IsHDMFER, _
-                                        HDMFEE, HDMFER, IsFlatTax, TaxPercentRate, IsSuspended, IsSeparated, IsUnion, IsUnionOfficer, ShiftNo, DayOffNo, _
-                                        DayOff2, MinTakeHomePay, HDMFMIDNo, PayLocNo,
-                                        OrienteeStartDate, OrienteeEndDate, ProbeStartDate, ProbeEndDate, HiredDate, RehiredDate, RegularizedDate, SeparatedDate, SuspendedDate, BlacklistedDate, PFEE, IsPFPaNoByER, IsDontDeductPF, IsRata, IsTA, OTParameterNo, HDMF2No) > 0 Then
+            If SQLHelper.ExecuteNonQuery("EPayInfo_WebSave", UserNo, TransNo, PayClassNo, PayTypeNo, PaymentTypeNo, TaxExemptNo, EmployeeRateClassNo, BankTypeNo, BankAccountNo, SSSNo,
+                                        PHNo, HDMFNo, TinNo, IsSuspendSSS, IsSuspendPHNo, IsSuspendHDMF, IsDontDeductTax, IsSSSER, IsPHER, IsHDMFER,
+                                        HDMFEE, HDMFER, IsFlatTax, TaxPercentRate, IsSuspended, IsSeparated, IsUnion, IsUnionOfficer, ShiftNo, DayOffNo,
+                                        DayOff2, MinTakeHomePay, HDMFMIDNo, PayLocNo, OrienteeStartDate, OrienteeEndDate, ProbeStartDate, ProbeEndDate, HiredDate, RehiredDate,
+                                        RegularizedDate, SeparatedDate, SuspendedDate, BlacklistedDate, PFEE, IsPFPaNoByER, IsDontDeductPF, IsRata, IsTA, OTParameterNo,
+                                        HDMF2No, FamBankTypeNo, FamBankAccountNo) > 0 Then
                 Retval = True
             Else
                 Retval = False

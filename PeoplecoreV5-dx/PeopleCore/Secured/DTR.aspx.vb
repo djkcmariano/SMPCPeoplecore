@@ -271,6 +271,19 @@ Partial Class Secured_DTR
                 DeleteCount = DeleteCount + 1
             Next
 
+            ' Disable DTR Processing during Auto Job Hours
+            Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
+            Dim dtx As New DataTable
+            dtx = SQLHelper.ExecuteDataTable("EDTR_WebProcessValidate", UserNo, ViewState("Id"), PayLocNo)
+
+            For Each rowx As DataRow In dtx.Rows
+                invalid = Generic.ToBol(rowx("Invalid"))
+                messagedialog = Generic.ToStr(rowx("MessageDialog"))
+                alerttype = Generic.ToStr(rowx("AlertType"))
+            Next
+
+
+
             If DeleteCount = 1 Then
                 DTRAppendAsyn()
                 Dim strx As String = process_status

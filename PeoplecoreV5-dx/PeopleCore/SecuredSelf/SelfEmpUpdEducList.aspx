@@ -2,7 +2,7 @@
 
 <asp:Content id="Content1" contentplaceholderid="cphBody" runat="server">
 
-<uc:Tab runat="server" ID="Tab">
+<uc:TabSelf runat="server" ID="Tab">
     <Header>
         <center>
             <asp:Image runat="server" ID="imgPhoto" Width="100" Height="110" />
@@ -74,7 +74,7 @@
     
     </Content>    
 
-</uc:Tab>
+</uc:TabSelf>
 <asp:Button ID="Button1" runat="server" style="display:none" />
     <ajaxtoolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1" PopupControlID="Panel1" CancelControlID="lnkClose" BackgroundCssClass="modalBackground" />
     <asp:Panel id="Panel1" runat="server" CssClass="entryPopup" style="display:none">

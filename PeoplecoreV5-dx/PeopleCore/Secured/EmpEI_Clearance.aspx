@@ -41,7 +41,7 @@
                         <div class="table-responsive">
                             <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="grdDX" KeyFieldName="EmployeeEIClearanceMainNo" OnCustomButtonCallback="lnkEditMain_Click">
                                 <Columns>
-                                    <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center">
+                                    <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center" Visible ="false">
                                         <DataItemTemplate>
                                             <asp:LinkButton runat="server" ID="lnkEditMain" CssClass="fa fa-pencil" Font-Size="Medium" CommandArgument='<%# Bind("EmployeeEIClearanceMainNo") %>' OnClick="lnkEditMain_Click" />
                                         </DataItemTemplate>

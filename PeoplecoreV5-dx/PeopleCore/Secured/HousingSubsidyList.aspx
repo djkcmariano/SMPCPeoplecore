@@ -35,7 +35,7 @@
                                     <dx:GridViewDataTextColumn FieldName="HousingClassDesc" Caption="Housing Classification" />
                                     <dx:GridViewDataTextColumn FieldName="EmployeeClassDesc" Caption="Employee Classification" />
                                     <dx:GridViewDataTextColumn FieldName="Effectivity" Caption="Effective Date" />
-                                    <dx:GridViewDataTextColumn FieldName="Amount" Caption="Amount" />
+                                    <dx:GridViewDataTextColumn FieldName="Amount" Caption="Subsidy" />
                                     <dx:GridViewDataTextColumn FieldName="EncodeBy" Caption="Encode By" />
                                     <dx:GridViewDataTextColumn FieldName="EncodeDate" Caption="Encode Date" />
                                     <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" Caption="Select" /> 
@@ -126,7 +126,7 @@
                     <asp:Textbox ID="txtAmount" runat="server" CssClass="form-control number" />
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display:none;">
                 <label class="col-md-4 control-label has-space">Company Name :</label>
                     <div class="col-md-7">
                         <asp:Dropdownlist ID="cboPayLocNo" runat="server" CssClass=" number form-control" >

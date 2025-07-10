@@ -39,6 +39,8 @@ Partial Class Secured_EmpEI_Clearance
             lnkDeleteMain.Visible = True
             lnkPost.Visible = False
             lnkCleared.Visible = True
+            lnkAdd.Visible = True
+            lnkDelete.Visible = True
         ElseIf Generic.ToInt(cboTabNo.SelectedValue) = 3 Then
             lnkDeleteMain.Visible = True
             lnkPost.Visible = False
@@ -50,6 +52,9 @@ Partial Class Secured_EmpEI_Clearance
             lnkDeleteMain.Visible = True
             lnkPost.Visible = True
             lnkCleared.Visible = False
+
+            lnkAdd.Visible = True
+            lnkDelete.Visible = True
         End If
 
         dt = SQLHelper.ExecuteDataTable("EEmployeeEIClearanceMain_Web", UserNo.ToString(), Generic.ToInt(cboTabNo.SelectedValue).ToString(), PayLocNo.ToString())

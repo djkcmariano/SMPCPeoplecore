@@ -64,6 +64,19 @@
                         <ajaxToolkit:FilteredTextBoxExtender runat="server" ID="ftb1" FilterMode="ValidChars" ValidChars="1234567890-" TargetControlID="txtBankAccountNo" />
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label has-space">Family Allotment Bank Type :</label>
+                    <div class="col-md-6">
+                        <asp:DropdownList ID="cboFamBankTypeNo" runat="server" CssClass="form-control" DataMember="EBankType" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label has-space">Family Allotment Bank Account No. :</label>
+                    <div class="col-md-6">
+                        <asp:TextBox runat="server" ID="txtFamBankAccountNo" CssClass="form-control" />
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label has-space">SSS No. :</label>
                     <div class="col-md-2">

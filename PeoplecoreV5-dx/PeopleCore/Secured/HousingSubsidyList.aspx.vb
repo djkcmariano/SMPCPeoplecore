@@ -133,7 +133,7 @@ Partial Class Secured_HousingSubsidyList
             Dim EFfectivity As String = Generic.ToStr(Me.txtEffectivity.Text)
             Dim Amount As Double = Generic.ToDbl(Me.txtAmount.Text)
 
-            If SQLHelper.ExecuteNonQuery("EHousingSubsidy_WebSave", UserNo, tno, HousingClassNo, EmployeeClassNo, EFfectivity, Amount, Generic.ToInt(cboPayLocNo.SelectedValue)) > 0 Then
+            If SQLHelper.ExecuteNonQuery("EHousingSubsidy_WebSave", UserNo, tno, HousingClassNo, EmployeeClassNo, EFfectivity, Amount, PayLocNo) > 0 Then
                 Retval = True
             Else
                 Retval = False
