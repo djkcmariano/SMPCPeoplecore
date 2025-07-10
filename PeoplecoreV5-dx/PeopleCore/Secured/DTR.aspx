@@ -32,6 +32,9 @@
                                     <asp:LinkButton runat="server" ID="lnkProcess" OnClick="lnkProcess_Click" Text="Process" CssClass="control-primary" />
                                 </li>
                                 <li>
+                                    <asp:LinkButton runat="server" ID="lnkProcessLogs" OnClick="lnkProcessLogs_Click" Text="Download Logs" CssClass="control-primary" />
+                                </li>
+                                <li>
                                     <asp:LinkButton runat="server" ID="lnkProcessDisc" OnClick="lnkProcessDisc_Click" Text="Process Discrepancy" CssClass="control-primary" Visible="false" />
                                 </li>
                                 <li>
