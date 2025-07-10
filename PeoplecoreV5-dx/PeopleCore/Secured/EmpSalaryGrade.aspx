@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" Theme="PCoreStyle" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="EmpSalaryLevel.aspx.vb" Inherits="Secured_EmpSalaryLevel" %>
+﻿<%@ Page Title="" Language="VB" Theme="PCoreStyle" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="EmpSalaryGrade.aspx.vb" Inherits="Secured_EmpSalaryGrade" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphBody" Runat="Server">    
  <br />
@@ -46,6 +46,7 @@
                                     <dx:GridViewDataTextColumn FieldName="Rata" Caption="RA" PropertiesTextEdit-DisplayFormatString="{0:N2}"  Visible="false"/>
                                     <dx:GridViewDataTextColumn FieldName="TA" Caption="TA" PropertiesTextEdit-DisplayFormatString="{0:N2}" Visible="false" /> 
                                     <dx:GridViewDataCheckColumn FieldName="IsNoOT" Caption="Not Entitled for OT" /> 
+                                    <dx:GridViewDataCheckColumn FieldName="IsNoNP" Caption="Not Entitled for NP" /> 
                                     <dx:GridViewDataTextColumn FieldName="EncodeBy" Caption="Encoded By" /> 
                                     <dx:GridViewDataTextColumn FieldName="EncodeDate" Caption="Encoded Date" /> 
                                     <dx:GridViewDataTextColumn FieldName="ModifiedBy" Caption="Last Modified By" Visible="false"/> 
@@ -137,9 +138,15 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">&nbsp;</label>
                 <div class="col-md-7">
-                        <asp:CheckBox runat="server" ID="txtIsNoOT" Text="&nbsp;Check here if not entitled for overtime." />                        
-                    </div>
-            </div
+                     <asp:CheckBox runat="server" ID="txtIsNoOT" Text="&nbsp;Check here if not entitled for overtime." />                        
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">&nbsp;</label>
+                <div class="col-md-7">
+                     <asp:CheckBox runat="server" ID="txtIsNoNP" Text="&nbsp;Check here if not entitled for NP." />                        
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">&nbsp;</label>
                 <div class="col-md-7">

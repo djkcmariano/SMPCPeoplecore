@@ -273,6 +273,7 @@ Partial Class Secured_DTR
             Next
 
             '//validate start here
+            ' Disable DTR Processing during Auto Job Hours
             Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
             Dim dtx As New DataTable
             dtx = SQLHelper.ExecuteDataTable("EDTR_WebProcessValidate", UserNo, ViewState("Id"), PayLocNo)
@@ -282,7 +283,6 @@ Partial Class Secured_DTR
                 messagedialog = Generic.ToStr(rowx("MessageDialog"))
                 alerttype = Generic.ToStr(rowx("AlertType"))
             Next
-
             If invalid = True Then
                 MessageBox.Alert(messagedialog, alerttype, Me)
                 Exit Sub
