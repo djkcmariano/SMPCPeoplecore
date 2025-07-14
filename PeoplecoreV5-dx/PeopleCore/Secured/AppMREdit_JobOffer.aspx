@@ -72,7 +72,7 @@
                             <div class="table-responsive">
                                 <mcn:DataPagerGridView ID="grdMain" runat="server" AllowSorting="true" OnSorting="grdMain_Sorting" OnPageIndexChanging="grdMain_PageIndexChanging" DataKeyNames="MRHiredMassNo, Fullname, IsEnabled">
                                     <Columns>                                                                        
-                                    <asp:TemplateField>
+                                    <asp:TemplateField Visible="false">
                                         <ItemTemplate>
                                             <asp:ImageButton ID="btnEdit" runat="server" CausesValidation="false" SkinID="grdEditbtn" CssClass="cancel" OnClick="btnEdit_Click" CommandArgument='<%# Bind("MRHiredMassNo") %>' />                                           
                                         </ItemTemplate>
@@ -98,15 +98,15 @@
                                             <asp:LinkButton runat="server" ID="lnk" Text='<%# Bind("Fullname") %>' CommandArgument='<%# Eval("ID") & "|" & Eval("IsApplicant") & "|" & Eval("Fullname") %>' OnClick="lnk_Click" />
                                         </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Left" />
-                                        <HeaderStyle HorizontalAlign="Left" Width="30%" />
+                                        <HeaderStyle HorizontalAlign="Left" Width="10%" />
                                     </asp:TemplateField>  
                                     
-                                    <asp:BoundField DataField="PayOffer" HeaderText="Pay Offer" SortExpression="PayOffer" >
+                                    <asp:BoundField DataField="PayOffer" HeaderText="Pay Offer" SortExpression="PayOffer" visible="false">
                                         <ItemStyle HorizontalAlign="Left" />
-                                        <HeaderStyle HorizontalAlign="Left" Width="15%" />
+                                        <HeaderStyle HorizontalAlign="Left" Width="10%" />
                                     </asp:BoundField>
 
-                                    <asp:BoundField DataField="EmployeeRateClassDesc" HeaderText="Rate Class" SortExpression="EmployeeRateClassDesc" >
+                                    <asp:BoundField DataField="EmployeeRateClassDesc" HeaderText="Rate Class" SortExpression="EmployeeRateClassDesc" visible="false">
                                         <ItemStyle HorizontalAlign="Left" />
                                         <HeaderStyle HorizontalAlign="Left" Width="15%" />
                                     </asp:BoundField>
@@ -116,16 +116,20 @@
                                         <HeaderStyle HorizontalAlign="Left" Width="15%" />
                                     </asp:BoundField>--%>
 
-                                   
-                                    <asp:TemplateField HeaderText="Offer Status" HeaderStyle-Width="20%" HeaderStyle-HorizontalAlign ="LEFT"  ItemStyle-HorizontalAlign="left" >
-                                        <ItemTemplate >      
-                                            <asp:DropDownList  CssClass="form-control" ID="cboJobOfferStatNo" Enabled='<%# Bind("IsEnabled") %>'  Text='<%# Bind("JobOfferStatNo") %>' AppendDataBoundItems="True"  runat="server" DataSourceID="ObjectDataSource3" DataTextField="tDesc" DataValueField="tNo">
-                                            </asp:DropDownList><asp:ObjectDataSource ID="ObjectDataSource3" runat="server" SelectMethod="Lookup_JobOfferStat" TypeName="clsLookup">
-                                            </asp:ObjectDataSource>                                       
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" />
-                                        <HeaderStyle HorizontalAlign="Left" Width="20%"/>
-                                    </asp:TemplateField> 
+                                    <asp:BoundField DataField="OfferedByName" HeaderText="Offered By" SortExpression="OfferedByName" HtmlEncode="false" >
+                                         <ItemStyle HorizontalAlign="Left" />
+                                         <HeaderStyle HorizontalAlign="Left" Width="10%" />
+                                     </asp:BoundField>
+ 
+                                     <asp:BoundField DataField="ApproveDisApproveby" HeaderText="Approved By" SortExpression="ApproveDisApproveby" HtmlEncode="false" >
+                                         <ItemStyle HorizontalAlign="Left" />
+                                         <HeaderStyle HorizontalAlign="Left" Width="10%" />
+                                     </asp:BoundField>
+
+                                        <asp:BoundField DataField="ApprovalStatDesc" SortExpression="ApprovalStatDesc" HeaderText="Offer Status" HtmlEncode="false" >
+                                         <ItemStyle HorizontalAlign="Left" />
+                                         <HeaderStyle HorizontalAlign="Left" Width="12%" />
+                                     </asp:BoundField>
 
                                      <%--<asp:TemplateField HeaderText="Form" HeaderStyle-Width="20%" HeaderStyle-HorizontalAlign ="LEFT"  ItemStyle-HorizontalAlign="left" >
                                         <ItemTemplate >      
@@ -135,7 +139,7 @@
                                         <HeaderStyle HorizontalAlign="Left" Width="5%"/>
                                     </asp:TemplateField>--%>
 
-                                    <asp:TemplateField HeaderText="Offer Details" >
+                                    <asp:TemplateField HeaderText="Offer Details" visible="false">
                                         <ItemTemplate >
                                             <asp:ImageButton ID="btnPreview" runat="server" SkinID="grdDetail"  OnClick="lnkView_Click" CausesValidation="false" />                                   
                                         </ItemTemplate>
@@ -143,6 +147,18 @@
                                         <HeaderStyle HorizontalAlign="Center" Width="10%" />
                                     </asp:TemplateField>
 
+                                    <asp:TemplateField HeaderText="View Offer" >
+                                        <ItemTemplate >
+                                            <asp:LinkButton runat="server" ID="lnkForm" CssClass="fa fa-external-link" Font-Size="Medium" CommandArgument='<%# Eval("MRNo") & "|" & Eval("MRHiredMassNo") %>' OnClick="lnkForm_Click" />
+                                        </ItemTemplate>
+                                        <ItemStyle HorizontalAlign="Center" />
+                                        <HeaderStyle HorizontalAlign="Left" Width="8%" />
+                                    </asp:TemplateField>
+
+                                   <asp:BoundField DataField="OnboardDate" HeaderText="Onboard Date" SortExpression="OnboardDate" HtmlEncode="false" >
+                                        <ItemStyle HorizontalAlign="Left" />
+                                        <HeaderStyle HorizontalAlign="Left" Width="10%" />
+                                    </asp:BoundField>
                                     <%--<asp:TemplateField HeaderText="JO Form">
                                     <ItemTemplate>
                                         <asp:LinkButton runat="server" ID="lnkPrint" CssClass="fa fa-print" OnClick="lnkPrint_Click" Font-Size="Medium" OnPreRender="lnkPrint_PreRender" />
@@ -183,11 +199,10 @@
                                     </Fields>
                                 </asp:DataPager>
                             </div>  
-                            
                             <div class="col-md-4 col-md-offset-2">
                                 <!-- Button here btn-group -->
                                 <div class="pull-right">
-                                    <asp:Button ID="btnUpdate" runat="server" CausesValidation="false" cssClass="btn btn-primary" Text="Save" OnClick="btnUpdate_Click"></asp:Button>                                
+                                    <asp:Button ID="btnUpdate" runat="server" CausesValidation="false" cssClass="btn btn-primary" Text="Save" OnClick="btnUpdate_Click" Visible="false"></asp:Button>                                
                                     <asp:Button ID="btnAdd" runat="server" CausesValidation="false" cssClass="btn btn-primary" Text="Add" OnClick="btnAdd_Click"></asp:Button>
                                     <asp:Button ID="btnDelete" runat="server" CausesValidation="false" cssClass="btn btn-default" Text="Delete" UseSubmitBehavior="false" OnClick="btnDelete_Click" />
                                 </div>
@@ -197,13 +212,10 @@
                         </div>                       
                     </div>                   
                 </div>
-
-
-
             </div>
 
 
-            <div class="row">
+            <div class="row" style="display: none;">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">
@@ -390,300 +402,8 @@
 
         </div>    
 
-
-
-        
-        
         <uc:Info runat="server" ID="Info1" />
-        
-        
-        <!-- Add main -->
-        <asp:Button ID="Button1" runat="server" style="display:none" />
-        <ajaxtoolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1" PopupControlID="Panel1" CancelControlID="lnkClose" BackgroundCssClass="modalBackground" />
-        <asp:Panel id="Panel1" runat="server" CssClass="entryPopup2">
-            <fieldset class="form" id="fsMain">                    
-                <div class="cf popupheader">
-                    <h4>&nbsp;</h4>
-                    <asp:Linkbutton runat="server" ID="lnkClose" CssClass="fa fa-times" ToolTip="Close" />&nbsp;<asp:Linkbutton runat="server" ID="lnkSave" OnClick="lnkSave_Click" CssClass="fa fa-floppy-o submit lnkSave" ToolTip="Save" />
-                </div>                                           
-                <div class="entryPopupDetl2 form-horizontal">                        
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-space">Applicant Type :</label>
-                        <div class="col-md-7">
-                            <asp:DropDownList runat="server" ID="cboHiringAlternativeNo" CssClass="form-control" onchange="SetContextKey()" OnSelectedIndexChanged="cboHiringAlternativeNo_SelectedIndexChanged" AutoPostBack="true" >
-                                <asp:ListItem Text="External Applicant" Value="1" Selected="True" />
-                                <asp:ListItem Text="Internal Applicant" Value="0" />
-                            </asp:DropDownList>
-                            <asp:HiddenField runat="server" ID="hidTransNo" />
-                            <script type="text/javascript">
-                                function SetContextKey() {
-                                    var e = document.getElementById('<%= cboHiringAlternativeNo.ClientID %>');
-                                    var str = e.options[e.selectedIndex].value + '|' + document.getElementById('<%= hidTransNo.ClientID %>').value;
-                                    $find('<%= AutoCompleteExtender1.ClientID %>').set_contextKey(str);
-                                }
-                            </script>
-                        </div>
-                    </div>                                        
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Name :</label>
-                        <div class="col-md-7">
-                            
-                            <asp:TextBox runat="server" ID="txtFullname" CssClass="form-control required" style="display:inline-block;" placeholder="Type here..." /> 
-                            <asp:HiddenField runat="server" ID="hidID" />
-                            <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server"  
-                            TargetControlID="txtFullname" MinimumPrefixLength="2" 
-                            CompletionInterval="500" ServiceMethod="ApplicantType" ServicePath="~/asmx/WebService.asmx"
-                            CompletionListCssClass="autocomplete_completionListElement" 
-                            CompletionListItemCssClass="autocomplete_listItem" 
-                            CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
-                            OnClientItemSelected="getID" FirstRowSelected="true" UseContextKey="true" />
-                            
-                            <script type="text/javascript">
-                                function Split(obj, index) {
-                                    var items = obj.split("|");
-                                    for (i = 0; i < items.length; i++) {
-                                        if (i == index) {
-                                            return items[i];
-                                        }
-                                    }
-                                }
-
-                                function getID(source, eventArgs) {
-                                    document.getElementById('<%= hidID.ClientID %>').value = Split(eventArgs.get_value(), 0);
-                                }
-                            </script>
-
-                        </div> 
-                    </div> 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Pay Offer :</label>
-                        <div class="col-md-7">
-                            <asp:TextBox ID="txtPayOffer" runat="server" CssClass="required form-control"></asp:TextBox>
-                            <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender1" runat="server" FilterType="Numbers, Custom" ValidChars="-." TargetControlID="txtPayOffer" />
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Rate Class :</label>
-                        <div class="col-md-7">
-                                <asp:DropdownList ID="cboEmployeeRateClassNo"  runat="server" DataMember="EEmployeeRateClass" CssClass="required form-control">
-                                </asp:DropdownList>
-                         </div>
-                    </div>   
-
-                    <div class="form-group">
-                <label class="col-md-4 control-label has-required">Contract Duration :</label>
-                <div class="col-md-3">
-                    <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control required" Placeholder="From" ></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server"
-                        TargetControlID="txtStartDate"
-                        Format="MM/dd/yyyy" />  
-                                                                          
-                    <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender3" runat="server"
-                        TargetControlID="txtStartDate"
-                        Mask="99/99/9999"
-                        MessageValidatorTip="true"
-                        OnFocusCssClass="MaskedEditFocus"
-                        OnInvalidCssClass="MaskedEditError"
-                        MaskType="Date"
-                        DisplayMoney="Left"
-                        AcceptNegative="Left" 
-                        ErrorTooltipEnabled ="true" 
-                        ClearTextOnInvalid="true"  
-                        />
-                                                                        
-                        <asp:RangeValidator
-                        ID="RangeValidator3"
-                        runat="server"
-                        ControlToValidate="txtStartDate"
-                        ErrorMessage="<b>Please enter valid entry</b>"
-                        MinimumValue="1900-01-01"
-                        MaximumValue="3000-12-31"
-                        Type="Date" Display="None"  />
-                                                                        
-                        <ajaxToolkit:ValidatorCalloutExtender runat="Server" 
-                        ID="ValidatorCalloutExtender6"
-                        TargetControlID="RangeValidator3"
-                        />   
-                </div>
-
-                <%--<label class="col-md-1 control-label">To :</label>--%>
-                <div class="col-md-3">
-                    <asp:TextBox ID="txtEndDate" runat="server"  CssClass="form-control required" Placeholder="To" ></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender4" runat="server"
-                        TargetControlID="txtEndDate"
-                        Format="MM/dd/yyyy" />  
-                                                                          
-                    <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender4" runat="server"
-                        TargetControlID="txtEndDate"
-                        Mask="99/99/9999"
-                        MessageValidatorTip="true"
-                        OnFocusCssClass="MaskedEditFocus"
-                        OnInvalidCssClass="MaskedEditError"
-                        MaskType="Date"
-                        DisplayMoney="Left"
-                        AcceptNegative="Left" 
-                        ErrorTooltipEnabled ="true" 
-                        ClearTextOnInvalid="true"  
-                        />
-                                                                        
-                     <asp:RangeValidator
-                        ID="RangeValidator4"
-                        runat="server"
-                        ControlToValidate="txtEndDate"
-                        ErrorMessage="<b>Please enter valid entry</b>"
-                        MinimumValue="1900-01-01"
-                        MaximumValue="3000-12-31"
-                        Type="Date" Display="None"  />
-
-                        <ajaxToolkit:ValidatorCalloutExtender runat="Server" 
-                        ID="ValidatorCalloutExtender2"
-                        TargetControlID="RangeValidator4"
-                        />       
-
-                </div>
-            </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-space">Remarks :</label>
-                        <div class="col-md-7">
-                            <asp:TextBox ID="txtJobOfferRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3"></asp:TextBox>
-                        </div>
-                    </div>
-
-                <div class="form-group">
-                <label class="col-md-4 control-label has-space">JO Date :</label>
-                <div class="col-md-3">
-                    <asp:TextBox ID="txtJOEncodeDate" runat="server" CssClass="form-control" Placeholder="JO Start Date" ></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server"
-                        TargetControlID="txtJOEncodeDate"
-                        Format="MM/dd/yyyy" />  
-                                                                          
-                    <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server"
-                        TargetControlID="txtJOEncodeDate"
-                        Mask="99/99/9999"
-                        MessageValidatorTip="true"
-                        OnFocusCssClass="MaskedEditFocus"
-                        OnInvalidCssClass="MaskedEditError"
-                        MaskType="Date"
-                        DisplayMoney="Left"
-                        AcceptNegative="Left" 
-                        ErrorTooltipEnabled ="true" 
-                        ClearTextOnInvalid="true"  
-                        />
-                                                                        
-                        <asp:RangeValidator
-                        ID="RangeValidator1"
-                        runat="server"
-                        ControlToValidate="txtJOEncodeDate"
-                        ErrorMessage="<b>Please enter valid entry</b>"
-                        MinimumValue="1900-01-01"
-                        MaximumValue="3000-12-31"
-                        Type="Date" Display="None"  />
-                                                                        
-                        <ajaxToolkit:ValidatorCalloutExtender runat="Server" 
-                        ID="ValidatorCalloutExtender1"
-                        TargetControlID="RangeValidator3"
-                        />   
-                </div>
-
-                <div class="col-md-3">
-                    <asp:TextBox ID="txtJOEndDate" runat="server"  CssClass="form-control" Placeholder="JO End Date" ></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server"
-                        TargetControlID="txtJOEndDate"
-                        Format="MM/dd/yyyy" />  
-                                                                          
-                    <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender2" runat="server"
-                        TargetControlID="txtJOEndDate"
-                        Mask="99/99/9999"
-                        MessageValidatorTip="true"
-                        OnFocusCssClass="MaskedEditFocus"
-                        OnInvalidCssClass="MaskedEditError"
-                        MaskType="Date"
-                        DisplayMoney="Left"
-                        AcceptNegative="Left" 
-                        ErrorTooltipEnabled ="true" 
-                        ClearTextOnInvalid="true"  
-                        />
-                                                                        
-                     <asp:RangeValidator
-                        ID="RangeValidator2"
-                        runat="server"
-                        ControlToValidate="txtJOEndDate"
-                        ErrorMessage="<b>Please enter valid entry</b>"
-                        MinimumValue="1900-01-01"
-                        MaximumValue="3000-12-31"
-                        Type="Date" Display="None"  />
-
-                        <ajaxToolkit:ValidatorCalloutExtender runat="Server" 
-                        ID="ValidatorCalloutExtender3"
-                        TargetControlID="RangeValidator4"
-                        />       
-
-                    </div>
-                 </div>
-
-                    <br /><br />
-                </div>                   
-            </fieldset>
-        </asp:Panel>
-
-
-
-        <asp:Button ID="btnShowDetl" runat="server" style="display:none" />
-        <ajaxtoolkit:ModalPopupExtender ID="mdlDetl" runat="server" TargetControlID="btnShowDetl" PopupControlID="pnlPopupDetl" CancelControlID="lnkCloseDetl" BackgroundCssClass="modalBackground" ></ajaxtoolkit:ModalPopupExtender>
-        <asp:Panel id="pnlPopupDetl" runat="server" CssClass="entryPopup2">
-            <fieldset class="form" id="fsDetl">
-                 <div class="cf popupheader">
-                      <h4>&nbsp;</h4>
-                      <asp:Linkbutton runat="server" ID="lnkCloseDetl" CssClass="fa fa-times" ToolTip="Close" />&nbsp;<asp:Linkbutton runat="server" ID="lnkSaveDetl" OnClick="btnSaveDetl_Click" CssClass="fa fa-floppy-o submit fsDetl lnkSaveDetl" ToolTip="Save" />
-                 </div>
-                <div  class="entryPopupDetl2 form-horizontal">
-
-                    <div class="form-group" style="display:none;">
-                        <label class="col-md-4 control-label has-space">Detail No. :</label>
-                        <div class="col-md-7">
-                                <asp:TextBox ID="txtMROfferNo"  runat="server" Enabled="false" ReadOnly="true" CssClass="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Allowance Type :</label>
-                        <div class="col-md-7">
-                                <asp:DropdownList ID="cboPayIncomeTypeNo"  runat="server" CssClass="required form-control">
-                                </asp:DropdownList>
-                         </div>
-                    </div>    
-      
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Amount :</label>
-                        <div class="col-md-3">
-                                <asp:TextBox ID="txtAmount" runat="server" CssClass="required form-control"></asp:TextBox>
-                                <ajaxToolkit:FilteredTextBoxExtender ID="FilteredTextBoxExtender2" runat="server" FilterType="Numbers, Custom" ValidChars="-." TargetControlID="txtAmount" />
-                         </div>
-                    </div>        
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-space"></label>
-                        <div class="col-md-8">
-                            <asp:CheckBox ID="txtIsPerDay" runat="server" Text="&nbsp; Amount is per day" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label has-required">Payroll Schedule :</label>
-                        <div class="col-md-7">
-                            <asp:DropDownList ID="cboPayScheduleNo" runat="server" CssClass="form-control required" DataMember="EPaySchedule">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <br />
-                    
-                </div>
-                <div class="cf popupfooter">
-                 </div> 
-            </fieldset>
-        </asp:Panel>
-       
-       
-       
+               
 <asp:Button ID="btnShowBen" runat="server" style="display:none" />
     <ajaxtoolkit:ModalPopupExtender ID="mdlShowBen" runat="server" TargetControlID="btnShowBen" PopupControlID="pnlPopupBen" CancelControlID="imgClosed" BackgroundCssClass="modalBackground" >
     </ajaxtoolkit:ModalPopupExtender>
@@ -861,6 +581,76 @@
              </fieldset>
     </asp:Panel>
                  
+        <%--Add Main Form--%>
+
+     <asp:Button ID="Button1" runat="server" style="display:none" />
+     <ajaxtoolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="Button1" PopupControlID="Panel1" CancelControlID="lnkClose" BackgroundCssClass="modalBackground" />
+     <asp:Panel id="Panel1" runat="server" CssClass="entryPopup2">
+         <fieldset class="form" id="fsMain">
+             <div class="cf popupheader">
+                 <h4>
+                     &nbsp;</h4>
+                 <asp:Linkbutton runat="server" ID="lnkClose" CssClass="fa fa-times" ToolTip="Close" />
+                 &nbsp;<asp:Linkbutton runat="server" ID="lnkSave" OnClick="lnkSave_Click" CssClass="fa fa-floppy-o submit lnkSave" ToolTip="Save" />
+             </div>
+             <br />
+             <div class="entryPopupDetl2 form-horizontal">
+                 <div class="form-group">
+                     <label class="col-md-4 control-label has-space">
+                     Applicant Type :</label>
+                     <div class="col-md-7">
+                         <asp:DropDownList runat="server" ID="cboHiringAlternativeNo" CssClass="form-control" onchange="SetContextKey()">
+                             <asp:ListItem Text="External Applicant" Value="1" Selected="True" />
+                             <asp:ListItem Text="Internal Applicant" Value="0" />
+                         </asp:DropDownList>
+                         <asp:HiddenField runat="server" ID="hidTransNo" />
+                         <script type="text/javascript">
+
+
+                             function SetContextKey() {
+                                 var e = document.getElementById('<%= cboHiringAlternativeNo.ClientID %>');
+                             var str = e.options[e.selectedIndex].value + '|' + document.getElementById('<%= hidTransNo.ClientID %>').value;
+                             $find('<%= AutoCompleteExtender1.ClientID %>').set_contextKey(str);
+                         }
+                         </script>
+                     </div>
+                 </div>
+                 <div class="form-group">
+                     <label class="col-md-4 control-label has-required">
+                     Name :</label>
+                     <div class="col-md-7">
+                         <asp:TextBox runat="server" ID="txtFullname" CssClass="form-control required" style="display:inline-block;" placeholder="Type here..." />
+                         <asp:HiddenField runat="server" ID="hidID"/>
+                         <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server"  
+                     TargetControlID="txtFullname" MinimumPrefixLength="2" 
+                     CompletionInterval="500" ServiceMethod="ApplicantType" ServicePath="~/asmx/WebService.asmx"
+                     CompletionListCssClass="autocomplete_completionListElement" 
+                     CompletionListItemCssClass="autocomplete_listItem" 
+                     CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
+                     OnClientItemSelected="getID" FirstRowSelected="true" UseContextKey="true" />
+                         <script type="text/javascript">
+
+                         function Split(obj, index) {
+                             var items = obj.split("|");
+                             for (i = 0; i < items.length; i++) {
+                                 if (i == index) {
+                                     return items[i];
+                                 }
+                             }
+                         }
+                         function getID(source, eventArgs) {
+                             document.getElementById('<%= hidID.ClientID %>').value = Split(eventArgs.get_value(), 0);
+                             }
+                         </script>
+                     </div>
+                 </div>
+             </div>
+             <br />
+             <br />
+         </fieldset>
+     </asp:Panel>
+            
+        <%--End Add Main Form--%>
         </Content>
     </uc:Tab>
 

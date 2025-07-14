@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="AppMRList.aspx.vb" Inherits="Secured_AppMRList" Theme="PCoreStyle" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="AppMRList.aspx.vb" Inherits="Secured_AppMRList" Theme="PCoreStyle" Async="true"%>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="cphBody" Runat="Server">
 <br />
@@ -17,7 +17,8 @@
                         <li><asp:LinkButton runat="server" ID="lnkApproved" OnClick="lnkApproved_Click" Text="Approve" CssClass="control-primary" /></li>
                         <li><asp:LinkButton runat="server" ID="lnkDisapproved" OnClick="lnkDisapproved_Click" Text="Disapprove" CssClass="control-primary" /></li>
                         <li><asp:LinkButton runat="server" ID="lnkPost" OnClick="lnkPost_Click" Text="Post" CssClass="control-primary" /></li>
-                        <li><asp:LinkButton runat="server" ID="lnkSync" OnClick="lnkSnyc_Click" Text="Sync" CssClass="control-primary" /></li>
+                        <li><asp:LinkButton runat="server" ID="lnkSync" OnClick="lnkSnyc_Click" Text="Sync" CssClass="control-primary" Visible="false" /></li>
+                        <li><asp:LinkButton runat="server" ID="lnkSyncAPI" OnClick="lnkSnycAPI_Click" Text="Sync" CssClass="control-primary" /></li>
                         <li><asp:LinkButton runat="server" ID="lnkAdd" OnClick="lnkAdd_Click" Text="Add" CssClass="control-primary" /></li>
                         <li><asp:LinkButton runat="server" ID="lnkDelete" OnClick="lnkDelete_Click" Text="Delete" CssClass="control-primary" /></li>
                         <li><asp:LinkButton runat="server" ID="lnkExport" OnClick="lnkExport_Click" Text="Export" CssClass="control-primary" /></li> 

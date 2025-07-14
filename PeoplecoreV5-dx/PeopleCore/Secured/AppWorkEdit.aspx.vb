@@ -1,4 +1,8 @@
-﻿Imports clsLib
+﻿Imports AjaxControlToolkit
+Imports clsLib
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 Imports System.Data
 
 Partial Class Secured_AppWorkEdit
@@ -21,7 +25,7 @@ Partial Class Secured_AppWorkEdit
         Try
             Dim dt As DataTable
             dt = SQLHelper.ExecuteDataTable("EApplicantExpe_WebOne", UserNo, id)
-            For Each row As DataRow In dt.Rows                
+            For Each row As DataRow In dt.Rows
                 Generic.PopulateData(Me, "Panel1", dt)
                 Dim IsWithOut As Boolean = Generic.ToBol(row("IsWithOut"))
                 If IsWithOut = True Then
@@ -38,11 +42,11 @@ Partial Class Secured_AppWorkEdit
                     If IsWithOut = False Then
                         txtToDate.CssClass = "form-control required"
                         txtToDate.Enabled = True
-                    Else                        
+                    Else
                         txtToDate.Enabled = False
                         cboExpeTypeNo.Enabled = False
                     End If
-                    
+
                 End If
 
             Next
@@ -87,64 +91,7 @@ Partial Class Secured_AppWorkEdit
     End Sub
 
     Protected Sub lnkSave_Click(sender As Object, e As EventArgs)
-        'Dim ExpeTypeNo As Integer = 0
-        'Dim NoOfYear As Double = 0
-        'Dim CurrentSalary As Double = Generic.ToDec(Me.txtCurrentSalary.Text)
-        'Dim EmployeeStatNo As Integer = Generic.ToInt(Me.cboEmployeeStatNo.SelectedValue)
-        'Dim Accredited As Double = 0
-        'Dim LWOP As Double = 0
-        'Dim FromDay As Integer = Generic.ToInt(cboFromDay.SelectedValue)
-        'Dim FromMonth As Integer = Generic.ToInt(cboFromMonth.SelectedValue)
-        'Dim FromYear As Integer = Generic.ToInt(txtFromYear.Text)
-        'Dim ToDay As Integer = Generic.ToInt(cboToDay.SelectedValue)
-        'Dim ToMonth As Integer = Generic.ToInt(cboToMonth.SelectedValue)
-        'Dim ToYear As Integer = Generic.ToInt(txtToYear.Text)
-        'Dim IsOtherExpe As Integer = Generic.ToInt(txtIsOtherExpe.Checked)
-        'Dim OtherExpe As String = Generic.ToStr(txtOtherExpe.Text)
 
-        'Dim RetVal As Boolean = False
-        'Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
-        'Dim dtx As New DataTable, dt As New DataTable, error_num As Integer = 0, error_message As String = ""
-        'dtx = SQLHelper.ExecuteDataTable("EApplicantExpe_WebValidate", UserNo, Generic.ToInt(txtApplicantExpeNo.Text), TransNo, Me.txtExpeComp.Text.ToString, ExpeTypeNo, Me.txtPosition.Text, "", "", Me.txtRemarks.Text.ToString, NoOfYear, CurrentSalary, EmployeeStatNo, 0, Accredited, LWOP, Me.txtExpeCompAdd.Text.ToString, Me.txtCompPhone.Text.ToString, "", Me.txtDuties.Text.ToString, "", 0, txtIndustry.Text, FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe)
-
-        'For Each rowx As DataRow In dtx.Rows
-        '    invalid = Generic.ToBol(rowx("tProceed"))
-        '    messagedialog = Generic.ToStr(rowx("xMessage"))
-        '    alerttype = Generic.ToStr(rowx("AlertType"))
-        'Next
-
-        'If invalid = True Then
-        '    MessageBox.Alert(messagedialog, alerttype, Me)
-        '    ModalPopupExtender1.Show()
-        '    Exit Sub
-        'End If
-
-        ''If SQLHelper.ExecuteNonQuery("EApplicantExpe_WebSave", UserNo, Generic.ToInt(txtApplicantExpeNo.Text), TransNo, Me.txtExpeComp.Text.ToString, ExpeTypeNo, Me.txtPosition.Text, "", "", Me.txtRemarks.Text.ToString, NoOfYear, CurrentSalary, EmployeeStatNo, 0, Accredited, LWOP, Me.txtExpeCompAdd.Text.ToString, Me.txtCompPhone.Text.ToString, "", Me.txtDuties.Text.ToString, "", 0, txtIndustry.Text, FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe) > 0 Then
-        ''    RetVal = True
-        ''Else
-        ''    RetVal = False
-        ''End If
-
-        'If SQLHelper.ExecuteNonQuery("EApplicantExpe_WebSave", UserNo, Generic.ToInt(txtApplicantExpeNo.Text), _
-        '                           TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text, _
-        '                           txtRemarks.Text, NoOfYear, CurrentSalary, EmployeeStatNo, Generic.ToInt(chkIsGov.Checked), Accredited, LWOP, _
-        '                           txtExpeCompAdd.Text, txtCompPhone.Text, txtImmediateSuperior.Text, Me.txtDuties.Text.ToString, txtReasonsForLeaving.Text, 0, txtIndustry.Text, _
-        '                           FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe, txtSalaryLevel.Text, txtAccomplishment.Text, txtAllowances.Text, txtIndustry.Text, Generic.ToInt(Me.chkIsPresent.Checked)) > 0 Then
-
-        '    'If SQLHelper.ExecuteNonQuery("EApplicantExpe_WebSave", UserNo, Generic.ToInt(txtApplicantExpeNo.Text), _
-        '    '                           TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text, _
-        '    '                           txtRemarks.Text, NoOfYear, CurrentSalary, EmployeeStatNo, chkIsGov.Checked, Accredited, LWOP, _
-        '    '                           txtExpeCompAdd.Text, txtCompPhone.Text, txtImmediateSuperior.Text, Me.txtDuties.Text.ToString, txtReasonsForLeaving.Text, 0, txtIndustry.Text, _
-        '    '                           FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe, txtSalaryLevel.Text, txtAccomplishment.Text, txtAllowances.Text, txtIndustry.Text, Me.chkIsPresent.Checked) > 0 Then
-        '    RetVal = True
-        'Else
-        '    RetVal = False
-        'End If
-
-        'If RetVal = True Then
-        '    PopulateGrid()
-        '    MessageBox.Success(MessageTemplate.SuccessSave, Me)
-        'End If
         Dim RetVal As Boolean = False
         Dim ApplicantExpeNo As Integer = Generic.ToInt(txtApplicantExpeNo.Text)
         Dim ExpeTypeNo As Integer = Generic.ToInt(cboExpeTypeNo.SelectedValue)
@@ -166,10 +113,10 @@ Partial Class Secured_AppWorkEdit
         Dim IndustryNo As Integer = Generic.ToInt(cboIndustryNo.SelectedValue)
         Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
         Dim dtx As New DataTable, dt As New DataTable, error_num As Integer = 0, error_message As String = ""
-        dtx = SQLHelper.ExecuteDataTable("EApplicantExpe_WebValidate", UserNo, ApplicantExpeNo, _
-                                   TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text, _
-                                   txtRemarks.Text, NoOfYear, CurrentSalary, ApplicantStatNo, chkIsGov.Checked, Accredited, LWOP, _
-                                   txtExpeCompAdd.Text, txtCompPhone.Text, "", Me.txtDuties.Text.ToString, "", 0, txtIndustry.Text, _
+        dtx = SQLHelper.ExecuteDataTable("EApplicantExpe_WebValidate", UserNo, ApplicantExpeNo,
+                                   TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text,
+                                   txtRemarks.Text, NoOfYear, CurrentSalary, ApplicantStatNo, chkIsGov.Checked, Accredited, LWOP,
+                                   txtExpeCompAdd.Text, txtCompPhone.Text, "", Me.txtDuties.Text.ToString, "", 0, txtIndustry.Text,
                                    FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe)
 
         For Each rowx As DataRow In dtx.Rows
@@ -184,24 +131,64 @@ Partial Class Secured_AppWorkEdit
             Exit Sub
         End If
 
-        If SQLHelper.ExecuteNonQuery("EApplicantExpe_WebSave", UserNo, ApplicantExpeNo, _
-                                   TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text, _
-                                   txtRemarks.Text, NoOfYear, CurrentSalary, ApplicantStatNo, Generic.ToInt(chkIsGov.Checked), Accredited, LWOP, _
-                                   txtExpeCompAdd.Text, txtCompPhone.Text, txtImmediateSuperior.Text, Me.txtDuties.Text.ToString, txtReasonsForLeaving.Text, 0, txtIndustry.Text, _
-                                   FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe, txtSalaryLevel.Text, txtAccomplishment.Text, txtAllowances.Text, IndustryNo, Generic.ToInt(Me.chkIsPresent.Checked), Generic.ToBol(chkIsWithOut.Checked), txtRatings.Text) > 0 Then
-            RetVal = True
-            'VerifyTab(ApplicantNo)
-        Else
-            RetVal = False
-        End If
+        'If SQLHelper.ExecuteNonQuery("EApplicantExpe_WebSave", UserNo, ApplicantExpeNo, _
+        '                           TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text, _
+        '                           txtRemarks.Text, NoOfYear, CurrentSalary, ApplicantStatNo, Generic.ToInt(chkIsGov.Checked), Accredited, LWOP, _
+        '                           txtExpeCompAdd.Text, txtCompPhone.Text, txtImmediateSuperior.Text, Me.txtDuties.Text.ToString, txtReasonsForLeaving.Text, 0, txtIndustry.Text, _
+        '                           FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe, txtSalaryLevel.Text, txtAccomplishment.Text, txtAllowances.Text, IndustryNo, Generic.ToInt(Me.chkIsPresent.Checked), Generic.ToBol(chkIsWithOut.Checked), txtRatings.Text) > 0 Then
+        '    RetVal = True
+        '    'VerifyTab(ApplicantNo)
+        'Else
+        '    RetVal = False
+        'End If
+
+        'If RetVal = True Then
+        '    PopulateGrid()
+        '    MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        'Else
+        '    MessageBox.Warning(MessageTemplate.ErrorSave, Me)
+        'End If
+
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantExpe_WebSave", UserNo, ApplicantExpeNo,
+                                   TransNo, txtExpeComp.Text, ExpeTypeNo, txtPosition.Text, txtFromDate.Text, txtToDate.Text,
+                                   txtRemarks.Text, NoOfYear, CurrentSalary, ApplicantStatNo, Generic.ToInt(chkIsGov.Checked), Accredited, LWOP,
+                                   txtExpeCompAdd.Text, txtCompPhone.Text, txtImmediateSuperior.Text, Me.txtDuties.Text.ToString, txtReasonsForLeaving.Text, 0, txtIndustry.Text,
+                                   FromDay, FromMonth, FromYear, ToDay, ToMonth, ToYear, IsOtherExpe, OtherExpe, txtSalaryLevel.Text, txtAccomplishment.Text, txtAllowances.Text, IndustryNo, Generic.ToInt(Me.chkIsPresent.Checked), Generic.ToBol(chkIsWithOut.Checked), txtRatings.Text)
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
+
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicantExpe"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantExpeNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicantExpe")
+                RetVal = True
+            Else
+                RetVal = False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
 
         If RetVal = True Then
             PopulateGrid()
             MessageBox.Success(MessageTemplate.SuccessSave, Me)
         Else
-            MessageBox.Warning(MessageTemplate.ErrorSave, Me)
+            MessageBox.Warning(error_message, Me)
         End If
-
     End Sub
 
     Protected Sub lnkEdit_Click(sender As Object, e As EventArgs)
