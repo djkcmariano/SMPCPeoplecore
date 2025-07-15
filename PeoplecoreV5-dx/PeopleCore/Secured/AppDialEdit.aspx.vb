@@ -1,6 +1,9 @@
 ﻿Imports System.Data
 Imports clsLib
 Imports DevExpress.Web
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 
 Partial Class Secured_EmpDialList
     Inherits System.Web.UI.Page
@@ -116,12 +119,37 @@ Partial Class Secured_EmpDialList
         Dim IsOtherDial As Boolean = Generic.ToBol(txtIsOtherDial.Checked)
         Dim OtherDial As String = Generic.ToStr(txtOtherDial.Text)
 
-        If SQLHelper.ExecuteNonQuery("EApplicantDialect_WebSave", UserNo, ApplicantDialectNo, TransNo, Dialect, 0, Remark, WritingLevel, ReadingLevel, SpeakingLevel, IsOtherDial, OtherDial) > 0 Then
-            Return True
-        Else
-            Return False
-        End If
+        Dim error_message As String = ""
 
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantDialect_WebSave", UserNo, ApplicantDialectNo, TransNo, Dialect, 0, Remark, WritingLevel, ReadingLevel, SpeakingLevel, IsOtherDial, OtherDial)
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
+
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicantDialect"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantRefeNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicantDialect")
+                Return True
+            Else
+                Return False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
     End Function
 
     Private Sub PopulateControls()

@@ -188,8 +188,6 @@ Partial Class Secured_EmpEditInfo
             Dim IsRata As Boolean = Generic.ToBol(chkIsRata.Checked)
             Dim IsTA As Boolean = Generic.ToBol(chkIsTA.Checked)
 
-            Dim FamBankTypeNo As Integer = Generic.ToInt(cboFamBankTypeNo.SelectedValue)
-            Dim FamBankAccountNo As String = Generic.ToStr(txtFamBankAccountNo.Text)
             Dim HousingClassNo As Integer = Generic.ToInt(cboHousingClassNo.SelectedValue)
 
             'Validate Here
@@ -232,7 +230,7 @@ Partial Class Secured_EmpEditInfo
                                          RehireDate, IsUnion, IsUnionOfficer, LocalNo, OrienteeStartDate,
                                          OrienteeEndDate, MinTakeHomePay, ActingPlantillaNo, xPayLocNo,
                                          MembershipTypeNo, MembershipClassNo, MembershipStatNo, txtCompanyMobileNo.Text,
-                                         txtCompanyEmail.Text, PFEE, IsRata, IsTA, txtCompanyTelNo.Text, txtFaxNo.Text, OTParameterNo, HDMF2No, FamBankTypeNo, FamBankAccountNo, HousingClassNo) > 0 Then
+                                         txtCompanyEmail.Text, PFEE, IsRata, IsTA, txtCompanyTelNo.Text, txtFaxNo.Text, OTParameterNo, HDMF2No) > 0 Then
                 Retval = True
             Else
                 Retval = False

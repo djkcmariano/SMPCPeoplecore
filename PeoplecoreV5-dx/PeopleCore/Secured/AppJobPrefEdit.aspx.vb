@@ -1,10 +1,13 @@
-﻿Imports clsLib
-Imports System.Data
+﻿Imports System.Data
+Imports clsLib
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 Partial Class Secured_AppJobPrefEdit
     Inherits System.Web.UI.Page
     Dim TransNo As Int64
     Dim IsEnabled As Boolean = False
-    Dim UserNo As Int64    
+    Dim UserNo As Int64
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs)
         If SaveRecord() Then
@@ -43,6 +46,9 @@ Partial Class Secured_AppJobPrefEdit
     End Sub
 
     Protected Function SaveRecord() As Boolean
+
+        Dim error_message As String = ""
+
         Dim IsWT As Integer = IIf(Generic.ToInt(rblIsWT.SelectedValue) = 0, 1, 0)
         Dim IsWTFreq As Integer = IIf(Generic.ToInt(rblIsWT.SelectedValue) = 1, 1, 0)
         Dim IsWTOcc As Integer = IIf(Generic.ToInt(rblIsWT.SelectedValue) = 2, 1, 0)
@@ -69,17 +75,41 @@ Partial Class Secured_AppJobPrefEdit
         Dim Position1 As String = txtPosition1.Text
         Dim Position2 As String = txtPosition2.Text
 
-        If SQLHelper.ExecuteNonQuery("EApplicantCareer_Apl", TransNo, DepNo1, DepNo2, _
-                                   PositionNo, PositionNo1, StartDate, _
-                                   SalaryDesired, VacancySourceNo, xWR, _
-                                   xWTY, xWTF, xWTO, _
-                                   xACE, x1, ExamDate, _
-                                   ExamVenue, RefereBy, xDate, _
-                                   xA, MRNo, IndiAccomplishJob, 0, Position1, Position2, Generic.ToInt(rblIsPreEmpTest.SelectedValue), txtPreEmpTestDate.Text, txtPreEmpTestDeptPos.Text) > 0 Then
-            Return True
-        Else
-            Return False
-        End If
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantCareer_Apl", TransNo, DepNo1, DepNo2,
+                                   PositionNo, PositionNo1, StartDate,
+                                   SalaryDesired, VacancySourceNo, xWR,
+                                   xWTY, xWTF, xWTO,
+                                   xACE, x1, ExamDate,
+                                   ExamVenue, RefereBy, xDate,
+                                   xA, MRNo, IndiAccomplishJob, 0, Position1, Position2, Generic.ToInt(rblIsPreEmpTest.SelectedValue), txtPreEmpTestDate.Text, txtPreEmpTestDeptPos.Text)
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
+
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicant"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicant")
+                Return True
+            Else
+                Return False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
 
     End Function
 
@@ -113,7 +143,7 @@ Partial Class Secured_AppJobPrefEdit
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserNo = Generic.ToInt(Session("OnlineUserNo"))
-        TransNo = Generic.ToInt(Request.QueryString("id"))        
+        TransNo = Generic.ToInt(Request.QueryString("id"))
         AccessRights.CheckUser(UserNo)
         If TransNo = 0 Then
             IsEnabled = True
@@ -122,7 +152,7 @@ Partial Class Secured_AppJobPrefEdit
         End If
 
         If Not IsPostBack Then
-            Generic.PopulateDropDownList(UserNo, Me, "Panel1", 0)            
+            Generic.PopulateDropDownList(UserNo, Me, "Panel1", 0)
             PopulateData()
             PopulateTabHeader()
             lblDisc.Text = Generic.ToStr(SQLHelper.ExecuteScalar("SELECT dbo.EGetDisclaimer()"))

@@ -59,7 +59,7 @@
                                                 <asp:LinkButton runat="server" ID="lnk" Text='<%# Bind("Fullname") %>' CommandArgument='<%# Eval("ID") & "|" & Eval("IsApplicant") & "|" & Eval("Fullname") %>' OnClick="lnk_Click" />
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
-                                        <dx:GridViewDataTextColumn FieldName="ServedDate" Caption="Date Invited" />
+                                        
                                         <dx:GridViewDataTextColumn FieldName="ApplicantTypeDesc" Caption="Applicant Type" />
                                         <dx:GridViewDataTextColumn FieldName="ApplicantStatDesc" Caption="Applicant Status" />
                                         <dx:GridViewDataTextColumn FieldName="ActionStatDesc" Caption="Next Step" />

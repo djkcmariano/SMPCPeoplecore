@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="AppRandomAnsList.aspx.vb" Inherits="Secured_AppRandomAnsList" Theme="PCoreStyle" %>
+﻿<%@ Page Title="" Language="VB" MasterPageFile="~/MasterPage/MasterPage.master" AutoEventWireup="false" CodeFile="AppRandomAnsList.aspx.vb" Inherits="Secured_AppRandomAnsList" Theme="PCoreStyle" Async="true" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -15,6 +15,9 @@
                         <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                             <ContentTemplate>
                                 <ul class="panel-controls">
+                                     <li>
+                                         <asp:LinkButton runat="server" ID="lnkSync" OnClick="lnkSync_Click" Text="Sync" CssClass="control-primary" />
+                                     </li>
                                     <li>
                                         <asp:LinkButton runat="server" ID="lnkAccept" OnClick="lnkAccept_Click" Text="Accept" CssClass="control-primary" />
                                     </li>

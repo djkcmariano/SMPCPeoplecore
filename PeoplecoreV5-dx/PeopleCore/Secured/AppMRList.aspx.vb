@@ -3,7 +3,9 @@ Imports System.Data
 Imports DevExpress.Web
 Imports DevExpress.XtraPrinting
 Imports DevExpress.Export
-
+Imports RestSharp
+Imports System.Threading.Tasks
+Imports System.Net
 Partial Class Secured_AppMRList
     Inherits System.Web.UI.Page
 
@@ -223,5 +225,114 @@ Partial Class Secured_AppMRList
 
 #End Region
 
+#Region "Sync API"
+
+    Protected Async Sub lnkSnycAPI_Click(sender As Object, e As EventArgs)
+        Try
+            Dim client = Await GetClientAsync()
+            Dim operation As String = "Push"
+
+            Dim processedCount = 0
+
+            Dim dt As DataTable
+            dt = SQLHelper.ExecuteDataTable("GetTableSync", "EMR", operation)
+            For Each row As DataRow In dt.Rows
+                Dim tableName = Generic.ToStr(row("TableName"))
+                Dim limit = Generic.ToStr(row("Limit"))
+                Await ProcessData(client, limit, tableName, operation)
+                processedCount += 1
+            Next
+
+            client.Dispose()
+            If processedCount > 0 Then
+                PopulateGrid()
+                MessageBox.Success(MessageTemplate.SuccessProcess, Me)
+            Else
+                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
+            End If
+        Catch ex As Exception
+            MessageBox.Warning(ex.ToString(), Me)
+        End Try
+    End Sub
+
+    Async Function ProcessData(client As RestSharp.RestClient, limit As Integer, tableName As String, operation As String) As Task
+        Try
+            Dim postRequest = New RestRequest("api/" & operation & "/data", Method.Post)
+            postRequest.AddJsonBody(New With {
+            .limit = limit,
+            .tableName = tableName
+        })
+
+            Dim postResponse = Await client.ExecuteAsync(postRequest)
+
+            If postResponse.IsSuccessful AndAlso postResponse.Content IsNot Nothing Then
+                Console.WriteLine("Successfully processed " & tableName)
+                Return
+            Else
+                Throw New Exception("Failed to process " & tableName & ". Status: " & postResponse.StatusCode & ", Message: " & postResponse.Content)
+            End If
+        Catch ex As Exception
+            Console.WriteLine("Error processing " & tableName & ": " & ex.Message)
+            Throw
+        End Try
+    End Function
+
+
+    Public Class Table
+        Public Property tableName As String
+        Public Property limit As Integer
+    End Class
+
+
+    Private _cachedToken As String = String.Empty
+    Private _tokenExpiration As DateTime
+
+    Private _restClient As RestSharp.RestClient
+
+    Public Sub New()
+        _restClient = New RestSharp.RestClient(ConfigurationManager.AppSettings("API:BaseURL"))
+    End Sub
+
+    Public Async Function GetClientAsync() As Task(Of RestSharp.RestClient)
+        Dim token As String = Await GetTokenAsync()
+        _restClient.AddDefaultHeader("Authorization", "Bearer " & token)
+        Return _restClient
+    End Function
+
+    Public Class AuthTokenResponse
+        Public Property token As String
+        Public Property expiresIn As Integer
+    End Class
+
+    Async Function GetTokenAsync() As Task(Of String)
+
+        If Not String.IsNullOrEmpty(_cachedToken) AndAlso _tokenExpiration > DateTime.Now.AddMinutes(1) Then
+            Return _cachedToken
+        End If
+        Try
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
+            Dim client As New RestSharp.RestClient(ConfigurationManager.AppSettings("API:BaseURL"))
+            Dim request = New RestRequest("api/auth", Method.Post)
+
+            request.AddJsonBody(New With {
+            .username = ConfigurationManager.AppSettings("API:Username"),
+            .password = ConfigurationManager.AppSettings("API:Password")
+            })
+
+            Dim response = Await client.ExecuteAsync(Of AuthTokenResponse)(request)
+            If response.StatusCode = Net.HttpStatusCode.OK Then
+                Return response.Content.Trim("""")
+            End If
+
+            _cachedToken = response.Data.token
+            _tokenExpiration = DateTime.Now.AddSeconds(response.Data.expiresIn)
+            Return _cachedToken
+        Catch ex As Exception
+            Throw New Exception("Failed to obtain JWT token", ex)
+        End Try
+    End Function
+
+#End Region
 
 End Class
