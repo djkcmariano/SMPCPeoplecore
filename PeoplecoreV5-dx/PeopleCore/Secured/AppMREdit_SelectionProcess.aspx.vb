@@ -1,5 +1,10 @@
 ﻿Imports clsLib
+Imports DevExpress.Xpo.DB.Helpers
+Imports RestSharp
 Imports System.Data
+Imports System.Net
+Imports System.Threading.Tasks
+Imports System.Web.Services.Description
 
 Partial Class Secured_AppMREdit_SelectionProcess
     Inherits System.Web.UI.Page
@@ -12,7 +17,7 @@ Partial Class Secured_AppMREdit_SelectionProcess
     Dim InterviewStatNo As Integer
     Dim dtVal As DataTable
     Dim clsGen As New clsGenericClass
-
+    Dim ComponentNo As Integer = 1
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -30,20 +35,6 @@ Partial Class Secured_AppMREdit_SelectionProcess
             ViewState("MRStatNo") = Generic.ToInt(SQLHelper.ExecuteScalar("SELECT MRSTatNo FROM EMR WHERE MRNo=" & TransNo))
         End If
         AddHandler Filter1.lnkSearchClick, AddressOf lnkSearch_Click
-
-        'If MRStatNo = 7 then Disabled
-        If Generic.ToInt(ViewState("MRStatNo") = 7) Then
-            grdMain.Enabled = False
-            grdDetl.Enabled = False
-            lnkSave.Visible = False
-            lnkSave2.Visible = False
-            btnAdd.Visible = False
-            btnAddDetl.Visible = False
-            btnUpdateDetl.Visible = False
-            btnBatch.Visible = False
-            btnBatch2.Visible = False
-            btnDeleteDetl.Visible = False
-        End If
 
     End Sub
 
@@ -72,16 +63,6 @@ Partial Class Secured_AppMREdit_SelectionProcess
         Info1.xIsApplicant = Generic.ToBol(Generic.Split(lnk.CommandArgument, 1))
         Info1.Show()
 
-    End Sub
-
-    Protected Sub lnkHistory_Click(sender As Object, e As EventArgs)
-        'Info1.xIsApplicant = True
-        Dim lnk As New LinkButton
-        lnk = sender
-
-        History.xID = Generic.ToInt(Generic.Split(lnk.CommandArgument, 0))
-        History.xIsApplicant = Generic.ToBol(Generic.Split(lnk.CommandArgument, 1))
-        History.Show()
     End Sub
 
     Protected Sub lnkFilter1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -292,7 +273,7 @@ Partial Class Secured_AppMREdit_SelectionProcess
         Dim Time As String = Generic.ToStr(txtScreeningTime.Text)
         Dim Venue As String = Generic.ToStr(txtScreeningVenue.Text)
         Dim ScreeningByNo As Integer = Generic.ToInt(Me.hifScreeningByNo.Value)
-        Dim ScreeningByNo2 As Integer = Generic.ToInt(Me.hifScreeningByNo2.Value)
+        'Dim ScreeningByNo2 As Integer = Generic.ToInt(Me.hifScreeningByNo2.Value)
         Dim FacilitatorNo As Integer = Generic.ToInt(Me.hifFacilitatorNo.Value)
 
 
@@ -311,7 +292,7 @@ Partial Class Secured_AppMREdit_SelectionProcess
         'End If
 
 
-        If SQLHelper.ExecuteNonQuery("EMRInterview_WebSave", UserNo, transNo, DateFrom, DateTo, Time, Venue, ScreeningByNo, ScreeningByNo2, FacilitatorNo) > 0 Then
+        If SQLHelper.ExecuteNonQuery("EMRInterview_WebSave", UserNo, transNo, DateFrom, DateTo, Time, Venue, ScreeningByNo, FacilitatorNo) > 0 Then
             Retval = True
         Else
             Retval = False
@@ -333,7 +314,7 @@ Partial Class Secured_AppMREdit_SelectionProcess
         Try
             Dim dt As DataTable
             Dim sortDirection As String = "", sortExpression As String = ""
-            dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_Web", UserNo, Generic.ToInt(ViewState("TransNo")), Filter1.SearchText, StatusNo)
+            dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_Web", UserNo, Generic.ToInt(ViewState("TransNo")), "", StatusNo, ComponentNo)
             dtVal = dt
             Dim dv As DataView = dt.DefaultView
             If ViewState("SortDirectionDetl") IsNot Nothing Then
@@ -382,114 +363,32 @@ Partial Class Secured_AppMREdit_SelectionProcess
 
     Protected Sub lnkEditDetl_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-            Dim ib As New ImageButton
-            ib = sender
+        'If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+        '    Dim ib As New ImageButton
+        '    ib = sender
 
-            Dim dt As DataTable
-            dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_WebOne", UserNo, Generic.ToInt(ib.CommandArgument))
-            For Each row As DataRow In dt.Rows
-                Generic.PopulateData(Me, "pnlPopupSched", dt)
-            Next
+        '    Dim dt As DataTable
+        '    dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_WebOne", UserNo, Generic.ToInt(ib.CommandArgument))
+        '    For Each row As DataRow In dt.Rows
+        '        Generic.PopulateData(Me, "pnlPopupSched", dt)
+        '    Next
 
-            PopulateScreening()
-            mdlSched.Show()
+        '    PopulateScreening()
+        '    mdlSched.Show()
 
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-        End If
+        'Else
+        '    MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        'End If
 
     End Sub
 
     Protected Sub btnAddDetl_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
         If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowAdd) Then
-            Generic.ClearControls(Me, "pnlPopupDetl")
+            Generic.ClearControls(Me, "pnlpopupdetl")
             mdlDetl.Show()
         Else
             MessageBox.Warning(MessageTemplate.DeniedAdd, Me)
-        End If
-
-    End Sub
-
-    Protected Sub btnBatch_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-            Dim chk As New CheckBox, Count As Integer = 0
-            For i As Integer = 0 To Me.grdDetl.Rows.Count - 1
-                chk = CType(grdDetl.Rows(i).FindControl("txtIsSelect"), CheckBox)
-                If chk.Checked = True Then
-                    Count = Count + 1
-                End If
-            Next
-
-            If Count > 0 Then
-                Generic.ClearControls(Me, "Panel2")
-                Try
-                    cboActionStatNo.DataSource = SQLHelper.ExecuteDataSet("EActionStat_WebLookup", UserNo, ActionStatNo, ViewState("TransNo"), PayLocNo)
-                    cboActionStatNo.DataTextField = "tdesc"
-                    cboActionStatNo.DataValueField = "tno"
-                    cboActionStatNo.DataBind()
-                Catch ex As Exception
-
-                End Try
-
-                Try
-                    'cboInterviewStatNo.DataSource = SQLHelper.ExecuteDataTable("xTable_Lookup", UserNo, "EInterviewStatL", PayLocNo, "", "")
-                    cboInterviewStatNo.DataSource = SQLHelper.ExecuteDataSet("EInterviewStat_WebLookup", UserNo, InterviewStatNo, ViewState("TransNo"), PayLocNo)
-                    cboInterviewStatNo.DataTextField = "tdesc"
-                    cboInterviewStatNo.DataValueField = "tno"
-                    cboInterviewStatNo.DataBind()
-                Catch ex As Exception
-
-                End Try
-                ModalPopupExtender2.Show()
-            Else
-                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
-            End If
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-        End If
-
-    End Sub
-
-    Protected Sub btnBatch2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-            Dim chk As New CheckBox, Count As Integer = 0
-            For i As Integer = 0 To Me.grdDetl.Rows.Count - 1
-                chk = CType(grdDetl.Rows(i).FindControl("txtIsSelect"), CheckBox)
-                If chk.Checked = True Then
-                    Count = Count + 1
-                End If
-            Next
-
-            If Count > 0 Then
-                Generic.ClearControls(Me, "Panel2")
-                Try
-                    cboActionStatNo.DataSource = SQLHelper.ExecuteDataSet("EActionStat_WebLookup", UserNo, ActionStatNo, ViewState("TransNo"), PayLocNo)
-                    cboActionStatNo.DataTextField = "tdesc"
-                    cboActionStatNo.DataValueField = "tno"
-                    cboActionStatNo.DataBind()
-                Catch ex As Exception
-
-                End Try
-
-                Try
-                    'cboInterviewStatNo.DataSource = SQLHelper.ExecuteDataTable("xTable_Lookup", UserNo, "EInterviewStatL", PayLocNo, "", "")
-                    cboInterviewStatNo.DataSource = SQLHelper.ExecuteDataSet("EInterviewStat_WebLookup", UserNo, InterviewStatNo, ViewState("TransNo"), PayLocNo)
-                    cboInterviewStatNo.DataTextField = "tdesc"
-                    cboInterviewStatNo.DataValueField = "tno"
-                    cboInterviewStatNo.DataBind()
-                Catch ex As Exception
-
-                End Try
-                ModalPopupExtender1.Show()
-            Else
-                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
-            End If
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
         End If
 
     End Sub
@@ -517,7 +416,6 @@ Partial Class Secured_AppMREdit_SelectionProcess
         Else
             MessageBox.Warning(MessageTemplate.DeniedDelete, Me)
         End If
-
     End Sub
 
     Protected Sub lnkSaveDetl_Click(sender As Object, e As EventArgs)
@@ -558,15 +456,15 @@ Partial Class Secured_AppMREdit_SelectionProcess
     End Sub
 
     Protected Sub lnkTemplate_Click(sender As Object, e As EventArgs)
-        Dim ib As ImageButton
-        ib = sender
-        Response.Redirect("~/secured/EvalTemplateForm.aspx?id=" & ib.CommandArgument & "&FormName=AppStandardHeader.aspx&TableName=EApplicantStandardHeader")
+        'Dim ib As ImageButton
+        'ib = sender
+        'Response.Redirect("~/secured/EvalTemplateForm.aspx?id=" & ib.CommandArgument & "&FormName=AppStandardHeader.aspx&TableName=EApplicantStandardHeader")
     End Sub
 
-    Protected Sub btnUpdateDetl_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Async Sub btnUpdateDetl_Click(ByVal sender As Object, ByVal e As System.EventArgs)
 
-        Dim lbl As New Label, lblInterviewDetiNo As New Label, cboInterviewStatNo As New DropDownList, cboActionStatNo As New DropDownList, txt As New TextBox
-        Dim tcount As Integer, SaveCount As Integer = 0, lblOverride As New Label
+        Dim lbl As New Label, lblInterviewDetiNo As New Label, cboInterviewStatNo As New DropDownList, cboActionStatNo As New DropDownList, txt As New TextBox, SchedNo As New Label
+        Dim tcount As Integer, SaveCount As Integer = 0, lblOverride As New Label, ActionCount As Integer = 0
         Dim xds As New DataSet
         Dim ScreeningResultNo As Integer = 0
 
@@ -579,6 +477,7 @@ Partial Class Secured_AppMREdit_SelectionProcess
                 cboInterviewStatNo = CType(grdDetl.Rows(tcount).FindControl("cboInterviewStatNo"), DropDownList)
                 cboActionStatNo = CType(grdDetl.Rows(tcount).FindControl("cboActionStatNo"), DropDownList)
                 txt = CType(grdDetl.Rows(tcount).FindControl("txtRemarks"), TextBox)
+                SchedNo = CType(grdDetl.Rows(tcount).FindControl("lblScheduleNo"), Label)
 
                 Dim MRInterviewDetiNo As Integer = Generic.ToInt(lblInterviewDetiNo.Text)
                 Dim MRHiredMassNo As Integer = Generic.ToInt(lbl.Text)
@@ -587,244 +486,36 @@ Partial Class Secured_AppMREdit_SelectionProcess
                 Dim chk = CType(grdDetl.Rows(tcount).FindControl("txtIsSelect"), CheckBox)
                 Dim IsOverride As Boolean = Generic.ToBol(lblOverride.Text)
                 Dim Remarks As String = Generic.ToStr(txt.Text)
+                Dim MRScheduleNo = Generic.ToInt(SchedNo.Text)
+
 
                 If Not cboInterviewStatNo Is Nothing And chk.Checked = True Then
 
-                    If Generic.ToInt(cboInterviewStatNo.SelectedValue) = 0 And Generic.ToInt(cboActionStatNo.SelectedValue) = 0 Then
+                    SaveCount = SaveCount + 1
+                    SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks)
+                    SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo)
 
-                    ElseIf Generic.ToInt(cboInterviewStatNo.SelectedValue) = 0 And Generic.ToInt(cboActionStatNo.SelectedValue) > 0 Then
+                    Try
+                        Dim client = Await GetClientAsync()
+                        Try
+                            Await ProcessData(client, Generic.ToStr(MRInterviewDetiNo), "EMRInterviewDeti")
+                            Await ProcessData(client, Generic.ToStr(MRHiredMassNo), "EMRHiredMass")
+                            Await ProcessData(client, Generic.ToStr(MRScheduleNo), "EMRSchedule")
+                        Finally
+                            client.Dispose()
+                        End Try
 
-                    Else
-
-                        If ScreeningResultNo = 1 And StatusNo > 0 Then
-                            If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                If StatusNo > 0 Then
-                                    If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                        SaveCount = SaveCount + 1
-                                    End If
-                                End If
-                            End If
-                        ElseIf ScreeningResultNo = 5 And StatusNo > 0 Then
-                            If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                If StatusNo > 0 Then
-                                    If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                        SaveCount = SaveCount + 1
-                                    End If
-                                End If
-                            End If
-                        Else
-                            If StatusNo > 0 Then
-                                If IsOverride Then
-                                    SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks)
-                                End If
-                                If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                    SaveCount = SaveCount + 1
-                                End If
-                            ElseIf ScreeningResultNo <> 1 And ScreeningResultNo <> 5 Then
-                                If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                    SaveCount = SaveCount + 1
-                                End If
-                            End If
-                        End If
-                    End If
-
-                    
-
+                    Catch ex As Exception
+                        Console.WriteLine(ex)
+                    End Try
                 End If
-
-
             Next
 
             If SaveCount > 0 Then
                 PopulateGrid()
                 MessageBox.Success("(" & SaveCount & ") " & MessageTemplate.SuccessUpdate, Me)
-            ElseIf ScreeningResultNo = 1 Or ScreeningResultNo = 5 Then
+            ElseIf ActionCount > 0 Then
                 MessageBox.Warning("Action is required.", Me)
-            Else
-                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
-            End If
-
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-        End If
-
-    End Sub
-
-    Protected Sub lnkSave2_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim lbl As New Label, lblInterviewDetiNo As New Label, txt As New TextBox
-        Dim tcount As Integer, SaveCount As Integer = 0, lblOverride As New Label
-        Dim xds As New DataSet
-        Dim ScreeningResultNo As Integer = 0
-
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowAdd) Then
-
-            For tcount = 0 To Me.grdDetl.Rows.Count - 1
-                lblInterviewDetiNo = CType(grdDetl.Rows(tcount).FindControl("lblInterviewDetiNo"), Label)
-                lbl = CType(grdDetl.Rows(tcount).FindControl("lblNo"), Label)
-                lblOverride = CType(grdDetl.Rows(tcount).FindControl("lblOverride"), Label)
-                txt = CType(grdDetl.Rows(tcount).FindControl("txtRemarks"), TextBox)
-
-                Dim MRInterviewDetiNo As Integer = Generic.ToInt(lblInterviewDetiNo.Text)
-                Dim MRHiredMassNo As Integer = Generic.ToInt(lbl.Text)
-                ScreeningResultNo = Generic.ToInt(cboInterviewStatNo.SelectedValue)
-                Dim StatusNo As Integer = Generic.ToInt(cboActionStatNo.SelectedValue) 'Generic.ToInt(cboActionStatNo.SelectedValue)
-                Dim chk = CType(grdDetl.Rows(tcount).FindControl("txtIsSelect"), CheckBox)
-                Dim IsOverride As Boolean = Generic.ToBol(lblOverride.Text)
-                Dim Remarks As String = Generic.ToStr(txt.Text)
-
-                If Not cboInterviewStatNo Is Nothing And chk.Checked = True Then
-
-                    If Generic.ToInt(cboInterviewStatNo.SelectedValue) = 0 And Generic.ToInt(cboActionStatNo.SelectedValue) = 0 Then
-
-                    ElseIf Generic.ToInt(cboInterviewStatNo.SelectedValue) = 0 And Generic.ToInt(cboActionStatNo.SelectedValue) > 0 Then
-
-                    Else
-
-                        If ScreeningResultNo = 1 And StatusNo > 0 Then
-                            If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                If StatusNo > 0 Then
-                                    If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                        SaveCount = SaveCount + 1
-                                    End If
-                                End If
-                            End If
-                        ElseIf ScreeningResultNo = 5 And StatusNo > 0 Then
-                            If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                If StatusNo > 0 Then
-                                    If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                        SaveCount = SaveCount + 1
-                                    End If
-                                End If
-                            End If
-                        Else
-                            If StatusNo > 0 Then
-                                If IsOverride Then
-                                    SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks)
-                                End If
-                                If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-                                    SaveCount = SaveCount + 1
-                                End If
-                            ElseIf ScreeningResultNo <> 1 And ScreeningResultNo <> 5 Then
-                                If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeningResultNo, Remarks) > 0 Then
-                                    SaveCount = SaveCount + 1
-                                End If
-                            End If
-                        End If
-                    End If
-
-
-
-                End If
-
-
-            Next
-
-            If SaveCount > 0 Then
-                PopulateGrid()
-                MessageBox.Success("(" & SaveCount & ") " & MessageTemplate.SuccessUpdate, Me)
-            ElseIf ScreeningResultNo = 1 Or ScreeningResultNo = 5 Then
-                MessageBox.Warning("Action is required.", Me)
-            Else
-                MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
-            End If
-
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-        End If
-        'Dim lbl As New Label, lblInterviewDetiNo As New Label
-        'Dim tcount As Integer, SaveCount As Integer = 0
-        'Dim xds As New DataSet
-
-        'Dim ScreeingResultNo As Integer = Generic.ToInt(cboInterviewStatNo.SelectedValue)
-        'Dim StatusNo As Integer = Generic.ToInt(cboActionStatNo.SelectedValue)
-
-        'If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-
-        '    For tcount = 0 To Me.grdDetl.Rows.Count - 1
-        '        lblInterviewDetiNo = CType(grdDetl.Rows(tcount).FindControl("lblInterviewDetiNo"), Label)
-        '        lbl = CType(grdDetl.Rows(tcount).FindControl("lblNo"), Label)
-
-        '        'cboInterviewStatNo = CType(grdDetl.Rows(tcount).FindControl("cboInterviewStatNo"), DropDownList)
-        '        'cboActionStatNo = CType(grdDetl.Rows(tcount).FindControl("cboActionStatNo"), DropDownList)
-
-        '        Dim MRInterviewDetiNo As Integer = Generic.ToInt(lblInterviewDetiNo.Text)
-        '        Dim MRHiredMassNo As Integer = Generic.ToInt(lbl.Text)
-        '        Dim chk = CType(grdDetl.Rows(tcount).FindControl("txtIsSelect"), CheckBox)
-
-        '        If Not cboInterviewStatNo Is Nothing And chk.Checked = True Then
-
-        '            If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebUpdate", UserNo, MRInterviewDetiNo, ScreeingResultNo) > 0 Then
-        '                SaveCount = SaveCount + 1
-        '            End If
-
-        '            If ScreeingResultNo = 1 Then
-
-        '                If Not cboActionStatNo Is Nothing Then
-        '                    If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebUpdate", UserNo, MRHiredMassNo, MRInterviewDetiNo, StatusNo, ActionStatNo) > 0 Then
-        '                        SaveCount = SaveCount + 1
-        '                    End If
-        '                End If
-
-        '            End If
-
-        '        End If
-
-
-        '    Next
-
-        '    If SaveCount > 0 Then
-        '        PopulateGrid()
-        '        MessageBox.Success("(" & SaveCount & ") " & MessageTemplate.SuccessUpdate, Me)
-        '    Else
-        '        MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
-        '    End If
-
-        'Else
-        '    MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-        'End If
-
-    End Sub
-
-    Protected Sub lnkSave3_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-        Dim lbl As New Label, lblInterviewDetiNo As New Label
-        Dim tcount As Integer, SaveCount As Integer = 0
-        Dim xds As New DataSet
-
-        Dim DateFrom As String = Generic.ToStr(txtScheduleDateFrom2.Text)
-        Dim DateTo As String = Generic.ToStr(txtScheduleDateTo2.Text)
-        Dim Time As String = Generic.ToStr(txtScheduleTime2.Text)
-        Dim Venue As String = Generic.ToStr(txtScheduleVenue2.Text)
-        Dim InterviewByNo As Integer = Generic.ToInt(Me.hifInterviewByNo2.Value)
-
-
-
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-
-
-            'txtScheduleDateFrom2.Text, txtScheduleDateTo2.Text
-
-
-            For tcount = 0 To Me.grdDetl.Rows.Count - 1
-                lblInterviewDetiNo = CType(grdDetl.Rows(tcount).FindControl("lblInterviewDetiNo"), Label)
-                'cboInterviewStatNo = CType(grdDetl.Rows(tcount).FindControl("cboInterviewStatNo"), DropDownList)
-                'cboActionStatNo = CType(grdDetl.Rows(tcount).FindControl("cboActionStatNo"), DropDownList)
-
-                Dim MRInterviewDetiNo As Integer = Generic.ToInt(lblInterviewDetiNo.Text)
-                Dim chk = CType(grdDetl.Rows(tcount).FindControl("txtIsSelect"), CheckBox)
-
-                If chk.Checked = True Then
-                    If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebSaveEdit", UserNo, Generic.ToInt(MRInterviewDetiNo), 1, DateFrom, DateTo, Time, Venue, InterviewByNo) > 0 Then
-                        SaveCount = SaveCount + 1
-                    End If
-
-                End If
-
-            Next
-
-            If SaveCount > 0 Then
-                PopulateDetl()
-                MessageBox.Success("(" & SaveCount & ") " & MessageTemplate.SuccessUpdate, Me)
             Else
                 MessageBox.Information(MessageTemplate.NoSelectedTransaction, Me)
             End If
@@ -918,30 +609,6 @@ Partial Class Secured_AppMREdit_SelectionProcess
 
     End Sub
 
-    Protected Sub lnkSaveSched_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-
-        Dim Retval As Boolean = False
-        Dim IsSchedule As Boolean = Generic.ToBol(txtIsSchedule.Checked)
-        Dim DateFrom As String = Generic.ToStr(txtScheduleDateFrom.Text)
-        Dim DateTo As String = Generic.ToStr(txtScheduleDateTo.Text)
-        Dim Time As String = Generic.ToStr(txtScheduleTime.Text)
-        Dim Venue As String = Generic.ToStr(txtScheduleVenue.Text)
-        Dim InterviewByNo As Integer = Generic.ToInt(Me.hifInterviewByNo.Value)
-
-        If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebSaveEdit", UserNo, Generic.ToInt(txtMRInterviewDetiNo.Text), IsSchedule, DateFrom, DateTo, Time, Venue, InterviewByNo) > 0 Then
-            Retval = True
-        Else
-            Retval = False
-        End If
-
-        If Retval Then
-            PopulateGrid()
-            MessageBox.Success(MessageTemplate.SuccessSave, Me)
-        Else
-            MessageBox.Critical(MessageTemplate.ErrorSave, Me)
-        End If
-
-    End Sub
 
     Protected Sub txtIsScreening_CheckedChanged(sender As Object, e As System.EventArgs)
         PopulateScreening()
@@ -996,10 +663,491 @@ Partial Class Secured_AppMREdit_SelectionProcess
 
 #End Region
 
+#Region "Schedule and Screener"
+
+
+    Protected Sub lnkScreener_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            Generic.ClearControls(Me, "pnlPopupScreener")
+            ViewState("MRInterviewDetiNo") = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            txtApplicantName2.Text = Generic.ToStr(Generic.Split(ib.CommandArgument, 1))
+
+            Dim dt As DataTable
+            dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_WebOne", UserNo, Generic.ToInt(ViewState("MRInterviewDetiNo")))
+            For Each row As DataRow In dt.Rows
+                Generic.PopulateData(Me, "pnlPopupScreener", dt)
+            Next
+            mdlScreener.Show()
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkSaveScreener_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        Dim Retval As Boolean = False
+        Dim InterviewByNo As Integer = Generic.ToInt(Me.hifInterviewByNo.Value)
+
+        If SQLHelper.ExecuteNonQuery("EMRInterviewDeti_WebSaveScreener", UserNo, Generic.ToInt(ViewState("MRInterviewDetiNo")), InterviewByNo) > 0 Then
+            Retval = True
+        Else
+            Retval = False
+        End If
+
+        If Retval Then
+            PopulateGrid()
+            MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        Else
+            MessageBox.Critical(MessageTemplate.ErrorSave, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkSaveSched_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        Dim Retval As Boolean = False
+        Dim MRInterviewDetiNo = Generic.ToInt(txtMRInterviewDetiNo.Text)
+        Dim IsSchedule As Boolean = Generic.ToBol(txtIsSchedule.Checked)
+        Dim DateFrom As String = Generic.ToStr(txtScheduleDateFrom.Text)
+        Dim DateTo As String = Generic.ToStr(txtScheduleDateTo.Text)
+        Dim Time As String = Generic.ToStr(txtScheduleTime.Text)
+        Dim Venue As String = Generic.ToStr(txtScheduleVenue.Text)
+        Dim Notes As String = Generic.ToStr(txtScheduleNotes.Text)
+        Dim InterviewByNo As Integer = 0 'Generic.ToInt(Me.hifInterviewByNo.Value)
+        Dim MRScheduleNo = Generic.ToInt(txtMRScheduleNo.Text)
+
+        If Time > "" And Generic.ToStr(cboPeriod.SelectedValue) > "" Then
+            Time = Time & " " & Generic.ToStr(cboPeriod.SelectedValue)
+        End If
+
+        Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
+        Dim dtx As New DataTable
+        dtx = SQLHelper.ExecuteDataTable("EMRSchedule_WebValidate", UserNo, MRScheduleNo, TransNo, MRInterviewDetiNo, DateFrom, DateTo, Time, Venue, Notes, InterviewByNo, Generic.ToInt(ViewState("MRScheduleStatNo")), ComponentNo)
+        For Each rowx As DataRow In dtx.Rows
+            invalid = Generic.ToBol(rowx("tProceed"))
+            messagedialog = Generic.ToStr(rowx("xMessage"))
+            alerttype = Generic.ToStr(rowx("AlertType"))
+        Next
+
+        If invalid = True Then
+            MessageBox.Alert(messagedialog, alerttype, Me)
+            mdlSched.Show()
+            Exit Sub
+        End If
+
+        Dim dt As New DataTable
+        dt = SQLHelper.ExecuteDataTable("EMRSchedule_WebSave", UserNo, MRScheduleNo, TransNo, MRInterviewDetiNo, DateFrom, DateTo, Time, Venue, Notes, InterviewByNo, Generic.ToInt(ViewState("MRScheduleStatNo")), ComponentNo)
+
+        For Each row As DataRow In dt.Rows
+            'Retval = PopulateSendMail(Generic.ToInt(row("MRScheduleNo")))
+            Retval = Generic.ToBol(row("Retval"))
+        Next
+
+
+        If Retval Then
+            PopulateGrid()
+            MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        Else
+            MessageBox.Critical(MessageTemplate.ErrorSave, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkAddSched_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            Generic.ClearControls(Me, "pnlPopupSched")
+            ViewState("MRScheduleStatNo") = 1
+            Dim MRInterviewDetiNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            Dim MRScheduleNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            Dim ApplicantName As String = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+
+            lblTitleSched.Text = "Set Schedule"
+            txtMRInterviewDetiNo.Text = MRInterviewDetiNo
+            txtMRScheduleNo.Text = MRScheduleNo
+            txtApplicantName.Text = ApplicantName
+
+            mdlSched.Show()
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkMove_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            Generic.ClearControls(Me, "pnlPopupSched")
+            ViewState("MRScheduleStatNo") = 5
+            Dim MRInterviewDetiNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            Dim MRScheduleNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            Dim ApplicantName As String = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+
+            Dim dt As DataTable
+            dt = SQLHelper.ExecuteDataTable("EMRInterviewDeti_WebOne", UserNo, MRInterviewDetiNo)
+            For Each row As DataRow In dt.Rows
+                Generic.PopulateData(Me, "pnlPopupSched", dt)
+            Next
+
+            lblTitleSched.Text = "Move Schedule"
+            txtMRInterviewDetiNo.Text = MRInterviewDetiNo
+            txtMRScheduleNo.Text = MRScheduleNo
+            txtApplicantName.Text = ApplicantName
+
+            mdlSched.Show()
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkHistory_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            Dim MRInterviewDetiNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            Dim MRScheduleNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            lblApplicantName.Text = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+
+            Dim dt As DataTable
+            dt = SQLHelper.ExecuteDataTable("EMRSchedule_Web", UserNo, TransNo, MRInterviewDetiNo)
+            grdSched.DataSource = dt
+            grdSched.DataBind()
+
+            mdlHistory.Show()
+
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkAccept_Click(sender As Object, e As EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            ViewState("MRScheduleStatNo") = 2
+            Dim MRInterviewDetiNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            Dim MRScheduleNo As Integer = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            Dim ApplicantName As String = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+
+            If PopulateSched_Update(MRScheduleNo, Generic.ToInt(ViewState("MRScheduleStatNo")), "") Then
+                PopulateGrid()
+                MessageBox.Success(MessageTemplate.SuccessSave, Me)
+            Else
+                MessageBox.Critical(MessageTemplate.ErrorSave, Me)
+            End If
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkDecline_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            ViewState("MRScheduleStatNo") = 3
+            ViewState("MRInterviewDetiNo") = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            ViewState("MRScheduleNo") = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            txtApplicantName1.Text = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+            lblTitleCancel.Text = "Decline Schedule"
+            lblRemarks.Text = "Preferred  Schedule <i>(if any)</i> :"
+            txtRemarks.Text = ""
+            mdlCancel.Show()
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+            Dim ib As New LinkButton
+            ib = sender
+
+            ViewState("MRScheduleStatNo") = 4
+            ViewState("MRInterviewDetiNo") = Generic.ToInt(Generic.Split(ib.CommandArgument, 0))
+            ViewState("MRScheduleNo") = Generic.ToInt(Generic.Split(ib.CommandArgument, 1))
+            'txtApplicantName1.Text = Generic.ToStr(Generic.Split(ib.CommandArgument, 2))
+            'lblTitleCancel.Text = "Cancel Schedule"
+            'lblRemarks.Text = "Reason"
+            'txtRemarks.Text = ""
+            'mdlCancel.Show()
+        Else
+            MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        End If
+
+    End Sub
+
+    Protected Sub lnkSaveCancel_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        If PopulateSched_Update(Generic.ToInt(ViewState("MRScheduleNo")), Generic.ToInt(ViewState("MRScheduleStatNo")), txtRemarks.Text) Then
+            PopulateGrid()
+            MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        Else
+            MessageBox.Critical(MessageTemplate.ErrorSave, Me)
+        End If
+
+    End Sub
+
+    Private Function PopulateSched_Update(MRScheduleNo As Integer, MRScheduleStatNo As Integer, Remarks As String) As Boolean
+
+        Dim RetVal As Boolean = False
+        Dim dt As New DataTable
+        dt = SQLHelper.ExecuteDataTable("EMRSchedule_WebUpdate", UserNo, MRScheduleNo, MRScheduleStatNo, Remarks, ComponentNo)
+        For Each row As DataRow In dt.Rows
+            MRScheduleNo = Generic.ToInt(row("MRScheduleNo"))
+            'RetVal = PopulateSendMail(MRScheduleNo)
+            RetVal = True
+        Next
+
+        If RetVal = False Then
+            SQLHelper.ExecuteDataTable("EMRSchedule_WebSentFailed", UserNo, MRScheduleNo)
+        End If
+
+        Return RetVal
+    End Function
+
+    Private Function PopulateSendMail(MRScheduleNo As Integer) As Boolean
+
+        'Dim Retval As Boolean = False
+        'Dim dt As DataTable
+        'Dim IsSendMail As Boolean = False
+        'Dim EmailTo As String, EmailFrom As String, EmailSubject As String, EmailBody As String
+        'Dim e_ip_addr As String = ""
+        'Dim e_port_no As String = ""
+        'Dim e_login As String = ""
+        'Dim e_pwd As String = ""
+        'Dim e_ssl As Boolean = False
+        'Dim DocNo As Integer = 0
+        'Dim FileName As String = ""
+
+        'dt = SQLHelper.ExecuteDataTable("EMRSchedule_WebEmail", UserNo, MRScheduleNo, ComponentNo)
+        'For Each row As DataRow In dt.Rows
+        '    IsSendMail = Generic.ToBol(row("IsSendMail"))
+        '    EmailFrom = Generic.ToStr(row("EmailFrom"))
+        '    EmailTo = Generic.ToStr(row("EmailTo"))
+        '    EmailSubject = Generic.ToStr(row("EmailSubject"))
+        '    EmailBody = Generic.ToStr(row("EmailBody"))
+        '    e_ip_addr = Generic.ToStr(row("IPAddress"))
+        '    e_port_no = Generic.ToStr(row("PortNo"))
+        '    e_login = Generic.ToStr(row("elogin"))
+        '    e_pwd = Generic.ToStr(row("epwd"))
+        '    e_ssl = Generic.ToBol(row("essl"))
+        '    DocNo = Generic.ToInt(row("DocNo"))
+        '    FileName = Generic.ToStr(row("FileName"))
+
+        '    If IsSendMail = True Then
+        '        Try
+        '            Dim sm As System.Net.Mail.SmtpClient = New System.Net.Mail.SmtpClient(e_ip_addr, e_port_no)
+        '            sm.EnableSsl = e_ssl
+        '            If e_login.Length > 0 Then
+        '                sm.Credentials = New System.Net.NetworkCredential(e_login, e_pwd)
+        '            Else
+        '                sm.UseDefaultCredentials = True
+        '            End If
+
+        '            Dim mm As New System.Net.Mail.MailMessage
+        '            mm.Subject = EmailSubject
+        '            mm.Body = EmailBody
+        '            mm.IsBodyHtml = True
+        '            mm.To.Add(EmailTo)
+        '            mm.From = New System.Net.Mail.MailAddress(EmailFrom)
+
+        '            Dim bytes_DocFile As Byte() = Nothing
+        '            If DocNo > 0 Then
+        '                bytes_DocFile = PopulateDocFile(DocNo)
+
+        '                If Not bytes_DocFile Is Nothing Then
+        '                    mm.Attachments.Add(New Net.Mail.Attachment(New System.IO.MemoryStream(bytes_DocFile), FileName))
+        '                End If
+        '            End If
+
+        '            sm.Send(mm)
+
+        '            Retval = True
+
+        '        Catch ex As Exception
+        '            Retval = False
+        '        End Try
+        '    Else
+        '        Retval = True
+        '    End If
+
+        'Next
+
+        'Return Retval
+
+    End Function
+
+    Public Function PopulateDocFile(DocNo As Integer) As Byte()
+
+        Try
+            Dim doc As Byte() = Nothing
+            Dim filename As String = ""
+            Dim orgname As String = ""
+            Dim dt As DataTable
+            Dim datafile() As Byte = Nothing
+            Dim fContentType As String = ""
+            Dim fileExt As String = ""
+            dt = SQLHelper.ExecuteDataTable("EDoc_WebOne_Attachment", UserNo, DocNo)
+            For Each row As DataRow In dt.Rows
+                filename = Generic.ToStr(row("ActualFileName"))
+                orgname = Generic.ToStr(row("DocFile"))
+                'datafile = row("DataFile")
+                fContentType = Generic.ToStr(row("contenttype"))
+                fileExt = Generic.ToStr(row("docExt"))
+            Next
+
+            If datafile Is Nothing And filename > "" Then
+                Dim path As String = ConfigurationManager.AppSettings("drive_path")
+                Dim file As System.IO.FileInfo = New System.IO.FileInfo(path & "\" & filename.ToString)
+                If file.Exists Then
+                    Dim fs As System.IO.FileStream = New System.IO.FileStream(path & "\" & filename.ToString, System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.Read)
+                    datafile = New Byte(fs.Length - 1) {}
+                End If
+            End If
+
+            Return datafile
+
+        Catch ex As Exception
+
+        End Try
+
+    End Function
+
+
+#End Region
+
+
+#Region "Sync API"
+
+    'Async Function SyncData(id As Integer) As Task
+    '    Try
+    '        Dim client = Await GetClientAsync()
+    '        Dim operation As String = "Push"
+
+    '        Dim processedCount = 0
+
+    '        'Dim dt As DataTable
+    '        'dt = SQLHelper.ExecuteDataTable("GetTableSync", "Applicant", operation)
+    '        'For Each row As DataRow In dt.Rows
+    '        '    Dim tableName = Generic.ToStr(row("TableName"))
+    '        '    Dim limit = Generic.ToStr(row("Limit"))
+    '        '    Await ProcessData(client, limit, tableName, operation)
+    '        '    processedCount += 1
+    '        'Next
 
 
 
+    '        Await ProcessData(client, id, tableName, operation)
 
-    
+    '        client.Dispose()
+    '    Catch
+
+    '    End Try
+
+    'End Function
+
+    Async Function ProcessData(client As RestSharp.RestClient, id As String, tableName As String) As Task
+        Try
+            Dim postRequest = New RestRequest("api/push/onedata", Method.Post)
+            postRequest.AddJsonBody(New With {
+            .id = id,
+            .tableName = tableName
+        })
+
+            Dim postResponse = Await client.ExecuteAsync(postRequest)
+
+            If postResponse.IsSuccessful AndAlso postResponse.Content IsNot Nothing Then
+                Console.WriteLine("Successfully processed " & tableName)
+                Return
+            Else
+                Throw New Exception("Failed to process " & tableName & ". Status: " & postResponse.StatusCode & ", Message: " & postResponse.Content)
+            End If
+        Catch ex As Exception
+            Console.WriteLine("Error processing " & tableName & ": " & ex.Message)
+            Throw
+        End Try
+    End Function
+
+
+    Public Class Table
+        Public Property tableName As String
+        Public Property limit As Integer
+    End Class
+
+
+    Private _cachedToken As String = String.Empty
+    Private _tokenExpiration As DateTime
+
+    Private _restClient As RestSharp.RestClient
+
+    Public Sub New()
+        _restClient = New RestSharp.RestClient(ConfigurationManager.AppSettings("API:BaseURL"))
+    End Sub
+
+    Public Async Function GetClientAsync() As Task(Of RestSharp.RestClient)
+        Dim token As String = Await GetTokenAsync()
+        _restClient.AddDefaultHeader("Authorization", "Bearer " & token)
+        Return _restClient
+    End Function
+
+    Public Class AuthTokenResponse
+        Public Property token As String
+        Public Property expiresIn As Integer
+    End Class
+
+    Async Function GetTokenAsync() As Task(Of String)
+
+        If Not String.IsNullOrEmpty(_cachedToken) AndAlso _tokenExpiration > DateTime.Now.AddMinutes(1) Then
+            Return _cachedToken
+        End If
+        Try
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+
+            Dim client As New RestSharp.RestClient(ConfigurationManager.AppSettings("API:BaseURL"))
+            Dim request = New RestRequest("api/auth", Method.Post)
+
+            request.AddJsonBody(New With {
+            .username = ConfigurationManager.AppSettings("API:Username"),
+            .password = ConfigurationManager.AppSettings("API:Password")})
+
+            Dim response = Await client.ExecuteAsync(Of AuthTokenResponse)(request)
+            If response.StatusCode = Net.HttpStatusCode.OK Then
+                Return response.Content.Trim("""")
+            End If
+
+            _cachedToken = response.Data.token
+            _tokenExpiration = DateTime.Now.AddSeconds(response.Data.expiresIn)
+            Return _cachedToken
+        Catch ex As Exception
+            Throw New Exception("Failed to obtain JWT token", ex)
+        End Try
+    End Function
+
+
+#End Region
+
+
 End Class
 

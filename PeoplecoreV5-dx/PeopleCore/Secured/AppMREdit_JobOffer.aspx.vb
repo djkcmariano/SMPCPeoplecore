@@ -12,7 +12,7 @@ Partial Class Secured_AppMREdit_JobOffer
     Dim PayLocNo As Integer = 0
     Dim ActionStatNo As Integer = 3
     Dim rowno As Integer = 0
-
+    Dim ComponentNo As Integer = 1
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserNo = Generic.ToInt(Session("OnlineUserNo"))
         TransNo = Generic.ToInt(Request.QueryString("id"))
@@ -57,12 +57,6 @@ Partial Class Secured_AppMREdit_JobOffer
             grdMain.SelectedIndex = 0
             grdMain.DataSource = dv
             grdMain.DataBind()
-
-            If dt.Rows.Count > 0 Then
-                ViewState("TransNo") = grdMain.DataKeys(0).Values(0).ToString()
-                ViewState("TransCode") = grdMain.DataKeys(0).Values(1).ToString()
-                ViewState("IsEnabled") = Generic.ToBol(grdMain.DataKeys(0).Values(2))
-            End If
 
         Catch ex As Exception
 
@@ -138,7 +132,7 @@ Partial Class Secured_AppMREdit_JobOffer
         Else
             MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
         End If
-        txtJOEncodeDate.Enabled = False
+        'txtJOEncodeDate.Enabled = False
     End Sub
 
     Protected Sub btnDelete_Click(sender As Object, e As EventArgs)
@@ -192,9 +186,9 @@ Partial Class Secured_AppMREdit_JobOffer
             txtFullname.Enabled = True
             Generic.EnableControls(Me, "Panel1", True)
             Generic.ClearControls(Me, "Panel1")
-            txtPayOffer.Text = ""
-            cboEmployeeRateClassNo.Text = ""
-            txtJobOfferRemarks.Text = ""
+            'txtPayOffer.Text = ""
+            'cboEmployeeRateClassNo.Text = ""
+            'txtJobOfferRemarks.Text = ""
             AutoCompleteExtender1.ContextKey = Generic.ToInt(cboHiringAlternativeNo.SelectedValue) & "|" & TransNo
             ModalPopupExtender1.Show()
         Else
@@ -207,12 +201,6 @@ Partial Class Secured_AppMREdit_JobOffer
         Dim RetVal As Boolean = False
         Dim HiringAlternativeNo As Integer = Generic.ToInt(cboHiringAlternativeNo.SelectedValue)
         Dim hidID As Integer = Generic.ToInt(Me.hidID.Value)
-        Dim PayOffer As Decimal = Generic.ToDec(txtPayOffer.Text)
-        Dim EmployeeRateClassNo As Integer = Generic.ToInt(cboEmployeeRateClassNo.SelectedValue)
-        Dim JobOfferRemarks As String = Generic.ToStr(txtJobOfferRemarks.Text)
-        Dim StartDate As String = Generic.ToStr(txtStartDate.Text)
-        Dim EndDate As String = Generic.ToStr(txtEndDate.Text)
-        Dim JOEndDate As String = Generic.ToStr(txtJOEndDate.Text)
 
         Dim invalid As Boolean = True, messagedialog As String = "", alerttype As String = ""
         Dim dt As New DataTable
@@ -229,7 +217,7 @@ Partial Class Secured_AppMREdit_JobOffer
             Exit Sub
         End If
 
-        If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebSave_JobOffer", UserNo, TransNo, hidID, HiringAlternativeNo, PayOffer, EmployeeRateClassNo, JobOfferRemarks, StartDate, EndDate, JOEndDate) > 0 Then
+        If SQLHelper.ExecuteNonQuery("EMRHiredMass_WebSave", UserNo, TransNo, hidID, HiringAlternativeNo, ActionStatNo) > 0 Then
             RetVal = True
         Else
             RetVal = False
@@ -241,7 +229,6 @@ Partial Class Secured_AppMREdit_JobOffer
         Else
             MessageBox.Critical(MessageTemplate.ErrorSave, Me)
         End If
-
     End Sub
 
 
@@ -290,6 +277,32 @@ Partial Class Secured_AppMREdit_JobOffer
         hidID.Value = 0
         AutoCompleteExtender1.ContextKey = Generic.ToStr(cboHiringAlternativeNo.SelectedValue) & "|" & hidTransNo.Value.ToString
         ModalPopupExtender1.Show()
+    End Sub
+
+    Protected Sub lnkForm_Click(sender As Object, e As EventArgs)
+        Try
+            Dim lnk As New LinkButton
+            lnk = sender
+            Dim MRNo As Integer = Generic.ToInt(Generic.Split(lnk.CommandArgument, 0))
+            Dim MRHiredMassNo As Integer = Generic.ToInt(Generic.Split(lnk.CommandArgument, 1))
+
+            'Dim invalid As Boolean = True, messagedialog As String = ""
+            'Dim dt As New DataTable
+            'dt = SQLHelper.ExecuteDataTable("EMRHiredMass_JobOffer_WebSalaryPermission", UserNo, MRNo, MRHiredMassNo, ComponentNo)
+            'For Each row As DataRow In dt.Rows
+            '    invalid = Generic.ToBol(row("tProceed"))
+            '    messagedialog = Generic.ToStr(row("xMessage"))
+            'Next
+
+            'If invalid = True Then
+            '    MessageBox.Warning(messagedialog, Me)
+            'Else
+            Response.Redirect("~/secured/AppMREdit_JobOffer_Contract.aspx?id=" & MRNo & "&mrhiredmassno=" & MRHiredMassNo & "&componentno=" & ComponentNo)
+            'End If
+
+        Catch ex As Exception
+        End Try
+
     End Sub
 #End Region
 
@@ -348,74 +361,74 @@ Partial Class Secured_AppMREdit_JobOffer
     End Sub
 
     Protected Sub lnkEditDetl_Click(sender As Object, e As EventArgs)
-        Try
-            If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
-                Dim lnk As New LinkButton, i As Integer
-                lnk = sender
-                Dim container As GridViewDataItemTemplateContainer = TryCast(lnk.NamingContainer, GridViewDataItemTemplateContainer)
-                i = Generic.ToInt(container.Grid.GetRowValues(container.VisibleIndex, New String() {"MROfferNo"}))
+        'Try
+        '    If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowEdit) Then
+        '        Dim lnk As New LinkButton, i As Integer
+        '        lnk = sender
+        '        Dim container As GridViewDataItemTemplateContainer = TryCast(lnk.NamingContainer, GridViewDataItemTemplateContainer)
+        '        i = Generic.ToInt(container.Grid.GetRowValues(container.VisibleIndex, New String() {"MROfferNo"}))
 
-                Dim dt As DataTable
-                dt = SQLHelper.ExecuteDataTable("EMROffer_WebOne", UserNo, Generic.ToInt(i))
-                For Each row As DataRow In dt.Rows
-                    Generic.PopulateDropDownList(UserNo, Me, "pnlPopupDetl", PayLocNo)
-                    Try
-                        cboPayIncomeTypeNo.DataSource = SQLHelper.ExecuteDataSet("EPayIncomeType_WebLookup_UnionAllow", UserNo, Generic.ToInt(row("PayIncomeTypeNo")), PayLocNo)
-                        cboPayIncomeTypeNo.DataValueField = "tNo"
-                        cboPayIncomeTypeNo.DataTextField = "tDesc"
-                        cboPayIncomeTypeNo.DataBind()
-                    Catch ex As Exception
-                    End Try
-                    Generic.PopulateData(Me, "pnlPopupDetl", dt)
-                Next
-                mdlDetl.Show()
+        '        Dim dt As DataTable
+        '        dt = SQLHelper.ExecuteDataTable("EMROffer_WebOne", UserNo, Generic.ToInt(i))
+        '        For Each row As DataRow In dt.Rows
+        '            Generic.PopulateDropDownList(UserNo, Me, "pnlPopupDetl", PayLocNo)
+        '            Try
+        '                cboPayIncomeTypeNo.DataSource = SQLHelper.ExecuteDataSet("EPayIncomeType_WebLookup_UnionAllow", UserNo, Generic.ToInt(row("PayIncomeTypeNo")), PayLocNo)
+        '                cboPayIncomeTypeNo.DataValueField = "tNo"
+        '                cboPayIncomeTypeNo.DataTextField = "tDesc"
+        '                cboPayIncomeTypeNo.DataBind()
+        '            Catch ex As Exception
+        '            End Try
+        '            Generic.PopulateData(Me, "pnlPopupDetl", dt)
+        '        Next
+        '        mdlDetl.Show()
 
-            Else
-                MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
-            End If
+        '    Else
+        '        MessageBox.Warning(MessageTemplate.DeniedEdit, Me)
+        '    End If
 
-        Catch ex As Exception
-        End Try
+        'Catch ex As Exception
+        'End Try
     End Sub
 
     Protected Sub lnkAddDetl_Click(sender As Object, e As EventArgs)
-        If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowAdd) Then
-            Generic.ClearControls(Me, "pnlPopupDetl")
-            Generic.PopulateDropDownList(UserNo, Me, "pnlPopupDetl", PayLocNo)
-            Try
-                cboPayIncomeTypeNo.DataSource = SQLHelper.ExecuteDataSet("EPayIncomeType_WebLookup_UnionAllow", UserNo, 0, PayLocNo)
-                cboPayIncomeTypeNo.DataValueField = "tNo"
-                cboPayIncomeTypeNo.DataTextField = "tDesc"
-                cboPayIncomeTypeNo.DataBind()
-            Catch ex As Exception
-            End Try
+        'If AccessRights.IsAllowUser(UserNo, AccessRights.EnumPermissionType.AllowAdd) Then
+        '    Generic.ClearControls(Me, "pnlPopupDetl")
+        '    Generic.PopulateDropDownList(UserNo, Me, "pnlPopupDetl", PayLocNo)
+        '    Try
+        '        cboPayIncomeTypeNo.DataSource = SQLHelper.ExecuteDataSet("EPayIncomeType_WebLookup_UnionAllow", UserNo, 0, PayLocNo)
+        '        cboPayIncomeTypeNo.DataValueField = "tNo"
+        '        cboPayIncomeTypeNo.DataTextField = "tDesc"
+        '        cboPayIncomeTypeNo.DataBind()
+        '    Catch ex As Exception
+        '    End Try
 
-            mdlDetl.Show()
-        Else
-            MessageBox.Warning(MessageTemplate.DeniedAdd, Me)
-        End If
+        '    mdlDetl.Show()
+        'Else
+        '    MessageBox.Warning(MessageTemplate.DeniedAdd, Me)
+        'End If
     End Sub
 
     Protected Sub btnSaveDetl_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim Retval As Boolean = False
-        Dim MROfferNo As Integer = Generic.ToInt(txtMROfferNo.Text)
-        Dim Amount As Decimal = Generic.ToDec(txtAmount.Text)
-        Dim PayIncomeTypeNo As Integer = Generic.ToInt(cboPayIncomeTypeNo.SelectedValue)
-        Dim IsPerDay As Boolean = Generic.ToBol(txtIsPerDay.Checked)
-        Dim PayScheduleNo As Integer = Generic.ToInt(cboPayScheduleNo.SelectedValue)
+        'Dim Retval As Boolean = False
+        'Dim MROfferNo As Integer = Generic.ToInt(txtMROfferNo.Text)
+        'Dim Amount As Decimal = Generic.ToDec(txtAmount.Text)
+        'Dim PayIncomeTypeNo As Integer = Generic.ToInt(cboPayIncomeTypeNo.SelectedValue)
+        'Dim IsPerDay As Boolean = Generic.ToBol(txtIsPerDay.Checked)
+        'Dim PayScheduleNo As Integer = Generic.ToInt(cboPayScheduleNo.SelectedValue)
 
-        If SQLHelper.ExecuteNonQuery("EMROffer_WebSave", UserNo, MROfferNo, Generic.ToInt(ViewState("TransNo")), TransNo, Amount, PayIncomeTypeNo, IsPerDay, PayScheduleNo) > 0 Then
-            Retval = True
-        Else
-            Retval = False
-        End If
+        'If SQLHelper.ExecuteNonQuery("EMROffer_WebSave", UserNo, MROfferNo, Generic.ToInt(ViewState("TransNo")), TransNo, Amount, PayIncomeTypeNo, IsPerDay, PayScheduleNo) > 0 Then
+        '    Retval = True
+        'Else
+        '    Retval = False
+        'End If
 
-        If Retval = True Then
-            MessageBox.Success(MessageTemplate.SuccessSave, Me)
-            PopulateDetl()
-        Else
-            MessageBox.Critical(MessageTemplate.ErrorSave, Me)
-        End If
+        'If Retval = True Then
+        '    MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        '    PopulateDetl()
+        'Else
+        '    MessageBox.Critical(MessageTemplate.ErrorSave, Me)
+        'End If
     End Sub
 
 

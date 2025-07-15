@@ -1,11 +1,14 @@
 ﻿Imports System.Data
 Imports clsLib
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 Partial Class Secured_AppInfoEdit
     Inherits System.Web.UI.Page
     Dim TransNo As Int64
     Dim IsEnabled As Boolean = False
     Dim UserNo As Int64
-
+    Dim error_message As String = ""
     Private Sub OptionEvents()
         rblNGovApplicant_SelectedIndexChanged()
         rblIsLGovApplicant_SelectedIndexChanged()
@@ -360,7 +363,7 @@ Partial Class Secured_AppInfoEdit
         TransNo = Generic.ToInt(Request.QueryString("id"))
         AccessRights.CheckUser(UserNo)
         If TransNo = 0 Then : IsEnabled = True : Else : IsEnabled = Generic.ToBol(ViewState("IsEnabled")) : End If
-        If Not IsPostBack Then            
+        If Not IsPostBack Then
             Generic.PopulateDropDownList(UserNo, Me, "Panel1", 0)
             PopulateData()
             PopulateTabHeader()
@@ -368,50 +371,74 @@ Partial Class Secured_AppInfoEdit
         EnabledControls()
     End Sub
 
-    Private Function SaveRecord() As Boolean        
-        If SQLHelper.ExecuteNonQuery("EApplicantOther_WebSave", UserNo, TransNo, txtHobbies.Text, txtRecognition.Text, _
-                                                                                            txtOrganization.Text, Generic.ToInt(rblNGovApplicant.SelectedValue), _
+    Private Function SaveRecord() As Boolean
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantOther_WebSave", UserNo, TransNo, txtHobbies.Text, txtRecognition.Text,
+                                                                                            txtOrganization.Text, Generic.ToInt(rblNGovApplicant.SelectedValue),
                                                                                             txtNGovApplicantDeti.Text, Generic.ToInt(rblIsLGovApplicant.SelectedValue),
                                                                                             txtGovApplicantDeti.Text, "",
-                                                                                            "", Generic.ToInt(rblIsCharged.SelectedValue), _
-                                                                                            txtChargedDeti.Text, Generic.ToInt(rblIsOffensed.SelectedValue), _
-                                                                                            txtOffensedDeti.Text, Generic.ToInt(rblIsCourt.SelectedValue), _
-                                                                                            txtCourtDeti.Text, Generic.ToInt(rblIsSector.SelectedValue), _
-                                                                                            txtSectorDeti.Text, Generic.ToInt(rblIsCandidate.SelectedValue), _
-                                                                                            txtCandidateDeti.Text, Generic.ToInt(rblIsIndigenGrp.SelectedValue), _
-                                                                                            txtIndigenGrpDeti.Text, Generic.ToInt(rblIsAbled.SelectedValue), _
-                                                                                            txtAbledDeti.Text, Generic.ToInt(rblIsSoloParent.SelectedValue), _
-                                                                                            txtSoloParentDeti.Text, Generic.ToInt(rblIsGuilty.SelectedValue), _
-                                                                                            txtGuiltyDeti.Text, 0, _
-                                                                                            "", txtGSISNo.Text, _
-                                                                                            txtPHNo.Text, txtHDMFNo.Text, _
-                                                                                            txtTINNo.Text, txtSSSNo.Text, _
-                                                                                            txtCTCN.Text, txtCTCNIssuedAt.Text, _
-                                                                                            txtCTCNIssuedOn.Text, txtHeight.Text, _
-                                                                                            txtWeight.Text, Generic.ToInt(cboTaxExemptNo.SelectedValue), _
-                                                                                            Generic.ToInt(cboShoeNo.SelectedValue), Generic.ToInt(cboTShirtNo.SelectedValue), _
-                                                                                            Generic.ToInt(rblIsResigned.SelectedValue), txtResignedDeti.Text, txtSoloParentDetiDate.Text, _
-                                                                                            txtGovtIssuedID.Text, txtGovtIssuedIDNo.Text, txtGovtIssueDatePlace.Text, _
-                                                                                            Generic.ToInt(rblIsConsanguinity.SelectedValue), txtConsanguinityDeti.Text, _
-                                                                                            Generic.ToInt(rblIsAffinity.SelectedValue), txtAffinityDeti.Text, _
-                                                                                            Generic.ToInt(rblIsOtherRelative.SelectedValue), txtOtherRelativeDeti.Text, _
-                                                                                            Generic.ToInt(rblIsFormer.SelectedValue), txtFormerDeti.Text, _
+                                                                                            "", Generic.ToInt(rblIsCharged.SelectedValue),
+                                                                                            txtChargedDeti.Text, Generic.ToInt(rblIsOffensed.SelectedValue),
+                                                                                            txtOffensedDeti.Text, Generic.ToInt(rblIsCourt.SelectedValue),
+                                                                                            txtCourtDeti.Text, Generic.ToInt(rblIsSector.SelectedValue),
+                                                                                            txtSectorDeti.Text, Generic.ToInt(rblIsCandidate.SelectedValue),
+                                                                                            txtCandidateDeti.Text, Generic.ToInt(rblIsIndigenGrp.SelectedValue),
+                                                                                            txtIndigenGrpDeti.Text, Generic.ToInt(rblIsAbled.SelectedValue),
+                                                                                            txtAbledDeti.Text, Generic.ToInt(rblIsSoloParent.SelectedValue),
+                                                                                            txtSoloParentDeti.Text, Generic.ToInt(rblIsGuilty.SelectedValue),
+                                                                                            txtGuiltyDeti.Text, 0,
+                                                                                            "", txtGSISNo.Text,
+                                                                                            txtPHNo.Text, txtHDMFNo.Text,
+                                                                                            txtTINNo.Text, txtSSSNo.Text,
+                                                                                            txtCTCN.Text, txtCTCNIssuedAt.Text,
+                                                                                            txtCTCNIssuedOn.Text, txtHeight.Text,
+                                                                                            txtWeight.Text, Generic.ToInt(cboTaxExemptNo.SelectedValue),
+                                                                                            Generic.ToInt(cboShoeNo.SelectedValue), Generic.ToInt(cboTShirtNo.SelectedValue),
+                                                                                            Generic.ToInt(rblIsResigned.SelectedValue), txtResignedDeti.Text, txtSoloParentDetiDate.Text,
+                                                                                            txtGovtIssuedID.Text, txtGovtIssuedIDNo.Text, txtGovtIssueDatePlace.Text,
+                                                                                            Generic.ToInt(rblIsConsanguinity.SelectedValue), txtConsanguinityDeti.Text,
+                                                                                            Generic.ToInt(rblIsAffinity.SelectedValue), txtAffinityDeti.Text,
+                                                                                            Generic.ToInt(rblIsOtherRelative.SelectedValue), txtOtherRelativeDeti.Text,
+                                                                                            Generic.ToInt(rblIsFormer.SelectedValue), txtFormerDeti.Text,
                                                                                             Generic.ToInt(rblIsRespondent.SelectedValue), txtRespondentDeti.Text,
-                                                                                            Generic.ToInt(chkIsOngoingA.Checked), Generic.ToInt(chkIsOngoingC.Checked), _
-                                                                                            0, 0, _
-                                                                                            Generic.ToInt(chkIsDismissedA.Checked), Generic.ToInt(chkIsDismissedC.Checked), _
-                                                                                            Generic.ToInt(chkIsHypertension.Checked), Generic.ToInt(chkIsDiabetes.Checked), _
-                                                                                            Generic.ToInt(chkIsAcquiredHeartDisease.Checked), Generic.ToInt(chkIsKidneyDisease.Checked), _
-                                                                                            Generic.ToInt(chkIsTuberculosis.Checked), Generic.ToInt(chkIsChronicPumonary.Checked), _
-                                                                                            Generic.ToInt(chkIsMalignancies.Checked), Generic.ToInt(chkIsAutoimmune.Checked), _
-                                                                                            Generic.ToInt(chkIsCardiovascularAccident.Checked), Generic.ToInt(chkIsNeuroPsychiatric.Checked), _
-                                                                                            Generic.ToInt(chkIsHematologic.Checked), Generic.ToInt(chkIsChronicLiver.Checked), Generic.ToInt(chkIsMajorcongenital.Checked), _
-                                                                                            Generic.ToInt(chkIsOthers.Checked), txtOtherDeti.Text, Generic.ToInt(rblIsAssigned.SelectedValue), txtChargedDetiDate.Text, txtChargedDetiStatus.Text) > 0 Then
+                                                                                            Generic.ToInt(chkIsOngoingA.Checked), Generic.ToInt(chkIsOngoingC.Checked),
+                                                                                            0, 0,
+                                                                                            Generic.ToInt(chkIsDismissedA.Checked), Generic.ToInt(chkIsDismissedC.Checked),
+                                                                                            Generic.ToInt(chkIsHypertension.Checked), Generic.ToInt(chkIsDiabetes.Checked),
+                                                                                            Generic.ToInt(chkIsAcquiredHeartDisease.Checked), Generic.ToInt(chkIsKidneyDisease.Checked),
+                                                                                            Generic.ToInt(chkIsTuberculosis.Checked), Generic.ToInt(chkIsChronicPumonary.Checked),
+                                                                                            Generic.ToInt(chkIsMalignancies.Checked), Generic.ToInt(chkIsAutoimmune.Checked),
+                                                                                            Generic.ToInt(chkIsCardiovascularAccident.Checked), Generic.ToInt(chkIsNeuroPsychiatric.Checked),
+                                                                                            Generic.ToInt(chkIsHematologic.Checked), Generic.ToInt(chkIsChronicLiver.Checked), Generic.ToInt(chkIsMajorcongenital.Checked),
+                                                                                            Generic.ToInt(chkIsOthers.Checked), txtOtherDeti.Text, Generic.ToInt(rblIsAssigned.SelectedValue), txtChargedDetiDate.Text, txtChargedDetiStatus.Text)
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
 
-            Return True
-        Else
-            Return False
-        End If
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicantOther"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicantOther")
+                Return True
+            Else
+                Return False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
+
     End Function
 
     Protected Sub lnkSave_Click(sender As Object, e As EventArgs)

@@ -1,4 +1,7 @@
 ﻿Imports clsLib
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 Imports System.Data
 
 Partial Class Secured_AppExamEdit
@@ -93,15 +96,53 @@ Partial Class Secured_AppExamEdit
             Exit Sub
         End If
 
-        If SQLHelper.ExecuteNonQuery("EApplicantExam_WebSave", UserNo, Generic.ToInt(txtApplicantExamNo.Text), TransNo, ExamTypeNo, CityNo, Me.txtDateTaken.Text.ToString, Me.txtDateReleased.Text, Rating, Me.txtRemark.Text, Me.txtLicenseNo.Text, Me.txtDateExpired.Text, Me.txtVenue.Text, IsOtherExam, OtherExam, txtScoreRatingDesc.Text) > 0 Then
-            RetVal = True
-        Else
-            RetVal = False
-        End If
+        'If SQLHelper.ExecuteNonQuery("EApplicantExam_WebSave", UserNo, Generic.ToInt(txtApplicantExamNo.Text), TransNo, ExamTypeNo, CityNo, Me.txtDateTaken.Text.ToString, Me.txtDateReleased.Text, Rating, Me.txtRemark.Text, Me.txtLicenseNo.Text, Me.txtDateExpired.Text, Me.txtVenue.Text, IsOtherExam, OtherExam, txtScoreRatingDesc.Text) > 0 Then
+        '    RetVal = True
+        'Else
+        '    RetVal = False
+        'End If
+
+        'If RetVal = True Then
+        '    PopulateGrid()
+        '    MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        'End If
+
+        'Saving through web api
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantExam_WebSave", UserNo, Generic.ToInt(txtApplicantExamNo.Text), TransNo, ExamTypeNo, CityNo, Me.txtDateTaken.Text.ToString, Me.txtDateReleased.Text, Rating, Me.txtRemark.Text, Me.txtLicenseNo.Text, Me.txtDateExpired.Text, Me.txtVenue.Text, IsOtherExam, OtherExam, txtScoreRatingDesc.Text)
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
+
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicantExam"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantExamNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicantExam")
+                RetVal = True
+            Else
+                RetVal = False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
 
         If RetVal = True Then
             PopulateGrid()
             MessageBox.Success(MessageTemplate.SuccessSave, Me)
+        Else
+            MessageBox.Warning(error_message, Me)
         End If
     End Sub
 

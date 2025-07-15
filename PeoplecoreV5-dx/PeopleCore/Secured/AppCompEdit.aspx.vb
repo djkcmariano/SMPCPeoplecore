@@ -1,5 +1,8 @@
-﻿Imports clsLib
-Imports System.Data
+﻿Imports System.Data
+Imports clsLib
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
+Imports RestSharp
 
 Partial Class Secured_AppEducEdit
     Inherits System.Web.UI.Page
@@ -63,9 +66,41 @@ Partial Class Secured_AppEducEdit
         End If
     End Sub
 
-    Protected Sub lnkSave_Click(sender As Object, e As EventArgs)      
+    Protected Sub lnkSave_Click(sender As Object, e As EventArgs)
         Dim RetVal As Boolean = False
-        If SQLHelper.ExecuteNonQuery("EApplicantComp_WebSave", UserNo, Generic.ToInt(txtCode.Text), TransNo, Generic.ToInt(cboCompNo.SelectedValue), Generic.ToInt(cboCompScaleNo.SelectedValue), 0, "", "") > 0 Then
+        Dim error_message As String = ""
+        Dim dt1 As DataTable = SQLHelper.ExecuteDataTable("EApplicantComp_WebSave", UserNo, Generic.ToInt(txtCode.Text), TransNo, Generic.ToInt(cboCompNo.SelectedValue), Generic.ToInt(cboCompScaleNo.SelectedValue), 0, "", "")
+
+        Dim json As String = JsonConvert.SerializeObject(dt1)
+        Try
+            Dim factory As New RestSharpClientFactory()
+            Dim client As RestClient = factory.GetClient()
+
+            Dim request As New RestRequest("api/push/onejsondata", Method.Post)
+            request.AddBody(New With {
+                .totalRows = 1,
+                    .hasMore = False,
+                    .content = json,
+                    .tableName = "EApplicantComp"
+                })
+
+            Dim response As RestResponse = client.Execute(request)
+            If response.IsSuccessful Then
+                Dim jsonData = JsonConvert.DeserializeObject(Of APIStatus)(response.Content)
+                Dim arr As JArray = JArray.Parse(json)
+                arr(0)("ApplicantCompNo") = jsonData.Id
+                json = arr.ToString(Newtonsoft.Json.Formatting.None)
+                SQLHelper.ExecuteNonQuery("EJSONMain_WebSave", json, "EApplicantComp")
+                RetVal = True
+            Else
+                RetVal = False
+                error_message = "Unable to save record in career portal server."
+            End If
+        Catch ex As Exception
+            error_message = ex.Message
+        End Try
+
+        If RetVal = True Then
             PopulateGrid()
             MessageBox.Success(MessageTemplate.SuccessSave, Me)
         Else
