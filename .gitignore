@@ -2,3 +2,4 @@
 *.rdlc
 /PeoplecoreV5-dx/PeopleCore/App_Data/PublishProfiles/ZIP Publish.pubxml
 /PeoplecoreV5-dx/PeopleCore/Secured/ConnectionSTR/peoplecore.ini
+/PeoplecoreV5-dx/PeopleCore/Secured/ConnectionSTR/peoplecore.ini
