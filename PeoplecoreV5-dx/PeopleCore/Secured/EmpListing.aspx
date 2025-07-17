@@ -64,7 +64,7 @@
                     </div>--%>
                     <div class="row">
                         <div class="table-responsive">
-                            <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="GrdNoSearch" KeyFieldName="EmployeeNo">
+                            <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="grdFilterBar" KeyFieldName="EmployeeNo">
                                 <Columns>
                                     <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center">
                                         <DataItemTemplate>
@@ -91,21 +91,21 @@
                                     <dx:GridViewDataComboBoxColumn FieldName="PayClassDesc" Caption="Payroll Group"/>
                                     <dx:GridViewDataComboBoxColumn FieldName="CostCenterDesc" Caption="Cost Center" Visible="false" />
                                     <dx:GridViewDataComboBoxColumn FieldName="UnitDesc" Caption="Unit" Visible="false" />
-                                    <dx:GridViewDataTextColumn FieldName="DateHired" Caption="Date Hired" />
-                                    <dx:GridViewDataTextColumn FieldName="DateHired" Caption="FDS" ToolTip="First Day in Service" Visible="false" />
-                                    <dx:GridViewDataTextColumn FieldName="RegularizedDate" Caption="Date of<br />Regularization" />
+                                    <dx:GridViewDataDateColumn FieldName="DateHired" Caption="Date Hired" />
+                                    <dx:GridViewDataDateColumn FieldName="DateHired" Caption="FDS" ToolTip="First Day in Service" Visible="false" />
+                                    <dx:GridViewDataDateColumn FieldName="RegularizedDate" Caption="Date of<br />Regularization" />
                                     <dx:GridViewDataTextColumn FieldName="Email" Caption="Email" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="MobileNo" Caption="Mobile No." Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="TINNo" Caption="TIN" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="SSSNo" Caption="SSS" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="PHNo" Caption="PhilHealth" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="HDMFNo" Caption="HDMF" Visible="false" />
-                                    <dx:GridViewDataTextColumn FieldName="SeparatedDate" Caption="Separated Date " Visible="false" />
+                                    <dx:GridViewDataDateColumn FieldName="SeparatedDate" Caption="Separated Date " Visible="false" />
                                     <dx:GridViewDataComboBoxColumn FieldName="BankTypeDesc" Caption="Bank Type" Visible="false" />
                                     <dx:GridViewDataTextColumn FieldName="BankAccountNo" Caption="Bank Account No." Visible="false" />
                                     <dx:GridViewDataComboBoxColumn FieldName="TaxExemptDesc" Caption="Tax Code" Visible="false" />                                    
                                     <dx:GridViewDataTextColumn FieldName="FPId" Caption="FPId" Visible="false" />
-                                    <dx:GridViewDataTextColumn FieldName="LastLoyaltyDate" Caption="Last Loyalty<br/>Anniversary Date" Visible="false" />
+                                    <dx:GridViewDataDateColumn FieldName="LastLoyaltyDate" Caption="Last Loyalty<br/>Anniversary Date" Visible="false" />
                                     <dx:GridViewDataComboBoxColumn FieldName="OTParameterDesc" Caption="OT Parameter" Visible="false" /> 
                                     <dx:GridViewDataColumn Caption="Attachment" CellStyle-HorizontalAlign="Center" Width="10">
                                     <DataItemTemplate>

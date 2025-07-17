@@ -23,9 +23,9 @@
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
-                    <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="grdDX" KeyFieldName="EmployeeNo">                                                                                   
+                    <dx:ASPxGridView ID="grdMain" ClientInstanceName="grdMain" runat="server" SkinID="grdDXMaster" KeyFieldName="EmployeeNo">                                                                                   
                         <Columns>
-                            <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center">
+                            <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center" Visible="false">
                                 <DataItemTemplate>
                                     <asp:LinkButton runat="server" ID="lnkEdit" CssClass="fa fa-pencil" Font-Size="Medium" OnClick="lnkEdit_Click" />
                                 </DataItemTemplate>
@@ -55,7 +55,69 @@
                             <dx:GridViewDataComboBoxColumn FieldName="GenderDesc" Caption="Gender" Visible="false" />   
                             <dx:GridViewDataComboBoxColumn FieldName="CivilStatDesc" Caption="Civil Status" Visible="false" />
                             <dx:GridViewDataComboBoxColumn FieldName="Tenure" Caption="Tenure" Visible="false" />                              
-                        </Columns>                            
+                        </Columns>      
+                        <Templates>
+                            <DetailRow>
+                                <div>
+                                <dx:ASPxPageControl runat="server" ID="PageControl" EnableCallBacks ="true" Width="100%">
+                                    <TabPages>
+                                        <dx:TabPage Text ="Allowances" Visible="true">
+                                            <ContentCollection>
+                                                <dx:ContentControl runat="server">
+                                                    <dx:ASPxGridView ID="grdAllowance" runat="server"  KeyFieldName="EmployeeAllowanceno" OnBeforePerformDataSelect="allowanceGridDataSelect" Width="100%">                                                                                   
+                                                        <Columns>
+                                                          <%--  <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Edit" HeaderStyle-HorizontalAlign="Center">
+                                                                <DataItemTemplate>
+                                                                    <asp:LinkButton runat="server" ID="lnkEdit" CssClass="fa fa-pencil" Font-Size="Medium" OnClick="lnkEditDetl_Click" />
+                                                                </DataItemTemplate>
+                                                            </dx:GridViewDataColumn>--%>
+                                                            <dx:GridViewDataTextColumn FieldName="Code" Caption="Transaction No." />
+                                                            <dx:GridViewDataTextColumn FieldName="PayIncomeTypeDesc" Caption="Allowance Type" />
+                                                            <dx:GridViewDataTextColumn FieldName="Amount" Caption="Amount" PropertiesTextEdit-DisplayFormatString="{0:N2}" />
+                                                            <dx:GridViewDataTextColumn FieldName="StartDate" Caption="Start Date" />
+                                                            <dx:GridViewDataTextColumn FieldName="Enddate" Caption="End Date" />                                                        
+                                                            <dx:GridViewDataTextColumn FieldName="PayScheduleDesc" Caption="Payroll Schedule" />
+                                                            <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" Caption="Select" Visible="false"/>
+                                                        </Columns>                            
+                                                    </dx:ASPxGridView>    
+                                                </dx:ContentControl>
+                                            </ContentCollection>
+                                        </dx:TabPage><dx:TabPage Text ="Rate History" Visible="true">
+                                            <ContentCollection>
+                                                <dx:ContentControl runat="server">
+                                                    <dx:ASPxGridView ID="grdRateHistory" runat="server"  KeyFieldName="EmployeeRateHistoryNo" OnBeforePerformDataSelect="historyGridDataSelect" Width="100%">                                                                                   
+                                                        <Columns>                                        
+                                                            <dx:GridViewDataTextColumn FieldName="Code" Caption="Transaction No." Visible="false"/>        
+                                                            <dx:GridViewDataTextColumn FieldName="HRANCode" Caption="HRAN No." />                                  
+                                                            <dx:GridViewDataTextColumn FieldName="HRANTypeDesc" Caption="HRAN Type" />
+                                                            <dx:GridViewDataDateColumn FieldName="Effectivity" Caption="Effective Date" />
+                                                            <dx:GridViewBandColumn Caption="Old Rate" HeaderStyle-HorizontalAlign="Center">
+                                                                <Columns>
+                                                                    <dx:GridViewDataTextColumn FieldName="OldEmployeeRateClassDesc" Caption="Rate Class" />
+                                                                    <dx:GridViewDataTextColumn FieldName="OldRate" Caption="Salary" PropertiesTextEdit-DisplayFormatString="{0:N2}" />
+                                                                </Columns>
+                                                            </dx:GridViewBandColumn>          
+                                                            <dx:GridViewBandColumn Caption="New Rate" HeaderStyle-HorizontalAlign="Center">
+                                                                <Columns>
+                                                                    <dx:GridViewDataTextColumn FieldName="NewEmployeeRateClassDesc" Caption="Rate Class" />
+                                                                    <dx:GridViewDataTextColumn FieldName="NewRate" Caption="Salary" PropertiesTextEdit-DisplayFormatString="{0:N2}" />
+                                                                </Columns>
+                                                            </dx:GridViewBandColumn>   
+                                                            <dx:GridViewDataTextColumn FieldName="PercentIncrease" Caption="% Increase" />
+                                                            <dx:GridViewDataDateColumn FieldName="PayDate" Caption="Pay Date Effect" Visible="false" />     
+                                                            <dx:GridViewDataTextColumn FieldName="DTRCode" Caption="DTR No." Visible="false"/> 
+                                                            <dx:GridViewDataTextColumn FieldName="CutOff" Caption="Cut Off Date" Visible="false"/>                                                                         
+                                                        </Columns>                              
+                                                    </dx:ASPxGridView>    
+                                                </dx:ContentControl>
+                                            </ContentCollection>
+                                        </dx:TabPage>
+                                    </TabPages>
+                                </dx:ASPxPageControl>
+                            </div>
+                            </DetailRow>
+                            
+                        </Templates>
                     </dx:ASPxGridView>
                     <dx:ASPxGridViewExporter ID="grdExport" runat="server" GridViewID="grdMain" />                                        
                 </div>                            

@@ -20,12 +20,27 @@ Partial Class Secured_EmpListing
 
         If Not IsPostBack Then
             PopulateDropDown()
-           
+
+
+
+            Generic.PopulateDXGridFilter(grdMain, UserNo, PayLocNo)
+            For Each col As GridViewColumn In grdMain.Columns
+                Dim combo = TryCast(col, GridViewDataComboBoxColumn)
+                If combo IsNot Nothing Then
+                    'dataCol.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList
+                    combo.Settings.HeaderFilterMode = HeaderFilterMode.CheckedList
+                End If
+                Dim dataCol = TryCast(col, GridViewDataTextColumn)
+                If dataCol IsNot Nothing Then
+                    'dataCol.SettingsHeaderFilter.Mode = GridHeaderFilterMode.CheckedList
+                    dataCol.Settings.HeaderFilterMode = HeaderFilterMode.CheckedList
+                End If
+            Next
         End If
 
         'AddHandler Filter1.lnkSearchClick, AddressOf lnkSearch_Click
         PopulateGrid()
-        'Generic.PopulateDXGridFilter(grdMain, UserNo, PayLocNo)
+
 
     End Sub
 
@@ -46,6 +61,8 @@ Partial Class Secured_EmpListing
         grdMain.DataSource = dt
         grdMain.DataBind()
 
+
+
         'EntityServerModeDataSource1.ContextTypeName = "EmployeeDataContext"
         'EntityServerModeDataSource1.TableName = _dt.TableName
         'grdMain.DataSourceID = EntityServerModeDataSource1.ID
@@ -64,7 +81,7 @@ Partial Class Secured_EmpListing
 
     Protected Sub lnkExport_Click(sender As Object, e As EventArgs)
         Try
-            grdExport.WriteXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.WYSIWYG})
+            grdExport.WriteXlsxToResponse(New XlsxExportOptionsEx With {.ExportType = ExportType.DataAware})
         Catch ex As Exception
             MessageBox.Warning("Error exporting to excel file.", Me)
         End Try

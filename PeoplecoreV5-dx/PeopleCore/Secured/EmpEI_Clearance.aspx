@@ -51,6 +51,10 @@
                                     <dx:GridViewDataTextColumn FieldName="FullName" Caption="Employee Name" />
                                     <dx:GridViewDataTextColumn FieldName="Effectivity" Caption="Resignation Date" />
                                     <dx:GridViewDataTextColumn FieldName="PostedDate" Caption="Posted Date" />
+                                    <dx:GridViewDataTextColumn FieldName="ClearedDate" Caption="Cleared Date" Visible ="false"/>
+                                    <dx:GridViewDataTextColumn FieldName="ClearedBy" Caption="Cleared By" Visible ="false"/>
+                                    <dx:GridViewDataTextColumn FieldName="DepartmentDesc" Caption="Department"  Visible ="False"/>
+                                    <dx:GridViewDataTextColumn FieldName="PayClassDesc" Caption="Payroll Group" Visible ="False"/>
                                     <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Details" HeaderStyle-HorizontalAlign="Center">
                                         <DataItemTemplate>
                                             <asp:LinkButton runat="server" ID="lnkDetail" CssClass="fa fa-list" Font-Size="Medium" OnClick="lnkDetail_Click" />
@@ -62,7 +66,7 @@
                                         <asp:LinkButton runat="server" ID="lnkPrint" CssClass="fa fa-print" OnClick="lnkPrint_Click" Font-Size="Medium" OnPreRender="lnkPrint_PreRender"/>
                                     </DataItemTemplate>
                                     </dx:GridViewDataColumn>
-
+                                    <dx:GridViewDataTextColumn FieldName="LocationDesc" Caption="Location" />
                                     <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" Caption="Select" />
                                 </Columns>
                                 <SettingsSearchPanel Visible="false" />

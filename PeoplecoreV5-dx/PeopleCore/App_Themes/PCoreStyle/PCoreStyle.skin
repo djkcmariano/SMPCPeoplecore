@@ -52,6 +52,32 @@ HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left"> </mcn:DataPa
     <SelectedRowStyle  CssClass="SelectedRowStyle"/>
 </mcn:DataPagerGridView> 
 
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdDXMaster">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="true" />
+    <SettingsDetail ShowDetailRow="true" />
+</dx:ASPxGridView>
+
 <dx:ASPxGridView runat="server" Width="100%" SkinID="grdDX">                            
     <Styles>
         <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
@@ -73,6 +99,33 @@ HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left"> </mcn:DataPa
         <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
     </SettingsContextMenu>
     <Settings ShowFilterBar="Visible" />                                                                                              
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
+    <SettingsSearchPanel Visible="true" />
+</dx:ASPxGridView>
+
+<dx:ASPxGridView runat="server" Width="100%" SkinID="grdFilterBar">                            
+    <Styles>
+        <Header Font-Bold="true" Paddings-Padding=".3em" BackColor="#F1F5F9" />
+        <SelectedRow BackColor="Transparent" ForeColor="Black"></SelectedRow>
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />        
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <TotalSummary>
+        <dx:ASPxSummaryItem FieldName="Size" SummaryType="Sum" />
+    </TotalSummary>
+    <GroupSummary>
+        <dx:ASPxSummaryItem SummaryType="Count" />
+    </GroupSummary>
+    <SettingsContextMenu Enabled="true">                                
+        <RowMenuItemVisibility CollapseDetailRow="false" CollapseRow="false" DeleteRow="false" EditRow="false" ExpandDetailRow="false" ExpandRow="false" NewRow="false" Refresh="false" /> 
+    </SettingsContextMenu>
+    <Settings ShowFilterBar="Visible" />                                              
+    <Settings ShowFilterRow="True"/>
+    <Settings ShowHeaderFilterButton="True" />                            
     <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
     <SettingsSearchPanel Visible="true" />
 </dx:ASPxGridView>
@@ -172,6 +225,28 @@ HeaderStyle-HorizontalAlign="Left" RowStyle-HorizontalAlign="Left"> </mcn:DataPa
     <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="True" />    
     <SettingsSearchPanel Visible="true" />
 </dx:ASPxGridView>
+
+<dx:ASPxGridView runat="server" SkinID="grdFilterBarO365">
+    <Styles>
+        <Header BackColor="#F1F5F9" Font-Bold="true" Font-Names="Segoe UI" Font-Size="12px" />
+        <Row BackColor="White" Font-Names="Segoe UI" Font-Size="11px" />
+        <SelectedRow BackColor="#E1EFFF" ForeColor="Black" Font-Bold="true" />
+        <AlternatingRow BackColor="#FAFAFA" />
+        <FocusedRow BackColor="#D0EBFF" />
+        <Footer BackColor="#F9FAFB" Font-Bold="true" />
+    </Styles>
+    <SettingsPager EllipsisMode="OutsideNumeric" NumericButtonCount="7">
+        <PageSizeItemSettings Visible="true" Items="10, 20, 50" />
+    </SettingsPager>
+    <StylesPager>
+        <Pager ItemSpacing="0px" Spacing="0px" />
+    </StylesPager>
+    <Settings ShowFilterBar="Visible" ShowFilterRow="True" ShowHeaderFilterButton="True" />
+    <SettingsBehavior EnableCustomizationWindow="true" AllowFocusedRow="true" />
+    <SettingsSearchPanel Visible="true" />
+    <SettingsText SearchPanelEditorNullText="Search..." />
+</dx:ASPxGridView>
+
 
 <ajaxToolkit:TextBoxWatermarkExtender  runat="server" WatermarkText="enter keyword --->"  />
 <ajaxToolkit:TextBoxWatermarkExtender skinId="dynamic"  runat="server" />

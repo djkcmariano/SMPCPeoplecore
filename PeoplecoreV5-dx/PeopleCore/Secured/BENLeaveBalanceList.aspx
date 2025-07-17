@@ -163,7 +163,7 @@
                                     <dx:GridViewDataDateColumn FieldName="DateForefeited" Caption="Forfeited Date" />
                                     <dx:GridViewDataTextColumn FieldName="LeaveHrs" Caption="Leave Hr/s" PropertiesTextEdit-DisplayFormatString="{0:N2}" />
                                     <dx:GridViewDataTextColumn FieldName="Remark" Caption="Remarks" />
-                                    <%--<dx:GridViewDataTextColumn FieldName="EncodeDate" Caption="Date Encoded"/>--%>
+                                    <dx:GridViewDataTextColumn FieldName="EncodeDate" Caption="Date Encoded" Visible="false"/>
                                     <dx:GridViewDataTextColumn FieldName="EncodedByName" Caption="Encoded By" Visible="false"/>
                                     <%--<dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" Caption="Select" Visible="false" /> --%>
                                 </Columns>     

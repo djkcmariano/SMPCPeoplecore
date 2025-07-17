@@ -48,6 +48,9 @@
                                 <dx:GridViewDataDateColumn FieldName="Effectivity" Caption="Effective Date" />
                                 <dx:GridViewDataDateColumn FieldName="InterviewDate" Caption="Interview Date" />
                                 <dx:GridViewDataDateColumn FieldName="WithFindings" Caption="With<br />Findings" />
+                                <dx:GridViewDataTextColumn FieldName="DepartmentDesc" Caption="Department"  Visible ="False"/>
+                                <dx:GridViewDataTextColumn FieldName="LocationDesc" Caption="Location" Visible ="False"/>
+                                <dx:GridViewDataTextColumn FieldName="PayClassDesc" Caption="Payroll Group" Visible ="False"/>
                                 <dx:GridViewDataColumn CellStyle-HorizontalAlign="Center" Caption="Details" Visible="false" HeaderStyle-HorizontalAlign="Center" Width="5%">
                                     <DataItemTemplate>
                                         <asp:LinkButton runat="server" ID="lnkDetails" CssClass="fa fa-list" Font-Size="Medium" OnClick="lnkDetails_Click" />                                        

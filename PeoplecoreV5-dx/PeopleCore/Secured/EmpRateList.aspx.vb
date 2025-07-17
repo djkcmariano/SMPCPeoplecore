@@ -98,6 +98,27 @@ Partial Class Secured_EmpRateList
         End If
     End Function
 #End Region
+#Region "devexUpdate"
+    Protected Sub allowanceGridDataSelect(ByVal sender As Object, ByVal e As EventArgs)
+        Dim TransNo As Integer
+        Dim grdAllowance As ASPxGridView = TryCast(sender, ASPxGridView)
+        TransNo = (TryCast(sender, ASPxGridView)).GetMasterRowKeyValue()
 
+        Dim _dt As DataTable
+        _dt = SQLHelper.ExecuteDataTable("EEmployeeRateAllowance_Web", UserNo, TransNo)
+        grdAllowance.DataSource = _dt
+        'grdAllowance.DataBind()
+    End Sub
+    Protected Sub historyGridDataSelect(ByVal sender As Object, ByVal e As EventArgs)
+        Dim TransNo As Integer
+        Dim grdRateHistory As ASPxGridView = TryCast(sender, ASPxGridView)
+        TransNo = (TryCast(sender, ASPxGridView)).GetMasterRowKeyValue()
+
+        Dim _dt As DataTable
+        _dt = SQLHelper.ExecuteDataTable("EEmployeeRateHistory_Web", UserNo, TransNo)
+        grdRateHistory.DataSource = _dt
+        'grdAllowance.DataBind()
+    End Sub
+#End Region
 End Class
 
